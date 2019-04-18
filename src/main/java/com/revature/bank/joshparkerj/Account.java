@@ -22,6 +22,10 @@ public class Account {
 	public String serialize() {
 		return "account\t" + type + "\t" + id + "\t" + bal + "\n";
 	}
+	
+	public String prettyPrint() {
+		return "Account type: " + type + "\nAccount Number: " + id + "\nBalance: " + bal + "\n\n";
+	}
 
 	public String getID() {
 		return id;

@@ -95,4 +95,19 @@ public class BankDB implements IDB {
 		return true;
 	}
 
+	public String getCustomerAccounts(String id) {
+		s = "";
+		for (AccountHolder ah : accountholders) {
+			if (ah.getSSN().equals(id)) {
+				for (Account a : accounts) {
+					if (ah.getNum().equals(a.getID())) {
+						s += a.prettyPrint();
+					}
+				}
+			}
+		}
+		if (s.length() == 0) s = "You have no accounts!\n";
+		return s;
+	}
+
 }

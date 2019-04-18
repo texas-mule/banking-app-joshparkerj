@@ -13,5 +13,6 @@ public interface IDB {
 	boolean uniqueAccountNumber(String num);
 	boolean uniqueCustomerName(String name);
 	boolean uniqueSSN(String id);
+	String getCustomerAccounts(String id);
 
 }

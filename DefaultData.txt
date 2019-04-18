@@ -1,13 +1,12 @@
-account	Savings	199	$0.00
 account	Billing	555	$0.00
 account	Savings	877	$0.00
-account	Golfing	555	$0.00
-customer		josh	1234customer
+account	Savings	189	$0.00
+account	Checking	1884	$0.00
 customer	Eightyfive	www	1231gg
-customer	Abe	1	Four
 customer	Don	7	155
-customer	Don	7	ageg
+customer	Abe	1	Four
 employee	Yoda	The Force	1223 1337	1599	178000	Frank	Oz	Dagobah	f
 ah	155	555
 ah	155	877
-ah	155	555
+ah	Four	189
+ah	Four	1884

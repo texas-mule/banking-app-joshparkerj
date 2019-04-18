@@ -20,4 +20,12 @@ public class AccountHolder {
 		return "ah\t" + ssn + "\t" + num + "\n";
 	}
 
+	public String getNum() {
+		return num;
+	}
+
+	public String getSSN() {
+		return ssn;
+	}
+
 }
