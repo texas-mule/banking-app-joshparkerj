@@ -35,7 +35,8 @@ public class LoginMenu extends ABCMenu {
 			id = null;
 		}
 		if (id != null) {
-			UserSession.init(type, id);
+			UserSession.init(id);
+			System.out.println("Hello, " + name + "! Thank you for logging in!");
 			mt.menu(type);
 		} else {
 			System.out.println("Login failed");

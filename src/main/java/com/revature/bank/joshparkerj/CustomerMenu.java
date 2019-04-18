@@ -11,9 +11,17 @@ public class CustomerMenu extends ABCMenu {
 	public void Run() {
 		System.out.println("Please choose from the following options:");
 		System.out.println("1. Create Account");
+		System.out.println("2. Log out");
+		System.out.println("3. Quit.");
 		switch (Integer.parseInt(s.nextLine().substring(0,1))) {
 		case 1:
 			mt.menu("CreateAccount");
+			break;
+		case 2:
+			UserSession.end();
+			mt.menu("Splash");
+			break;
+		case 3:
 			break;
 		default:
 			System.out.println("Your input was not understood");

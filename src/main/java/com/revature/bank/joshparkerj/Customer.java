@@ -19,4 +19,12 @@ public class Customer extends ABCUser {
 		return "customer\t" + name + "\t" + pass + "\t" + id + "\n";
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public String getID() {
+		return id;
+	}
+
 }

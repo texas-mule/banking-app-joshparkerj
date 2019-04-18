@@ -17,6 +17,7 @@ public class TextFile {
 	private List<Account> accounts;
 	private List<Customer> customers;
 	private List<Employee> employees;
+	private List<AccountHolder> accountholders;
 	private String filename;
 	private Path filepath;
 	private File file;
@@ -25,6 +26,7 @@ public class TextFile {
 		accounts = new LinkedList<Account>();
 		customers = new LinkedList<Customer>();
 		employees = new LinkedList<Employee>();
+		accountholders = new LinkedList<AccountHolder>();
 		filename = "./" + f;
 		filepath = Paths.get(filename);
 		file = new File(filename);
@@ -37,6 +39,8 @@ public class TextFile {
 					customers.add(new Customer(st));
 				} else if (st.startsWith("employee")) {
 					employees.add(new Employee(st));
+				} else if (st.startsWith("ah")) {
+					accountholders.add(new AccountHolder(st));
 				}
 			}
 
@@ -55,6 +59,10 @@ public class TextFile {
 
 	public List<Customer> getCustomers() {
 		return customers;
+	}
+	
+	public List<AccountHolder> getAccountHolders(){
+		return accountholders;
 	}
 
 	public void writeToDisc(IDB db) {

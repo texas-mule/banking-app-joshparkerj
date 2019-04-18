@@ -23,4 +23,8 @@ public class Account {
 		return "account\t" + type + "\t" + id + "\t" + bal + "\n";
 	}
 
+	public String getID() {
+		return id;
+	}
+
 }

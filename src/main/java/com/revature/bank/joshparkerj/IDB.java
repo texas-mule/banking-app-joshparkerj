@@ -9,5 +9,9 @@ public interface IDB {
 	void addEmployee(Employee employee);
 	void addAccount(Account account);
 	String serialize();
+	void addAccountHolder(AccountHolder accountHolder);
+	boolean uniqueAccountNumber(String num);
+	boolean uniqueCustomerName(String name);
+	boolean uniqueSSN(String id);
 
 }
