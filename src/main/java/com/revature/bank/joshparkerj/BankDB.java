@@ -131,4 +131,11 @@ public class BankDB implements IDB {
 		return false;
 	}
 
+	public String withdraw(String num, String sum) {
+		for (Account a : accounts) {
+			if (a.getID().equals(num)) return a.withdraw(sum);
+		}
+		return null;
+	}
+
 }

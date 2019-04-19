@@ -17,5 +17,6 @@ public interface IDB {
 	boolean employeeExists(String supid);
 	String deposit(String num, String sum);
 	boolean holdsAccount(String num, String id);
+	String withdraw(String num, String sum);
 
 }

@@ -39,4 +39,13 @@ public class Account {
 		return bal;
 	}
 
+	public String withdraw(String sum) {
+		int cents = Integer.parseInt(bal.replaceAll("\\D", "")) - Integer.parseInt(sum.replaceAll("\\D", ""));
+		if (cents < 0) return null;
+		int remainder = cents % 100;
+		String r = remainder < 10 ? ("0" + remainder) : ("" + remainder);
+		bal = "$" + cents / 100 + "." + r;
+		return bal;
+	}
+
 }
