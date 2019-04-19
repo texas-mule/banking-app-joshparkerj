@@ -12,6 +12,9 @@ public class CustomerMenu extends ABCMenu {
 		System.out.println("Please choose from the following options:");
 		System.out.println("1. Create Account");
 		System.out.println("2. See your accounts");
+		System.out.println("3. Make a deposit");
+		System.out.println("4. Make a withdrawal");
+		System.out.println("5. Make a transfer");
 		System.out.println("9. Log out");
 		System.out.println("0. Quit.");
 		switch (Integer.parseInt(s.nextLine().substring(0,1))) {
@@ -21,6 +24,15 @@ public class CustomerMenu extends ABCMenu {
 		case 2:
 			System.out.print(mt.getDB().getCustomerAccounts(UserSession.getID()));
 			mt.menu("Customer");
+			break;
+		case 3:
+			mt.menu("Deposit");
+			break;
+		case 4:
+			mt.menu("Withdrawal");
+			break;
+		case 5:
+			mt.menu("Transfer");
 			break;
 		case 9:
 			UserSession.end();

@@ -110,4 +110,25 @@ public class BankDB implements IDB {
 		return s;
 	}
 
+	public boolean employeeExists(String supid) {
+		for (Employee e : employees) {
+			if (e.getID().equals(supid)) return true;
+		}
+		return false;
+	}
+
+	public String deposit(String num, String sum) {
+		for (Account a : accounts) {
+			if (a.getID().equals(num)) return a.deposit(sum);
+		}
+		return null;
+	}
+
+	public boolean holdsAccount(String num, String id) {
+		for (AccountHolder ah : accountholders) {
+			if(ah.holdsAccount(num,id)) return true;
+		}
+		return false;
+	}
+
 }

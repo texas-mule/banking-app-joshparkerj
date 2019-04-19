@@ -21,11 +21,16 @@ public class CreateCustomerMenu extends ABCMenu {
 			System.out.println("Please enter your ssn:");
 			id = s.nextLine();
 			if (mt.getDB().uniqueSSN(id)) {
-			mt.getDB().addCustomer(new Customer(name, pass, id));
-			System.out.println("Customer added.");
-			UserSession.init(id);
-			mt.menu("Customer");
-			}else {
+				if (name.length() > 0 && pass.length() > 0 && id.length() > 0) {
+					mt.getDB().addCustomer(new Customer(name, pass, id));
+					System.out.println("Customer added.");
+					UserSession.init(id);
+					mt.menu("Customer");
+				} else {
+					System.out.println("You can\'t leave any fields blank!");
+					mt.menu("Splash");
+				}
+			} else {
 				System.out.println("That ssn is already in our system!");
 				mt.menu("Splash");
 			}

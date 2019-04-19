@@ -31,4 +31,12 @@ public class Account {
 		return id;
 	}
 
+	public String deposit(String sum) {
+		int cents = Integer.parseInt(bal.replaceAll("\\D", "")) + Integer.parseInt(sum.replaceAll("\\D", ""));
+		int remainder = cents % 100;
+		String r = remainder < 10 ? ("0" + remainder) : ("" + remainder);
+		bal = "$" + cents / 100 + "." + r;
+		return bal;
+	}
+
 }

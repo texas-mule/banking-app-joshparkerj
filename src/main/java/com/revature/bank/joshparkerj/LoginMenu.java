@@ -40,7 +40,7 @@ public class LoginMenu extends ABCMenu {
 			mt.menu(type);
 		} else {
 			System.out.println("Login failed");
-			mt.menu("Login");
+			mt.menu("Splash");
 		}
 	}
 

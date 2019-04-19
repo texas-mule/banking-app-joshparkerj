@@ -14,5 +14,8 @@ public interface IDB {
 	boolean uniqueCustomerName(String name);
 	boolean uniqueSSN(String id);
 	String getCustomerAccounts(String id);
+	boolean employeeExists(String supid);
+	String deposit(String num, String sum);
+	boolean holdsAccount(String num, String id);
 
 }

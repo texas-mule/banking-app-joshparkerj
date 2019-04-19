@@ -39,4 +39,8 @@ public class Employee extends ABCUser {
 				+ "\t" + loc + "\t" + admin + "\n";
 	}
 
+	public String getID() {
+		return id;
+	}
+
 }
