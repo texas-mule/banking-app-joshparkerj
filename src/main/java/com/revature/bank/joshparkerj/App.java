@@ -1,5 +1,9 @@
 package com.revature.bank.joshparkerj;
 
+import com.revature.bank.joshparkerj.db.BankDB;
+import com.revature.bank.joshparkerj.db.IDB;
+import com.revature.bank.joshparkerj.menu.MenuTree;
+
 public class App {
 
 	private static String filename;

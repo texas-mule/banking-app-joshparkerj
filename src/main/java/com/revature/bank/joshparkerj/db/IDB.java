@@ -1,15 +1,15 @@
-package com.revature.bank.joshparkerj;
+package com.revature.bank.joshparkerj.db;
 
 public interface IDB {
 
 	void write();
 	String getCustomerID(String name, String pass);
 	String getEmployeeID(String name, String pass);
-	void addCustomer(Customer customer);
-	void addEmployee(Employee employee);
-	void addAccount(Account account);
+	void addCustomer(String name, String pass, String id);
+	void addEmployee(String name, String pass, String id, String supid, String pay, String first, String last, String loc);
+	void addAccount(String type, String number);
 	String serialize();
-	void addAccountHolder(AccountHolder accountHolder);
+	void addAccountHolder(String id, String number);
 	boolean uniqueAccountNumber(String num);
 	boolean uniqueCustomerName(String name);
 	boolean uniqueSSN(String id);

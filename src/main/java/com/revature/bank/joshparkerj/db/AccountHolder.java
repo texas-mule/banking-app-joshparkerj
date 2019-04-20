@@ -1,6 +1,6 @@
-package com.revature.bank.joshparkerj;
+package com.revature.bank.joshparkerj.db;
 
-public class AccountHolder {
+class AccountHolder {
 	
 	private String ssn;
 	private String num;

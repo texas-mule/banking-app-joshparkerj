@@ -1,4 +1,4 @@
-package com.revature.bank.joshparkerj;
+package com.revature.bank.joshparkerj.db;
 
 import java.util.List;
 
@@ -58,20 +58,20 @@ public class BankDB implements IDB {
 		return null;
 	}
 
-	public void addCustomer(Customer customer) {
-		customers.add(customer);
+	public void addCustomer(String name, String pass, String id) {
+		customers.add(new Customer(name, pass, id));
 	}
 
-	public void addEmployee(Employee employee) {
-		employees.add(employee);
+	public void addEmployee(String name, String pass, String id, String supid, String pay, String first, String last, String loc) {
+		employees.add(new Employee(name,pass,id,supid,pay,first,last,loc,"f"));
 	}
 
-	public void addAccount(Account account) {
-		accounts.add(account);
+	public void addAccount(String type, String number) {
+		accounts.add(new Account(type,number,"$0.00"));
 	}
 	
-	public void addAccountHolder(AccountHolder ah) {
-		accountholders.add(ah);
+	public void addAccountHolder(String id, String num) {
+		accountholders.add(new AccountHolder(id,num));
 	}
 
 	public boolean uniqueAccountNumber(String num) {
@@ -125,10 +125,7 @@ public class BankDB implements IDB {
 	}
 
 	public boolean holdsAccount(String num, String id) {
-		for (AccountHolder ah : accountholders) {
-			if(ah.holdsAccount(num,id)) return true;
-		}
-		return false;
+		return accountholders.stream().anyMatch(ah -> ah.getNum().equals(num) && ah.getSSN().equals(id));
 	}
 
 	public String withdraw(String num, String sum) {

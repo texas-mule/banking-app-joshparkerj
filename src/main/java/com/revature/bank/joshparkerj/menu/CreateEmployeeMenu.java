@@ -1,8 +1,8 @@
-package com.revature.bank.joshparkerj;
+package com.revature.bank.joshparkerj.menu;
 
 import java.util.Scanner;
 
-public class CreateEmployeeMenu extends ABCMenu {
+class CreateEmployeeMenu extends ABCMenu {
 
 	private String name;
 	private String pass;
@@ -35,7 +35,7 @@ public class CreateEmployeeMenu extends ABCMenu {
 			last = s.nextLine();
 			System.out.println("Enter branch name: ");
 			loc = s.nextLine();
-			mt.getDB().addEmployee(new Employee(name, pass, id, supid, pay, first, last, loc, "f"));
+			mt.getDB().addEmployee(name, pass, id, supid, pay, first, last, loc);
 			System.out.println("Employee added.");
 
 		} else {

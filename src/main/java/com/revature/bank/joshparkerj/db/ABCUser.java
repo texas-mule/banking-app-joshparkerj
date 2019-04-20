@@ -1,6 +1,6 @@
-package com.revature.bank.joshparkerj;
+package com.revature.bank.joshparkerj.db;
 
-public abstract class ABCUser {
+abstract class ABCUser {
 
 	protected String name;
 	protected String pass;

@@ -1,8 +1,9 @@
-package com.revature.bank.joshparkerj;
+package com.revature.bank.joshparkerj.menu;
 
 import java.util.Scanner;
+import com.revature.bank.joshparkerj.UserSession;
 
-public class DepositMenu extends TransactionMenu {
+class DepositMenu extends TransactionMenu {
 
 	public DepositMenu(MenuTree m, Scanner ss) {
 		super(m, ss);

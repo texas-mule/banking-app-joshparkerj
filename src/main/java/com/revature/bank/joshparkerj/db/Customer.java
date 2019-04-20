@@ -1,6 +1,6 @@
-package com.revature.bank.joshparkerj;
+package com.revature.bank.joshparkerj.db;
 
-public class Customer extends ABCUser {
+class Customer extends ABCUser {
 
 	public Customer(String n, String p, String i) {
 		name = n;

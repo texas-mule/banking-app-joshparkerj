@@ -1,4 +1,4 @@
-package com.revature.bank.joshparkerj;
+package com.revature.bank.joshparkerj.db;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TextFile {
+class TextFile {
 
 	private List<Account> accounts;
 	private List<Customer> customers;

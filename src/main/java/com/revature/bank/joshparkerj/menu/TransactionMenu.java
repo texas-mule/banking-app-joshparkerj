@@ -1,8 +1,8 @@
-package com.revature.bank.joshparkerj;
+package com.revature.bank.joshparkerj.menu;
 
 import java.util.Scanner;
 
-public abstract class TransactionMenu extends ABCMenu {
+abstract class TransactionMenu extends ABCMenu {
 
 	protected String num;
 	protected String sum;

@@ -1,6 +1,6 @@
-package com.revature.bank.joshparkerj;
+package com.revature.bank.joshparkerj.db;
 
-public class Account {
+class Account {
 	
 	private String type;
 	private String id;

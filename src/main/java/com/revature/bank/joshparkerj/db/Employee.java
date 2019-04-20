@@ -1,6 +1,6 @@
-package com.revature.bank.joshparkerj;
+package com.revature.bank.joshparkerj.db;
 
-public class Employee extends ABCUser {
+class Employee extends ABCUser {
 
 	private String supid;
 	private String pay;

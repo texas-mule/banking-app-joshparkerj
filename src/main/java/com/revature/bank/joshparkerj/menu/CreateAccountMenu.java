@@ -1,8 +1,9 @@
-package com.revature.bank.joshparkerj;
+package com.revature.bank.joshparkerj.menu;
 
 import java.util.Scanner;
+import com.revature.bank.joshparkerj.UserSession;
 
-public class CreateAccountMenu extends ABCMenu {
+class CreateAccountMenu extends ABCMenu {
 
 	private String type;
 	private String num;
@@ -17,8 +18,8 @@ public class CreateAccountMenu extends ABCMenu {
 		System.out.println("Please enter the account number:");
 		num = s.nextLine();
 		if (mt.getDB().uniqueAccountNumber(num)) {
-			mt.getDB().addAccount(new Account(type, num, "$0.00"));
-			mt.getDB().addAccountHolder(new AccountHolder(UserSession.getID(), num));
+			mt.getDB().addAccount(type, num);
+			mt.getDB().addAccountHolder(UserSession.getID(), num);
 			System.out.println("Account added");
 			mt.menu("Customer");
 		} else {

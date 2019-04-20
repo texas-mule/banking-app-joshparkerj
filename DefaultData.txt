@@ -2,13 +2,14 @@ account	Billing	555	$0.00
 account	Savings	877	$0.00
 account	Savings	189	$0.00
 account	Checking	1884	$434.88
-account	Testing	1	$99.99
-customer	Eightyfive	www	1231gg
-customer	Don	7	155
-customer	Abe	1	Four
-customer	Gus	Gus	Gus
-employee	Yoda	The Force	1223 1337	1599	178000	Frank	Oz	Dagobah	f
-employee	Ugly	Doll	144tg	55532	aab	Sal	Portnoy	Toronto	f
+account	Testing	1	$142.00
+customer	Ehtyfive	www	1231gg
+customer	D	7	155
+customer	A	1	Four
+customer	G	Gus	Gus
+customer	1	aA9+	1
+employee	Ya	The Force	1223 1337	1599	178000	Frank	Oz	Dagobah	f
+employee	Uy	Doll	144tg	55532	aab	Sal	Portnoy	Toronto	f
 ah	155	555
 ah	155	877
 ah	Four	189

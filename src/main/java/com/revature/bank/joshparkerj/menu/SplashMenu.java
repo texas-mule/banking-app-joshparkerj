@@ -1,8 +1,8 @@
-package com.revature.bank.joshparkerj;
+package com.revature.bank.joshparkerj.menu;
 
 import java.util.Scanner;
 
-public class SplashMenu extends ABCMenu {
+class SplashMenu extends ABCMenu {
 
 	private static boolean newSession = true;
 

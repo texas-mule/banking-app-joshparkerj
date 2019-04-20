@@ -1,8 +1,8 @@
-package com.revature.bank.joshparkerj;
+package com.revature.bank.joshparkerj.menu;
 
 import java.util.Scanner;
 
-public class CreateUserMenu extends ABCMenu {
+class CreateUserMenu extends ABCMenu {
 
 	public CreateUserMenu(MenuTree mt, Scanner s) {
 		super(mt, s);
@@ -24,7 +24,7 @@ public class CreateUserMenu extends ABCMenu {
 				System.out.println("Your input was not understood");
 				mt.menu("CreateUser");
 			}
-		} catch (StringIndexOutOfBoundsException e) {
+		} catch (StringIndexOutOfBoundsException | NumberFormatException e) {
 			System.out.println("You have to enter a number!");
 			mt.menu("CreateUser");
 		}
