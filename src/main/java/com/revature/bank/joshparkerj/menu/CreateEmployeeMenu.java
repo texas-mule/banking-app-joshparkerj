@@ -41,7 +41,7 @@ class CreateEmployeeMenu extends ABCMenu {
 		} else {
 			System.out.println("That supervisor is not in the system!");
 		}
-		mt.menu("Splash");
+		mt.queueMenu("Splash");
 	}
 
 }

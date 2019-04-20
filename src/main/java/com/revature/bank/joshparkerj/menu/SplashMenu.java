@@ -20,20 +20,21 @@ class SplashMenu extends ABCMenu {
 		try {
 			switch (Integer.parseInt(s.nextLine().substring(0, 1))) {
 			case 1:
-				mt.menu("CreateUser");
+				mt.queueMenu("CreateUser");
 				break;
 			case 2:
-				mt.menu("Login");
+				mt.queueMenu("Login");
 				break;
 			case 3:
+				mt.quit();
 				break;
 			default:
 				System.out.println("Your input was not understood.");
-				mt.menu("Splash");
+				mt.queueMenu("Splash");
 			}
 		} catch (StringIndexOutOfBoundsException e) {
 			System.out.println("You have to enter a number!");
-			mt.menu("Splash");
+			mt.queueMenu("Splash");
 		}
 	}
 

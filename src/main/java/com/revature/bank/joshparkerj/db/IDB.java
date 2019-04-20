@@ -18,5 +18,7 @@ public interface IDB {
 	String deposit(String num, String sum);
 	boolean holdsAccount(String num, String id);
 	String withdraw(String num, String sum);
+	String transfer(String num, String dnum, String sum);
+	boolean accountExists(String num);
 
 }

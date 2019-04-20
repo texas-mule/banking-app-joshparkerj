@@ -3,11 +3,21 @@ account	Savings	877	$0.00
 account	Savings	189	$0.00
 account	Checking	1884	$434.88
 account	Testing	1	$142.00
+account	Checking	18	$500.00
+account	Checking	42	$140000.00
+account	Checking	19249	$0.00
+account	Savings	5994	$88.08
+account	Billing	4959932	$8093.69
+account	Testing	994949993	$0.00
+account	Invoicing	415188888425248	$0.00
 customer	Ehtyfive	www	1231gg
 customer	D	7	155
 customer	A	1	Four
 customer	G	Gus	Gus
 customer	1	aA9+	1
+customer	Abe	aA1/	14
+customer	Liz	Tt7/	19
+customer	Jonathan Cain	555Abc*	12342212
 employee	Ya	The Force	1223 1337	1599	178000	Frank	Oz	Dagobah	f
 employee	Uy	Doll	144tg	55532	aab	Sal	Portnoy	Toronto	f
 ah	155	555
@@ -15,3 +25,10 @@ ah	155	877
 ah	Four	189
 ah	Four	1884
 ah	Four	1
+ah	14	18
+ah	19	42
+ah	12342212	19249
+ah	12342212	5994
+ah	12342212	4959932
+ah	12342212	994949993
+ah	12342212	415188888425248

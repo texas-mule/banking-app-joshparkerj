@@ -23,22 +23,22 @@ class CreateCustomerMenu extends ABCMenu {
 		name = s.nextLine();
 		if (!mt.getDB().uniqueCustomerName(name)) {
 			System.out.println("That username is already in use!");
-			mt.menu("Splash");
+			mt.queueMenu("Splash");
 			return;
 		}
 		if (Pattern.compile("[^\\w\\s]").matcher(name).find()) {
 			System.out.println("Special characters not allowed");
-			mt.menu("Splash");
+			mt.queueMenu("Splash");
 			return;
 		}
 		if (name.length() < 1) {
 			System.out.println("You can\'t leave this field blank!");
-			mt.menu("Splash");
+			mt.queueMenu("Splash");
 			return;
 		}
 		if (name.length() > 30) {
 			System.out.println("Please choose a shorter username!");
-			mt.menu("Splash");
+			mt.queueMenu("Splash");
 			return;
 		}
 		System.out.println("your password must include the following:");
@@ -50,30 +50,30 @@ class CreateCustomerMenu extends ABCMenu {
 		pass = s.nextLine();
 		if (!Pattern.compile("[a-z]").matcher(pass).find()) {
 			System.out.println("you have to include at least one lower case letter");
-			mt.menu("Splash");
+			mt.queueMenu("Splash");
 			return;
 		}
 		if (!Pattern.compile("[A-Z]").matcher(pass).find()) {
 			System.out.println("You have to include at least one upper case letter");
-			mt.menu("Splash");
+			mt.queueMenu("Splash");
 			return;
 		}
 		System.out.println("Please enter your ssn:");
 		id = s.nextLine();
 		if (!mt.getDB().uniqueSSN(id)) {
 			System.out.println("That ssn is already in our system!");
-			mt.menu("Splash");
+			mt.queueMenu("Splash");
 			return;
 		}
 		if (name.length() == 0 || pass.length() == 0 || id.length() == 0) {
 			System.out.println("You can\'t leave any fields blank!");
-			mt.menu("Splash");
+			mt.queueMenu("Splash");
 			return;
 		}
 		mt.getDB().addCustomer(name, pass, id);
 		System.out.println("Customer added.");
 		UserSession.init(id);
-		mt.menu("Customer");
+		mt.queueMenu("Customer");
 	}
 
 }

@@ -15,18 +15,18 @@ class CreateUserMenu extends ABCMenu {
 		try {
 			switch (Integer.parseInt(s.nextLine().substring(0, 1))) {
 			case 1:
-				mt.menu("CreateCustomer");
+				mt.queueMenu("CreateCustomer");
 				break;
 			case 2:
-				mt.menu("CreateEmployee");
+				mt.queueMenu("CreateEmployee");
 				break;
 			default:
 				System.out.println("Your input was not understood");
-				mt.menu("CreateUser");
+				mt.queueMenu("CreateUser");
 			}
 		} catch (StringIndexOutOfBoundsException | NumberFormatException e) {
 			System.out.println("You have to enter a number!");
-			mt.menu("CreateUser");
+			mt.queueMenu("CreateUser");
 		}
 	}
 

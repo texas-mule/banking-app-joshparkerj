@@ -17,7 +17,7 @@ class DepositMenu extends TransactionMenu {
 			verifyAmount();
 		} else {
 			System.out.println("Not your account!");
-			mt.menu("Customer");
+			mt.queueMenu("Customer");
 		}
 	}
 	

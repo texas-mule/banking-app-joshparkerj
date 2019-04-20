@@ -21,10 +21,10 @@ class CreateAccountMenu extends ABCMenu {
 			mt.getDB().addAccount(type, num);
 			mt.getDB().addAccountHolder(UserSession.getID(), num);
 			System.out.println("Account added");
-			mt.menu("Customer");
+			mt.queueMenu("Customer");
 		} else {
 			System.out.println("That account number is taken!");
-			mt.menu("CreateAccount");
+			mt.queueMenu("CreateAccount");
 		}
 	}
 

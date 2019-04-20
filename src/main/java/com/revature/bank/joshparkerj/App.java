@@ -12,7 +12,7 @@ public class App {
 		filename = args.length > 0 ? args[0] : "DefaultData.txt";
 		IDB db = BankDB.getDB(filename);
 		MenuTree mt = new MenuTree(db);
-		mt.menu("Splash");
+		while (!mt.isFinished()) mt.menu();
 		db.write();
 	}
 

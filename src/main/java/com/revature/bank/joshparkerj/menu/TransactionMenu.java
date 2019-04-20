@@ -27,7 +27,7 @@ abstract class TransactionMenu extends ABCMenu {
 		if (choice.toLowerCase().startsWith("y")) {
 			transact();
 		} else System.out.println("No transaction made");
-		mt.menu("Customer");
+		mt.queueMenu("Customer");
 	}
 	
 	abstract void transact();
