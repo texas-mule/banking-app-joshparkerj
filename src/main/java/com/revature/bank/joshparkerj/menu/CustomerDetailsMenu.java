@@ -18,7 +18,15 @@ public class CustomerDetailsMenu extends ABCMenu {
 			System.out.println("That customer is not in the system!");
 			return;
 		}
+		System.out.println("**** **** **** **** ****");
+		System.out.println("Customer Details:");
 		System.out.println(mt.getDB().customerDetails(id));
+		System.out.println("**** **** **** **** ****");
+		System.out.println("");
+		System.out.println("**** **** **** **** ****");
+		System.out.println("Customer Accounts:");
+		System.out.println(mt.getDB().getCustomerAccounts(id));
+		System.out.println("**** **** **** **** ****");
 	}
 
 }
