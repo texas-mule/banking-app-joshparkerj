@@ -2,6 +2,8 @@ package com.revature.bank.joshparkerj.menu;
 
 import java.util.Scanner;
 
+import com.revature.bank.joshparkerj.UserSession;
+
 public class EmployeeMenu extends ABCMenu {
 
 	public EmployeeMenu(MenuTree m, Scanner ss) {
@@ -22,12 +24,35 @@ public class EmployeeMenu extends ABCMenu {
 			viewCustomers();
 			break;
 		case 2:
-			
+			mt.queueMenu("CustomerDetails");
+			break;
+		case 3:
+			viewApps();
+			break;
+		case 4:
+			mt.queueMenu("ApproveApp");
+			break;
+		case 5:
+			mt.queueMenu("DenyApp");
+			break;
+		case 9:
+			UserSession.end();
+			mt.queueMenu("Splash");
+			break;
+		case 0:
+			mt.quit();
+			break;
+			default:
+				System.out.println("Your input was not understood");
 		}
 	}
 	
 	private void viewCustomers() {
-		
+		System.out.print(mt.getDB().getCustomers());
+	}
+	
+	private void viewApps() {
+		System.out.println(mt.getDB().getPendingApps());
 	}
 
 }

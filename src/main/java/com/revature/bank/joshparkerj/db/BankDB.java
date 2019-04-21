@@ -68,7 +68,7 @@ public class BankDB implements IDB {
 	}
 
 	public void addAccount(String type, String number) {
-		accounts.add(new Account(type, number, "$0.00"));
+		accounts.add(new Account(type, number, "$0.00", "f"));
 	}
 
 	public void addAccountHolder(String id, String num) {
@@ -149,19 +149,82 @@ public class BankDB implements IDB {
 			for (Account b : accounts) {
 				if (a.getID().equals(num) && b.getID().equals(dnum)) {
 					finalSum = a.withdraw(sum);
-					if (finalSum != null) b.deposit(sum);
+					if (finalSum != null)
+						b.deposit(sum);
 					return finalSum;
 				}
 			}
 		}
 		return finalSum;
 	}
-	
+
 	public boolean accountExists(String num) {
 		for (Account a : accounts) {
-			if(a.getID().equals(num)) return true;
+			if (a.getID().equals(num))
+				return true;
 		}
 		return false;
+	}
+
+	public String getCustomers() {
+		s = "";
+		customers.forEach(customer -> this.s += customer.summary());
+		return s;
+	}
+
+	public String getPendingApps() {
+		s = "";
+		for (Account a : accounts) {
+			if (a.unapproved()) {
+				for (AccountHolder ah : accountholders) {
+					if (ah.getNum().equals(a.getID())) {
+						for (Customer c : customers) {
+							if (c.getID().equals(ah.getSSN())) {
+								s += c.summary() + a.summary();
+							}
+						}
+					}
+				}
+			}
+		}
+		return s;
+	}
+
+	public boolean customerExists(String id) {
+		for (Customer c : customers) {
+			if (c.getID().equals(id))
+				return true;
+		}
+		return false;
+	}
+
+	public String customerDetails(String id) {
+		for (Customer c : customers) {
+			if (c.getID().equals(id))
+				return c.details();
+		}
+		return null;
+	}
+
+	public boolean accountApproved(String num) {
+		for (Account a : accounts) {
+			if (a.getID().equals(num)) return !a.unapproved();
+		}
+		return false;
+	}
+
+	public void approveAccount(String num) {
+		for (Account a : accounts) {
+			if (a.getID().equals(num)) {
+				a.approve();
+				return;
+			}
+		}
+	}
+
+	public void denyAccount(String num) {
+		accounts.removeIf(a->a.getID().equals(num));
+		accountholders.removeIf(ah->ah.getNum().equals(num));
 	}
 
 }

@@ -5,11 +5,13 @@ class Account {
 	private String type;
 	private String id;
 	private String bal;
+	private boolean approved;
 	
-	public Account(String t, String n, String b) {
+	public Account(String t, String n, String b, String a) {
 		type = t;
 		id = n;
 		bal = b;
+		approved = (a.equals("t")) ? true : false;
 	}
 
 	public Account(String st) {
@@ -17,10 +19,11 @@ class Account {
 		type = b[1];
 		id = b[2];
 		bal = b[3];
+		approved = (b[4].toLowerCase().startsWith("t")) ? true : false;
 	}
 
 	public String serialize() {
-		return "account\t" + type + "\t" + id + "\t" + bal + "\n";
+		return "account\t" + type + "\t" + id + "\t" + bal + "\t" + (approved ? "t" : "f") + "\n";
 	}
 	
 	public String prettyPrint() {
@@ -46,6 +49,18 @@ class Account {
 		String r = remainder < 10 ? ("0" + remainder) : ("" + remainder);
 		bal = "$" + cents / 100 + "." + r;
 		return bal;
+	}
+	
+	public boolean unapproved() {
+		return !this.approved;
+	}
+
+	public String summary() {
+		return "Account number: " + id + "\tType: " + type + "\n";
+	}
+
+	public void approve() {
+		approved = true;
 	}
 
 }

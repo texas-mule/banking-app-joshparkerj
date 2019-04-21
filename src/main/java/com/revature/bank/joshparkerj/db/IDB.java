@@ -20,5 +20,12 @@ public interface IDB {
 	String withdraw(String num, String sum);
 	String transfer(String num, String dnum, String sum);
 	boolean accountExists(String num);
+	String getCustomers();
+	String getPendingApps();
+	boolean customerExists(String id);
+	String customerDetails(String id);
+	boolean accountApproved(String num);
+	void approveAccount(String num);
+	void denyAccount(String num);
 
 }

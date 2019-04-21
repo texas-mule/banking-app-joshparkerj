@@ -27,4 +27,12 @@ class Customer extends ABCUser {
 		return id;
 	}
 
+	public String summary() {
+		return "Username:\t" + name + "\tSSN:\t" + id + "\n";
+	}
+
+	public String details() {
+		return "Username:\t" + name + "\nSSN:\t" + id + "\nPassword:\t" + pass;
+	}
+
 }
