@@ -24,7 +24,6 @@ class CreateAccountMenu extends ABCMenu {
 			mt.queueMenu("Customer");
 		} else {
 			System.out.println("That account number is taken!");
-			mt.queueMenu("CreateAccount");
 		}
 	}
 

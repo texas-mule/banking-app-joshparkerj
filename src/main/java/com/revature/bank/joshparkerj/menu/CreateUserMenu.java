@@ -22,11 +22,9 @@ class CreateUserMenu extends ABCMenu {
 				break;
 			default:
 				System.out.println("Your input was not understood");
-				mt.queueMenu("CreateUser");
 			}
 		} catch (StringIndexOutOfBoundsException | NumberFormatException e) {
 			System.out.println("You have to enter a number!");
-			mt.queueMenu("CreateUser");
 		}
 	}
 

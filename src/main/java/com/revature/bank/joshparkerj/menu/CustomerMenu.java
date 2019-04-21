@@ -18,13 +18,12 @@ class CustomerMenu extends ABCMenu {
 		System.out.println("5. Make a transfer");
 		System.out.println("9. Log out");
 		System.out.println("0. Quit.");
-		switch (Integer.parseInt(s.nextLine().substring(0,1))) {
+		switch (Integer.parseInt(s.nextLine().substring(0, 1))) {
 		case 1:
 			mt.queueMenu("CreateAccount");
 			break;
 		case 2:
 			System.out.print(mt.getDB().getCustomerAccounts(UserSession.getID()));
-			mt.queueMenu("Customer");
 			break;
 		case 3:
 			mt.queueMenu("Deposit");
@@ -44,7 +43,6 @@ class CustomerMenu extends ABCMenu {
 			break;
 		default:
 			System.out.println("Your input was not understood");
-			mt.queueMenu("Customer");
 		}
 	}
 
