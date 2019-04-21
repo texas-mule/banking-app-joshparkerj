@@ -1,12 +1,12 @@
 package com.revature.bank.joshparkerj.db;
 
 class Account {
-	
+
 	private String type;
 	private String id;
 	private String bal;
 	private boolean approved;
-	
+
 	public Account(String t, String n, String b, String a) {
 		type = t;
 		id = n;
@@ -15,7 +15,7 @@ class Account {
 	}
 
 	public Account(String st) {
-		String[]b = st.split("\t");
+		String[] b = st.split("\t");
 		type = b[1];
 		id = b[2];
 		bal = b[3];
@@ -25,7 +25,7 @@ class Account {
 	public String serialize() {
 		return "account\t" + type + "\t" + id + "\t" + bal + "\t" + (approved ? "t" : "f") + "\n";
 	}
-	
+
 	public String prettyPrint() {
 		return "Account type: " + type + "\nAccount Number: " + id + "\nBalance: " + bal + "\n\n";
 	}
@@ -44,13 +44,14 @@ class Account {
 
 	public String withdraw(String sum) {
 		int cents = Integer.parseInt(bal.replaceAll("\\D", "")) - Integer.parseInt(sum.replaceAll("\\D", ""));
-		if (cents < 0) return null;
+		if (cents < 0)
+			return null;
 		int remainder = cents % 100;
 		String r = remainder < 10 ? ("0" + remainder) : ("" + remainder);
 		bal = "$" + cents / 100 + "." + r;
 		return bal;
 	}
-	
+
 	public boolean unapproved() {
 		return !this.approved;
 	}

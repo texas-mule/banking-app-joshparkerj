@@ -9,7 +9,7 @@ public class EmployeeMenu extends ABCMenu {
 	public EmployeeMenu(MenuTree m, Scanner ss) {
 		super(m, ss);
 	}
-	
+
 	public void Run() {
 		System.out.println("Please choose from the following options:");
 		System.out.println("1. View All Customers");
@@ -42,15 +42,15 @@ public class EmployeeMenu extends ABCMenu {
 		case 0:
 			mt.quit();
 			break;
-			default:
-				System.out.println("Your input was not understood");
+		default:
+			System.out.println("Your input was not understood");
 		}
 	}
-	
+
 	private void viewCustomers() {
 		System.out.print(mt.getDB().getCustomers());
 	}
-	
+
 	private void viewApps() {
 		System.out.println(mt.getDB().getPendingApps());
 	}

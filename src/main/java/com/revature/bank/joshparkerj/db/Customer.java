@@ -7,7 +7,7 @@ class Customer extends ABCUser {
 		pass = p;
 		id = i;
 	}
-	
+
 	public Customer(String st) {
 		String[] b = st.split("\t");
 		name = b[1];

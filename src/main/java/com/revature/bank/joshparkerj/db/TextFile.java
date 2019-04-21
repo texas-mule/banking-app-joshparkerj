@@ -32,7 +32,7 @@ class TextFile {
 		file = new File(filename);
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			String st;
-			while((st = br.readLine()) != null) {
+			while ((st = br.readLine()) != null) {
 				if (st.startsWith("account")) {
 					accounts.add(new Account(st));
 				} else if (st.startsWith("customer")) {
@@ -60,18 +60,18 @@ class TextFile {
 	public List<Customer> getCustomers() {
 		return customers;
 	}
-	
-	public List<AccountHolder> getAccountHolders(){
+
+	public List<AccountHolder> getAccountHolders() {
 		return accountholders;
 	}
 
 	public void writeToDisc(IDB db) {
-		try (BufferedWriter w = Files.newBufferedWriter(filepath, Charset.forName("UTF-8"))){
+		try (BufferedWriter w = Files.newBufferedWriter(filepath, Charset.forName("UTF-8"))) {
 			String s = db.serialize();
 			w.write(s, 0, s.length());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

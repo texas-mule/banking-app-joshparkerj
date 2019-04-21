@@ -22,7 +22,7 @@ class LoginMenu extends ABCMenu {
 		System.out.println("Login as: ");
 		System.out.println("1. Customer");
 		System.out.println("2. Employee");
-		switch (Integer.parseInt(s.nextLine().substring(0,1))) {
+		switch (Integer.parseInt(s.nextLine().substring(0, 1))) {
 		case 1:
 			type = "Customer";
 			id = mt.getDB().getCustomerID(name, pass);

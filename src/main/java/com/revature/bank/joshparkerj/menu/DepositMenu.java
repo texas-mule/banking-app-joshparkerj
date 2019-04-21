@@ -20,7 +20,7 @@ class DepositMenu extends TransactionMenu {
 			mt.queueMenu("Customer");
 		}
 	}
-	
+
 	void transact() {
 		bal = mt.getDB().deposit(num, sum);
 		System.out.println("The account balance is now: " + bal);

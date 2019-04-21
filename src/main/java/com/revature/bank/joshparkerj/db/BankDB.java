@@ -208,7 +208,8 @@ public class BankDB implements IDB {
 
 	public boolean accountApproved(String num) {
 		for (Account a : accounts) {
-			if (a.getID().equals(num)) return !a.unapproved();
+			if (a.getID().equals(num))
+				return !a.unapproved();
 		}
 		return false;
 	}
@@ -223,8 +224,8 @@ public class BankDB implements IDB {
 	}
 
 	public void denyAccount(String num) {
-		accounts.removeIf(a->a.getID().equals(num));
-		accountholders.removeIf(ah->ah.getNum().equals(num));
+		accounts.removeIf(a -> a.getID().equals(num));
+		accountholders.removeIf(ah -> ah.getNum().equals(num));
 	}
 
 }

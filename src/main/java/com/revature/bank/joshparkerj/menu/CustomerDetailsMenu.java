@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class CustomerDetailsMenu extends ABCMenu {
 
 	private String id;
-	
+
 	public CustomerDetailsMenu(MenuTree m, Scanner ss) {
 		super(m, ss);
 	}

@@ -27,19 +27,19 @@ public class MenuTree {
 			System.out.println(e.toString());
 		}
 	}
-	
+
 	public IDB getDB() {
 		return db;
 	}
-	
+
 	public boolean isFinished() {
 		return this.finished;
 	}
-	
+
 	public void quit() {
 		this.finished = true;
 	}
-	
+
 	public void queueMenu(String m) {
 		this.nextMenu = m;
 	}

@@ -11,11 +11,11 @@ abstract class TransactionMenu extends ABCMenu {
 	protected int remainder;
 	protected String r;
 	protected String choice;
-	
+
 	public TransactionMenu(MenuTree m, Scanner ss) {
 		super(m, ss);
 	}
-	
+
 	protected void verifyAmount() {
 		sum = s.nextLine();
 		amount = Integer.parseInt(sum.replaceAll("\\D", ""));
@@ -26,10 +26,11 @@ abstract class TransactionMenu extends ABCMenu {
 		choice = s.nextLine();
 		if (choice.toLowerCase().startsWith("y")) {
 			transact();
-		} else System.out.println("No transaction made");
+		} else
+			System.out.println("No transaction made");
 		mt.queueMenu("Customer");
 	}
-	
+
 	abstract void transact();
 
 }

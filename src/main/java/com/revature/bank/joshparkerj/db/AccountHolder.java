@@ -1,10 +1,10 @@
 package com.revature.bank.joshparkerj.db;
 
 class AccountHolder {
-	
+
 	private String ssn;
 	private String num;
-	
+
 	public AccountHolder(String st) {
 		String[] b = st.split("\t");
 		ssn = b[1];

@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class DenyAppMenu extends ABCMenu {
 
 	private String num;
-	
+
 	public DenyAppMenu(MenuTree m, Scanner ss) {
 		super(m, ss);
 	}
