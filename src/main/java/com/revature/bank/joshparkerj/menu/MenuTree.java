@@ -1,7 +1,9 @@
 package com.revature.bank.joshparkerj.menu;
 
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
+
 import com.revature.bank.joshparkerj.db.IDB;
 
 public class MenuTree {
@@ -11,9 +13,9 @@ public class MenuTree {
 	private boolean finished;
 	private String nextMenu = "Splash";
 
-	public MenuTree(IDB d) {
+	public MenuTree(IDB d, InputStream i_s) {
 		db = d;
-		s = new Scanner(System.in);
+		s = new Scanner(i_s);
 	}
 
 	public void menu() {

@@ -11,7 +11,7 @@ public class App {
 	public static void main(String[] args) {
 		filename = args.length > 0 ? args[0] : "DefaultData.txt";
 		IDB db = BankDB.getDB(filename);
-		MenuTree mt = new MenuTree(db);
+		MenuTree mt = new MenuTree(db, System.in);
 		while (!mt.isFinished())
 			mt.menu();
 		db.write();
