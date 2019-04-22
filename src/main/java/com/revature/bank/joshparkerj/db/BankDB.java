@@ -227,5 +227,13 @@ public class BankDB implements IDB {
 		accounts.removeIf(a -> a.getID().equals(num));
 		accountholders.removeIf(ah -> ah.getNum().equals(num));
 	}
+	
+	public void close() {
+		uniqueInstance = null;
+	}
+	
+	public void deleteCustomer(String id) {
+		customers.removeIf(c->c.getID().equals(id));
+	}
 
 }

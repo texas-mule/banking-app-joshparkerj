@@ -52,5 +52,9 @@ public interface IDB {
 	void approveAccount(String num);
 
 	void denyAccount(String num);
+	
+	void close();
+	
+	void deleteCustomer(String id);
 
 }
