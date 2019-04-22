@@ -31,6 +31,8 @@ public class BankDBTest {
 		assertTrue(db.customerExists("1231235555123"));
 		db.deleteCustomer("1231235555123");
 		assertFalse(db.customerExists("1231235555123"));
+		db.write();
+		db.close();
 	}
 	
 	@Test
