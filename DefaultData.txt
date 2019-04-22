@@ -4,7 +4,9 @@ customer	Wolverine	JeanGrey01!	idk
 customer	White Queen	EmmaFrost01*	88
 customer	Lobo	1455.Coolguy	8884
 customer	Human Torch	ABC123iamaclown!	6869
+customer	Abe	Lincoln01!	123
 employee	supervisor	xxx	0	0	$100000000.00	Mahatma	Ghandi	Nirvana	t
 employee	Joe	1	101	0	14000	Joseph	Magneto	Dallas	f
+employee	Doug Jones	8088Test	8088Test	0	40000	Doug	Jones	Burlington Coat Factory	f
 ah	idk	8884
 ah	idk	6969420

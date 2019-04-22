@@ -10,19 +10,17 @@ import com.revature.bank.joshparkerj.db.BankDB;
 import com.revature.bank.joshparkerj.db.IDB;
 
 public class BankDBTest {
-
-	private IDB db;
 	
 	@Test
 	public void testGetDB() {
-		db = BankDB.getDB("DefaultData.txt");
+		IDB db = BankDB.getDB("DefaultData.txt");
 		assertTrue(db instanceof BankDB);
 		assertEquals(db, BankDB.getDB(""));
 	}
 	
 	@Test
 	public void testWrite() {
-		db = BankDB.getDB("DefaultData.txt");
+		IDB db = BankDB.getDB("DefaultData.txt");
 		db.addCustomer("Doug Woolford Jones", "IAmaGiantBaby01!", "1231235555123");
 		db.write();
 		db.close();
@@ -37,7 +35,7 @@ public class BankDBTest {
 	
 	@Test
 	public void testGetEmployeeID() {
-		db = BankDB.getDB("DefaultData.txt");
+		IDB db = BankDB.getDB("DefaultData.txt");
 		db.addEmployee("a", "b", "c", "0", "e", "f", "g", "h");
 		assertEquals(db.getEmployeeID("a", "b"), "c");
 		assertTrue(db.employeeExists("c"));
@@ -47,7 +45,7 @@ public class BankDBTest {
 	
 	@Test
 	public void testCustomerTransactions() {
-		db = BankDB.getDB("DefaultData.txt");
+		IDB db = BankDB.getDB("DefaultData.txt");
 		db.addCustomer("a", "b", "coolguy");
 		assertTrue(db.customerExists("coolguy"));
 		db.addAccount("e", "failaccount");
@@ -61,8 +59,6 @@ public class BankDBTest {
 		assertTrue(db.sufficientFunds("failaccount","$1000.00"));
 		db.withdraw("failaccount", "$900.00");
 		assertFalse(db.sufficientFunds("failaccount", "$1000.00"));
-		System.out.println(db.getBalance("failaccount"));
-		System.out.println(db.sufficientFunds("failaccount", "$100.00"));
 		assertTrue(db.getBalance("failaccount").equals("$100.00"));
 		assertTrue(db.sufficientFunds("failaccount","$100.00"));
 		db.addAccount("g", "hackaccount");
