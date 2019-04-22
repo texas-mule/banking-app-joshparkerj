@@ -27,7 +27,7 @@ public interface IDB {
 
 	String getCustomerAccounts(String id);
 
-	boolean employeeExists(String supid);
+	boolean employeeExists(String id);
 
 	String deposit(String num, String sum);
 
@@ -56,5 +56,13 @@ public interface IDB {
 	void close();
 	
 	void deleteCustomer(String id);
+
+	void deleteEmployee(String id);
+	
+	void deleteAccount(String id);
+
+	boolean sufficientFunds(String num, String sum);
+
+	String getBalance(String num);
 
 }

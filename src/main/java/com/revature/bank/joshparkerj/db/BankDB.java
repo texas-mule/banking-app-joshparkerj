@@ -115,9 +115,9 @@ public class BankDB implements IDB {
 		return s;
 	}
 
-	public boolean employeeExists(String supid) {
+	public boolean employeeExists(String id) {
 		for (Employee e : employees) {
-			if (e.getID().equals(supid))
+			if (e.getID().equals(id))
 				return true;
 		}
 		return false;
@@ -234,6 +234,30 @@ public class BankDB implements IDB {
 	
 	public void deleteCustomer(String id) {
 		customers.removeIf(c->c.getID().equals(id));
+		accountholders.removeIf(ah->ah.getNum().equals(id));
+	}
+
+	public void deleteEmployee(String id) {
+		employees.removeIf(e->e.getID().equals(id));
+	}
+	
+	public void deleteAccount(String id) {
+		accounts.removeIf(a->a.getID().equals(id));
+		accountholders.removeIf(ah->ah.getNum().equals(id));
+	}
+
+	public boolean sufficientFunds(String num, String sum) {
+		for (Account a : accounts) {
+			if (a.getID().equals(num)) return a.sufficientFunds(sum);
+		}
+		return false;
+	}
+
+	public String getBalance(String num) {
+		for (Account a : accounts) {
+			if (a.getID().equals(num)) return a.getBalance();
+		}
+		return null;
 	}
 
 }

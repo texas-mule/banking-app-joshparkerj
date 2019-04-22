@@ -64,4 +64,12 @@ class Account {
 		approved = true;
 	}
 
+	public boolean sufficientFunds(String sum) {
+		return (Integer.parseInt(bal.replaceAll("\\D", "")) - Integer.parseInt(sum.replaceAll("\\D", ""))) >= 0;
+	}
+
+	public String getBalance() {
+		return bal;
+	}
+
 }
