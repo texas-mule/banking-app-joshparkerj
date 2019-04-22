@@ -22,7 +22,7 @@ abstract class TransactionMenu extends ABCMenu {
 		remainder = amount % 100;
 		r = remainder < 10 ? ("0" + remainder) : ("" + remainder);
 		sum = "$" + amount / 100 + "." + r;
-		System.out.println("I got: " + sum + ". Is this the correct amount? Y//n");
+		System.out.println("I got: " + sum + ". Is this the correct amount? Y/n");
 		choice = s.nextLine();
 		if (choice.toLowerCase().startsWith("y")) {
 			transact();

@@ -1,5 +1,7 @@
 account	Checking	8884	$88.00	t
 account	Perforating	6969420	$0.00	t
+account	Checking	88G	$50.00	t
+account	Checking	99H	$50.00	f
 customer	Wolverine	JeanGrey01!	idk
 customer	White Queen	EmmaFrost01*	88
 customer	Lobo	1455.Coolguy	8884
@@ -10,3 +12,6 @@ employee	Joe	1	101	0	14000	Joseph	Magneto	Dallas	f
 employee	Doug Jones	8088Test	8088Test	0	40000	Doug	Jones	Burlington Coat Factory	f
 ah	idk	8884
 ah	idk	6969420
+ah	idk	88G
+ah	idk	99H
+ah	88	8884
