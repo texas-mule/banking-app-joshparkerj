@@ -20,6 +20,7 @@ public class MenuTreeTest {
 	private final String testEmployeeMenuInput = "2\nJoe\n1\n2\n1\n3\nX\n6\n0\n";
 	private final String testBadWithdrawalInput = "2\nAbe\nLincoln01!\n1\n3\n8884\n4\n8884\n9\n2\nWolverine\nJeanGrey01!\n1\n4\n8884\n$888.00\ny\n0\n";
 	private final String testSmallAmountsInput = "1\n1\nCyclops\nSlim01!\n456Test\n1\nChecking\nvladimir putin\n1\nSavings\n205D\n3\n205D\n$0.09\ny\n4\n205D\n$0.01\ny\n5\n205D\nvladimir putin\n$0.02\ny\n1\nOptic Blast\n893HB\n3\n893HB\n$79.99\ny\n4\n893HB\n$2.36\ny\n4\n893HB\n$2.36\ny\n0\n";
+	private final String testBadTransferInput = "1\n1\nStorm\nOroro01@\n8882Testing\n1\nChecking\nShadow King\n1\nSavings\nForge\n3\nForge\n$1200.89\ny\n5\nForge\nShadow King\n$24,000.00\ny\n5\nZany\n5\nForge\nZany\n0\n";
 
 	@Test
 	public void testMenu() {
@@ -72,6 +73,16 @@ public class MenuTreeTest {
 		assertEquals(db.getBalance("vladimir putin"), "$0.02");
 		assertEquals(db.getBalance("205D"), "$0.06");
 		assertEquals(db.getBalance("893HB"), "$75.27");
+	}
+	
+	@Test
+	public void testBadTransfer() {
+		IDB db = BankDB.getDB("DefaultData.txt");
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadTransferInput.getBytes()));
+		while (!mt.isFinished())
+			mt.menu();
+		assertEquals(db.getBalance("Forge"), "$1200.89");
+		assertEquals(db.getBalance("Shadow King"), "$0.00");
 	}
 
 }

@@ -19,6 +19,7 @@ public class AllTest {
 		mtt.testEmployeeMenu();
 		mtt.testBadWithdrawal();
 		mtt.testSmallAmounts();
+		mtt.testBadTransfer();
 		BadFileTest bft = new BadFileTest();
 		bft.testBadFileName();
 		AppTest at = new AppTest();

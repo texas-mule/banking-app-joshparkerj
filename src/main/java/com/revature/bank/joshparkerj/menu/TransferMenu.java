@@ -12,6 +12,7 @@ public class TransferMenu extends TransactionMenu {
 	}
 
 	public void Run() {
+		mt.queueMenu("Customer");
 		System.out.println("Enter the source account number:");
 		num = s.nextLine();
 		if (!mt.getDB().holdsAccount(num, UserSession.getID())) {
