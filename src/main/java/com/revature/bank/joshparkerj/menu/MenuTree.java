@@ -1,7 +1,6 @@
 package com.revature.bank.joshparkerj.menu;
 
 import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 
 import com.revature.bank.joshparkerj.db.IDB;
@@ -23,8 +22,7 @@ public class MenuTree {
 			Class<?> c = Class.forName("com.revature.bank.joshparkerj.menu." + nextMenu + "Menu");
 			ABCMenu a = (ABCMenu) c.getConstructor(MenuTree.class, Scanner.class).newInstance(this, s);
 			a.Run();
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+		} catch (Exception e) {
 			System.out.println("Failed to open menu: " + nextMenu);
 			System.out.println(e.toString());
 		}

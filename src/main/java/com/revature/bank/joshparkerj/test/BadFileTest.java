@@ -13,11 +13,15 @@ public class BadFileTest {
 	public void testBadFileName() {
 		IDB db = BankDB.getDB("DefaultData.txt");
 		assertTrue(db.holdsAccount("88G", "idk"));
-		db = BankDB.getDB("Bad File Name");
+		db = BankDB.getDB("~*~*~Bad#:#:#File%:%:%Name&*&*&");
 		assertTrue(db.accountExists("88G"));
 		db.close();
-		db = BankDB.getDB("Bad File Name");
+		db = BankDB.getDB("~*~*~Bad#:#:#File%:%:%Name&*&*&");
 		assertTrue(db.uninitialized());
+		db.write();
+		db.close();
+		db = BankDB.getDB("LockedData.txt");
+		db.write();
 		db.close();
 	}
 

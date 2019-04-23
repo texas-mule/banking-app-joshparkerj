@@ -13,6 +13,7 @@ class CreateAccountMenu extends ABCMenu {
 	}
 
 	public void Run() {
+		mt.queueMenu("Customer");
 		System.out.println("Please enter the account type:");
 		type = s.nextLine();
 		System.out.println("Please enter the account number:");
@@ -21,7 +22,6 @@ class CreateAccountMenu extends ABCMenu {
 			mt.getDB().addAccount(type, num);
 			mt.getDB().addAccountHolder(UserSession.getID(), num);
 			System.out.println("Account added");
-			mt.queueMenu("Customer");
 		} else {
 			System.out.println("That account number is taken!");
 		}

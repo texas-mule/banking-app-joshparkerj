@@ -17,6 +17,7 @@ public class BankDBTest {
 		IDB db = BankDB.getDB("DefaultData.txt");
 		assertTrue(db instanceof BankDB);
 		assertEquals(db, BankDB.getDB(""));
+		assertFalse(db.uninitialized());
 	}
 	
 	@Test

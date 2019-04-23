@@ -20,6 +20,16 @@ public class AllTest {
 		mtt.testBadWithdrawal();
 		mtt.testSmallAmounts();
 		mtt.testBadTransfer();
+		mtt.testAccountNumberTaken();
+		mtt.testNoSupervisor();
+		mtt.testRefuseTransaction();
+		mtt.testNonExistentCustomer();
+		mtt.testBadMenuName();
+		mtt.testBadLogin();
+		mtt.testBadSplash();
+		mtt.testBadApproval();
+		mtt.testBadUserCreation();
+		mtt.testBadDenial();
 		BadFileTest bft = new BadFileTest();
 		bft.testBadFileName();
 		AppTest at = new AppTest();
