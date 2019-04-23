@@ -28,7 +28,7 @@ public class BankDB implements IDB {
 	}
 
 	public String serialize() {
-		s.setLength(0);;
+		s = new StringBuilder();
 		accounts.forEach(account -> this.s.append(account.serialize()));
 		customers.forEach(customer -> this.s.append(customer.serialize()));
 		employees.forEach(employee -> this.s.append(employee.serialize()));
@@ -100,7 +100,7 @@ public class BankDB implements IDB {
 	}
 
 	public String getCustomerAccounts(String id) {
-		s.setLength(0);
+		s = new StringBuilder();
 		for (AccountHolder ah : accountholders) {
 			if (ah.getSSN().equals(id)) {
 				for (Account a : accounts) {
@@ -167,13 +167,13 @@ public class BankDB implements IDB {
 	}
 
 	public String getCustomers() {
-		s.setLength(0);;
+		s = new StringBuilder();
 		customers.forEach(customer -> this.s.append(customer.summary()));
 		return s.toString();
 	}
 
 	public String getPendingApps() {
-		s.setLength(0);
+		s = new StringBuilder();
 		for (Account a : accounts) {
 			if (a.unapproved()) {
 				for (AccountHolder ah : accountholders) {

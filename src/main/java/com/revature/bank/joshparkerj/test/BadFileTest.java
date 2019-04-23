@@ -18,6 +18,7 @@ public class BadFileTest {
 		db.close();
 		db = BankDB.getDB("Bad File Name");
 		assertTrue(db.uninitialized());
+		db.close();
 	}
 
 }
