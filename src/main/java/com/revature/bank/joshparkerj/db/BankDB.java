@@ -6,7 +6,7 @@ public class BankDB implements IDB {
 
 	private static BankDB uniqueInstance = null;
 
-	private String s;
+	private StringBuilder s;
 	private TextFile t;
 	private List<Account> accounts;
 	private List<Customer> customers;
@@ -28,12 +28,12 @@ public class BankDB implements IDB {
 	}
 
 	public String serialize() {
-		s = "";
-		accounts.forEach(account -> this.s += account.serialize());
-		customers.forEach(customer -> this.s += customer.serialize());
-		employees.forEach(employee -> this.s += employee.serialize());
-		accountholders.forEach(ah -> this.s += ah.serialize());
-		return s;
+		s.setLength(0);;
+		accounts.forEach(account -> this.s.append(account.serialize()));
+		customers.forEach(customer -> this.s.append(customer.serialize()));
+		employees.forEach(employee -> this.s.append(employee.serialize()));
+		accountholders.forEach(ah -> this.s.append(ah.serialize()));
+		return s.toString();
 	}
 
 	public void write() {
@@ -100,19 +100,19 @@ public class BankDB implements IDB {
 	}
 
 	public String getCustomerAccounts(String id) {
-		s = "";
+		s.setLength(0);
 		for (AccountHolder ah : accountholders) {
 			if (ah.getSSN().equals(id)) {
 				for (Account a : accounts) {
 					if (ah.getNum().equals(a.getID())) {
-						s += a.prettyPrint();
+						s.append(a.prettyPrint());
 					}
 				}
 			}
 		}
 		if (s.length() == 0)
-			s = "You have no accounts!\n";
-		return s;
+			s.append("You have no accounts!\n");
+		return s.toString();
 	}
 
 	public boolean employeeExists(String id) {
@@ -167,27 +167,27 @@ public class BankDB implements IDB {
 	}
 
 	public String getCustomers() {
-		s = "";
-		customers.forEach(customer -> this.s += customer.summary());
-		return s;
+		s.setLength(0);;
+		customers.forEach(customer -> this.s.append(customer.summary()));
+		return s.toString();
 	}
 
 	public String getPendingApps() {
-		s = "";
+		s.setLength(0);
 		for (Account a : accounts) {
 			if (a.unapproved()) {
 				for (AccountHolder ah : accountholders) {
 					if (ah.getNum().equals(a.getID())) {
 						for (Customer c : customers) {
 							if (c.getID().equals(ah.getSSN())) {
-								s += c.summary() + a.summary();
+								s.append(c.summary() + a.summary());
 							}
 						}
 					}
 				}
 			}
 		}
-		return s;
+		return s.toString();
 	}
 
 	public boolean customerExists(String id) {
