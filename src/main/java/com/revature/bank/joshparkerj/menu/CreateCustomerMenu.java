@@ -23,19 +23,31 @@ class CreateCustomerMenu extends ABCMenu {
 		mt.queueMenu("Splash");
 		name = s.nextLine();
 		if (!mt.getDB().uniqueCustomerName(name)) {
+			System.out.println("***** *****     ***** *****");
+			System.out.println("Unacceptable username: " + name);
 			System.out.println("That username is already in use!");
+			System.out.println("***** *****     ***** *****");
 			return;
 		}
 		if (Pattern.compile("[^\\w\\s]").matcher(name).find()) {
+			System.out.println("***** *****     ***** *****");
+			System.out.println("Unacceptable username: " + name);
 			System.out.println("Special characters not allowed");
+			System.out.println("***** *****     ***** *****");
 			return;
 		}
 		if (name.length() < 1) {
+			System.out.println("***** *****     ***** *****");
+			System.out.println("Unacceptable username: " + name);
 			System.out.println("You can\'t leave this field blank!");
+			System.out.println("***** *****     ***** *****");
 			return;
 		}
 		if (name.length() > 30) {
+			System.out.println("***** *****     ***** *****");
+			System.out.println("Unacceptable username: " + name);
 			System.out.println("Please choose a shorter username!");
+			System.out.println("***** *****     ***** *****");
 			return;
 		}
 		System.out.println("your password must include the following:");
@@ -46,21 +58,34 @@ class CreateCustomerMenu extends ABCMenu {
 		System.out.println("Please enter your password:");
 		pass = s.nextLine();
 		if (!Pattern.compile("[a-z]").matcher(pass).find()) {
+			System.out.println("***** *****     ***** *****");
+			System.out.println("Unacceptable password: " + pass);
 			System.out.println("you have to include at least one lower case letter");
+			System.out.println("***** *****     ***** *****");
 			return;
 		}
 		if (!Pattern.compile("[A-Z]").matcher(pass).find()) {
+			System.out.println("***** *****     ***** *****");
+			System.out.println("Unacceptable password: " + pass);
 			System.out.println("You have to include at least one upper case letter");
+			System.out.println("***** *****     ***** *****");
 			return;
 		}
 		System.out.println("Please enter your ssn:");
 		id = s.nextLine();
+		System.out.println("ID length: " + id.length()); //testing
 		if (!mt.getDB().uniqueSSN(id)) {
+			System.out.println("***** *****     ***** *****");
+			System.out.println("Unacceptable ssn: " + id);
 			System.out.println("That ssn is already in our system!");
+			System.out.println("***** *****     ***** *****");
 			return;
 		}
-		if (name.length() == 0 || pass.length() == 0 || id.length() == 0) {
-			System.out.println("You can\'t leave any fields blank!");
+		if (id.length() == 0) {
+			System.out.println("***** *****     ***** *****");
+			System.out.println("Unacceptable ssn: " + id);
+			System.out.println("You can\'t leave this field blank!");
+			System.out.println("***** *****     ***** *****");
 			return;
 		}
 		mt.getDB().addCustomer(name, pass, id);

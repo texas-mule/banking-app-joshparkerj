@@ -19,6 +19,7 @@ public class EmployeeMenu extends ABCMenu {
 		System.out.println("5. Deny an application");
 		System.out.println("9. Log out");
 		System.out.println("0. Quit.");
+		try {
 		switch (Integer.parseInt(s.nextLine().substring(0, 1))) {
 		case 1:
 			viewCustomers();
@@ -44,6 +45,9 @@ public class EmployeeMenu extends ABCMenu {
 			break;
 		default:
 			System.out.println("Your input was not understood");
+		}
+		} catch (NumberFormatException e) {
+			System.out.println("You have to enter a number!");
 		}
 	}
 

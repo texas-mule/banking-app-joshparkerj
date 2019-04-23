@@ -227,37 +227,43 @@ public class BankDB implements IDB {
 		accounts.removeIf(a -> a.getID().equals(num));
 		accountholders.removeIf(ah -> ah.getNum().equals(num));
 	}
-	
+
 	public void close() {
 		uniqueInstance = null;
 	}
-	
+
 	public void deleteCustomer(String id) {
-		customers.removeIf(c->c.getID().equals(id));
-		accountholders.removeIf(ah->ah.getNum().equals(id));
+		customers.removeIf(c -> c.getID().equals(id));
+		accountholders.removeIf(ah -> ah.getNum().equals(id));
 	}
 
 	public void deleteEmployee(String id) {
-		employees.removeIf(e->e.getID().equals(id));
+		employees.removeIf(e -> e.getID().equals(id));
 	}
-	
+
 	public void deleteAccount(String id) {
-		accounts.removeIf(a->a.getID().equals(id));
-		accountholders.removeIf(ah->ah.getNum().equals(id));
+		accounts.removeIf(a -> a.getID().equals(id));
+		accountholders.removeIf(ah -> ah.getNum().equals(id));
 	}
 
 	public boolean sufficientFunds(String num, String sum) {
 		for (Account a : accounts) {
-			if (a.getID().equals(num)) return a.sufficientFunds(sum);
+			if (a.getID().equals(num))
+				return a.sufficientFunds(sum);
 		}
 		return false;
 	}
 
 	public String getBalance(String num) {
 		for (Account a : accounts) {
-			if (a.getID().equals(num)) return a.getBalance();
+			if (a.getID().equals(num))
+				return a.getBalance();
 		}
 		return null;
+	}
+	
+	public boolean uninitialized() {
+		return (accounts.isEmpty() && customers.isEmpty() && accountholders.isEmpty() && employees.isEmpty());
 	}
 
 }

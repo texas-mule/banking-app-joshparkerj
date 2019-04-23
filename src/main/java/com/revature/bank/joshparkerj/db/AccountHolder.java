@@ -28,8 +28,4 @@ class AccountHolder {
 		return ssn;
 	}
 
-	public boolean holdsAccount(String n, String i) {
-		return n.equals(num) && i.equals(ssn);
-	}
-
 }

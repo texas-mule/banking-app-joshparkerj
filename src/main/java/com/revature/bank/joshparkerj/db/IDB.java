@@ -65,4 +65,6 @@ public interface IDB {
 
 	String getBalance(String num);
 
+	boolean uninitialized();
+
 }
