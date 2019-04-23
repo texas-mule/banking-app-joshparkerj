@@ -18,6 +18,7 @@ abstract class TransactionMenu extends ABCMenu {
 
 	protected void verifyAmount() {
 		sum = s.nextLine();
+		System.out.println(sum);
 		amount = Integer.parseInt(sum.replaceAll("\\D", ""));
 		remainder = amount % 100;
 		r = remainder < 10 ? ("0" + remainder) : ("" + remainder);

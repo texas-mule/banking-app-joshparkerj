@@ -7,11 +7,11 @@ class Account {
 	private String bal;
 	private boolean approved;
 
-	public Account(String t, String n, String b, String a) {
+	public Account(String t, String n, String b) {
 		type = t;
 		id = n;
 		bal = b;
-		approved = (a.equals("t")) ? true : false;
+		approved = false;
 	}
 
 	public Account(String st) {

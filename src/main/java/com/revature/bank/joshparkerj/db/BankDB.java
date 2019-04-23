@@ -68,7 +68,7 @@ public class BankDB implements IDB {
 	}
 
 	public void addAccount(String type, String number) {
-		accounts.add(new Account(type, number, "$0.00", "f"));
+		accounts.add(new Account(type, number, "$0.00"));
 	}
 
 	public void addAccountHolder(String id, String num) {
