@@ -67,4 +67,8 @@ public interface IDB {
 
 	boolean uninitialized();
 
+	String getJointApps(String id);
+
+	void addJointAccount(String num, String id);
+
 }

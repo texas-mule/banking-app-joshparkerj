@@ -72,7 +72,42 @@ public class BankDB implements IDB {
 	}
 
 	public void addAccountHolder(String id, String num) {
-		accountholders.add(new AccountHolder(id, num));
+		accountholders.add(new AccountHolder(id, num, true));
+	}
+	
+	public void addJointAccount(String num, String id) {
+		accountholders.add(new AccountHolder(id, num, false));
+	}
+	
+	public void approveAccountHolder(String id, String num) {
+		for (AccountHolder ah : accountholders) {
+			if (ah.getNum().equals(num) && ah.getSSN().equals(id)) {
+				ah.approve();
+			}
+		}
+	}
+	
+	public boolean jointAppExists(String id, String num) {
+		for (AccountHolder ah : accountholders) {
+			if (ah.getNum().equals(num) && ah.getSSN().equals(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public String getJointApps(String id) {
+		s = new StringBuilder();
+		for (AccountHolder ah : accountholders) {
+			if (ah.getSSN().equals(id)) {
+				for (AccountHolder zl : accountholders) {
+					if (zl.getNum().equals(ah.getNum())) {
+						s.append(zl.serialize());
+					}
+				}
+			}
+		}
+		return s.toString();
 	}
 
 	public boolean uniqueAccountNumber(String num) {
