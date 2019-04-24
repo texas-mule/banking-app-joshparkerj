@@ -17,9 +17,14 @@ abstract class TransactionMenu extends ABCMenu {
 	}
 
 	protected void verifyAmount() {
+		mt.queueMenu("Customer");
 		sum = s.nextLine();
-		System.out.println(sum);
-		amount = Integer.parseInt(sum.replaceAll("\\D", ""));
+		sum = sum.replaceAll("\\D", "");
+		if (sum.length() < 1) {
+			System.out.println("Please enter the amount using numerals!");
+			return;
+		}
+		amount = Integer.parseInt(sum);
 		remainder = amount % 100;
 		r = remainder < 10 ? ("0" + remainder) : ("" + remainder);
 		sum = "$" + amount / 100 + "." + r;
@@ -29,7 +34,6 @@ abstract class TransactionMenu extends ABCMenu {
 			transact();
 		} else
 			System.out.println("No transaction made");
-		mt.queueMenu("Customer");
 	}
 
 	abstract void transact();
