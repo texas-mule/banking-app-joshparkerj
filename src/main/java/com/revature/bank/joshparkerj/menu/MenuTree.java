@@ -1,12 +1,14 @@
 package com.revature.bank.joshparkerj.menu;
 
 import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import com.revature.bank.joshparkerj.db.IDB;
 
 public class MenuTree {
 
+	PrintStream ps;
 	private IDB db;
 	private Scanner s;
 	private boolean finished;
@@ -15,6 +17,13 @@ public class MenuTree {
 	public MenuTree(IDB d, InputStream i_s) {
 		db = d;
 		s = new Scanner(i_s);
+		ps = System.out;
+	}
+	
+	public MenuTree(IDB d, InputStream i_s, PrintStream p) {
+		db = d;
+		s = new Scanner(i_s);
+		ps = p;
 	}
 
 	public void menu() {
@@ -23,8 +32,8 @@ public class MenuTree {
 			ABCMenu a = (ABCMenu) c.getConstructor(MenuTree.class, Scanner.class).newInstance(this, s);
 			a.Run();
 		} catch (Exception e) {
-			System.out.println("Failed to open menu: " + nextMenu);
-			System.out.println(e.toString());
+			ps.println("Failed to open menu: " + nextMenu);
+			ps.println(e.toString());
 		}
 	}
 

@@ -14,16 +14,16 @@ class CreateAccountMenu extends ABCMenu {
 
 	public void Run() {
 		mt.queueMenu("Customer");
-		System.out.println("Please enter the account type:");
+		mt.ps.println("Please enter the account type:");
 		type = s.nextLine();
-		System.out.println("Please enter the account number:");
+		mt.ps.println("Please enter the account number:");
 		num = s.nextLine();
 		if (mt.getDB().uniqueAccountNumber(num)) {
 			mt.getDB().addAccount(type, num);
 			mt.getDB().addAccountHolder(UserSession.getID(), num);
-			System.out.println("Account added");
+			mt.ps.println("Account added");
 		} else {
-			System.out.println("That account number is taken!");
+			mt.ps.println("That account number is taken!");
 		}
 	}
 

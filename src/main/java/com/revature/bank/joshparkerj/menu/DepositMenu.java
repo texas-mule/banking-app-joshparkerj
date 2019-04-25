@@ -10,20 +10,20 @@ class DepositMenu extends TransactionMenu {
 	}
 
 	public void Run() {
-		System.out.println("Enter the account number:");
+		mt.ps.println("Enter the account number:");
 		num = s.nextLine();
 		if (mt.getDB().holdsAccount(UserSession.getID(), num)) {
-			System.out.println("Enter the amount in dollars and cents:");
+			mt.ps.println("Enter the amount in dollars and cents:");
 			verifyAmount();
 		} else {
-			System.out.println("Not your account!");
+			mt.ps.println("Not your account!");
 			mt.queueMenu("Customer");
 		}
 	}
 
 	void transact() {
 		bal = mt.getDB().deposit(num, sum);
-		System.out.println("The account balance is now: " + bal);
+		mt.ps.println("The account balance is now: " + bal);
 	}
 
 }

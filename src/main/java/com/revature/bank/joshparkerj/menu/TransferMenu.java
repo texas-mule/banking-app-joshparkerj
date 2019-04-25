@@ -13,19 +13,19 @@ public class TransferMenu extends TransactionMenu {
 
 	public void Run() {
 		mt.queueMenu("Customer");
-		System.out.println("Enter the source account number:");
+		mt.ps.println("Enter the source account number:");
 		num = s.nextLine();
 		if (!mt.getDB().holdsAccount(UserSession.getID(), num)) {
-			System.out.println("Not your account!");
+			mt.ps.println("Not your account!");
 			return;
 		}
-		System.out.println("Enter the destination account number:");
+		mt.ps.println("Enter the destination account number:");
 		dnum = s.nextLine();
 		if (!mt.getDB().accountExists(dnum)) {
-			System.out.println("That account is not in the system!");
+			mt.ps.println("That account is not in the system!");
 			return;
 		}
-		System.out.println("How much do you wish to transfer, in dollars and cents?");
+		mt.ps.println("How much do you wish to transfer, in dollars and cents?");
 		verifyAmount();
 
 	}
@@ -33,9 +33,9 @@ public class TransferMenu extends TransactionMenu {
 	void transact() {
 		bal = mt.getDB().transfer(num, dnum, sum);
 		if (bal != null) {
-			System.out.println("Your account balance is now: " + bal);
+			mt.ps.println("Your account balance is now: " + bal);
 		} else {
-			System.out.println("You are not allowed to transfer that much!");
+			mt.ps.println("You are not allowed to transfer that much!");
 		}
 	}
 

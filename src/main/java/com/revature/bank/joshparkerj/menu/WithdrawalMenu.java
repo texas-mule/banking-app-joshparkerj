@@ -10,13 +10,13 @@ public class WithdrawalMenu extends TransactionMenu {
 	}
 
 	public void Run() {
-		System.out.println("Enter the account number:");
+		mt.ps.println("Enter the account number:");
 		num = s.nextLine();
 		if (mt.getDB().holdsAccount(UserSession.getID(), num)) {
-			System.out.println("How much do you wish to withdraw, in dollars and cents?");
+			mt.ps.println("How much do you wish to withdraw, in dollars and cents?");
 			verifyAmount();
 		} else {
-			System.out.println("Not your account!");
+			mt.ps.println("Not your account!");
 			mt.queueMenu("Customer");
 		}
 	}
@@ -24,9 +24,9 @@ public class WithdrawalMenu extends TransactionMenu {
 	void transact() {
 		bal = mt.getDB().withdraw(num, sum);
 		if (bal != null) {
-			System.out.println("The account balance is now: " + bal);
+			mt.ps.println("The account balance is now: " + bal);
 		} else {
-			System.out.println("You are not allowed to withdraw that much!");
+			mt.ps.println("You are not allowed to withdraw that much!");
 		}
 	}
 

@@ -21,19 +21,19 @@ abstract class TransactionMenu extends ABCMenu {
 		sum = s.nextLine();
 		sum = sum.replaceAll("\\D", "");
 		if (sum.length() < 1) {
-			System.out.println("Please enter the amount using numerals!");
+			mt.ps.println("Please enter the amount using numerals!");
 			return;
 		}
 		amount = Integer.parseInt(sum);
 		remainder = amount % 100;
 		r = remainder < 10 ? ("0" + remainder) : ("" + remainder);
 		sum = "$" + amount / 100 + "." + r;
-		System.out.println("I got: " + sum + ". Is this the correct amount? Y/n");
+		mt.ps.println("I got: " + sum + ". Is this the correct amount? Y/n");
 		choice = s.nextLine();
 		if (choice.toLowerCase().startsWith("y")) {
 			transact();
 		} else
-			System.out.println("No transaction made");
+			mt.ps.println("No transaction made");
 	}
 
 	abstract void transact();

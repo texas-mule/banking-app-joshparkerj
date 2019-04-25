@@ -14,18 +14,18 @@ public class ApplyJointMenu extends ABCMenu {
 
 	public void Run() {
 		mt.queueMenu("Customer2");
-		System.out.println("Please enter the account number: ");
+		mt.ps.println("Please enter the account number: ");
 		num = s.nextLine();
 		if (!mt.getDB().accountExists(num)) {
-			System.out.println("That account is not in the system!");
+			mt.ps.println("That account is not in the system!");
 			return;
 		}
 		if (mt.getDB().holdsAccount(UserSession.getID(), num)) {
-			System.out.println("You can\'t create duplicate applications for a joint account!");
+			mt.ps.println("You can\'t create duplicate applications for a joint account!");
 			return;
 		}
 		mt.getDB().addJointAccount(UserSession.getID(), num);
-		System.out.println("Application saved!");
+		mt.ps.println("Application saved!");
 	}
 
 }

@@ -9,9 +9,9 @@ class CreateUserMenu extends ABCMenu {
 	}
 
 	public void Run() {
-		System.out.println("Select a user type: ");
-		System.out.println("1. Customer");
-		System.out.println("2. Employee");
+		mt.ps.println("Select a user type: ");
+		mt.ps.println("1. Customer");
+		mt.ps.println("2. Employee");
 		try {
 			switch (Integer.parseInt(s.nextLine().substring(0, 1))) {
 			case 1:
@@ -21,10 +21,10 @@ class CreateUserMenu extends ABCMenu {
 				mt.queueMenu("CreateEmployee");
 				break;
 			default:
-				System.out.println("Your input was not understood");
+				mt.ps.println("Your input was not understood");
 			}
 		} catch (StringIndexOutOfBoundsException | NumberFormatException e) {
-			System.out.println("You have to enter a number!");
+			mt.ps.println("You have to enter a number!");
 		}
 	}
 

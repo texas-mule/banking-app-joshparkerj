@@ -11,14 +11,14 @@ public class EmployeeMenu extends ABCMenu {
 	}
 
 	public void Run() {
-		System.out.println("Please choose from the following options:");
-		System.out.println("1. View All Customers");
-		System.out.println("2. View a Customer's Details");
-		System.out.println("3. View Account Applications");
-		System.out.println("4. Approve an Application");
-		System.out.println("5. Deny an application");
-		System.out.println("9. Log out");
-		System.out.println("0. Quit.");
+		mt.ps.println("Please choose from the following options:");
+		mt.ps.println("1. View All Customers");
+		mt.ps.println("2. View a Customer's Details");
+		mt.ps.println("3. View Account Applications");
+		mt.ps.println("4. Approve an Application");
+		mt.ps.println("5. Deny an application");
+		mt.ps.println("9. Log out");
+		mt.ps.println("0. Quit.");
 		try {
 		switch (Integer.parseInt(s.nextLine().substring(0, 1))) {
 		case 1:
@@ -44,19 +44,19 @@ public class EmployeeMenu extends ABCMenu {
 			mt.quit();
 			break;
 		default:
-			System.out.println("Your input was not understood");
+			mt.ps.println("Your input was not understood");
 		}
 		} catch (NumberFormatException e) {
-			System.out.println("You have to enter a number!");
+			mt.ps.println("You have to enter a number!");
 		}
 	}
 
 	private void viewCustomers() {
-		System.out.print(mt.getDB().getCustomers());
+		mt.ps.print(mt.getDB().getCustomers());
 	}
 
 	private void viewApps() {
-		System.out.println(mt.getDB().getPendingApps());
+		mt.ps.println(mt.getDB().getPendingApps());
 	}
 
 }

@@ -11,20 +11,20 @@ public class Customer2Menu extends ABCMenu {
 	}
 
 	public void Run() {
-		System.out.println("Please choose from the following options:");
-		System.out.println("1. Apply for joint account");
-		System.out.println("2. See joint account applications");
-		System.out.println("3. Approve joint account application");
-		System.out.println("4. Deny joint account application");
-		System.out.println("8. Previous options...");
-		System.out.println("9. Log out");
-		System.out.println("0. Quit.");
+		mt.ps.println("Please choose from the following options:");
+		mt.ps.println("1. Apply for joint account");
+		mt.ps.println("2. See joint account applications");
+		mt.ps.println("3. Approve joint account application");
+		mt.ps.println("4. Deny joint account application");
+		mt.ps.println("8. Previous options...");
+		mt.ps.println("9. Log out");
+		mt.ps.println("0. Quit.");
 		switch (Integer.parseInt(s.nextLine().substring(0, 1))) {
 		case 1:
 			mt.queueMenu("ApplyJoint");
 			break;
 		case 2:
-			System.out.print(mt.getDB().getJointApps(UserSession.getID()));
+			mt.ps.print(mt.getDB().getJointApps(UserSession.getID()));
 			break;
 		case 3:
 			mt.queueMenu("ApproveJoint");
@@ -42,7 +42,7 @@ public class Customer2Menu extends ABCMenu {
 			mt.quit();
 			break;
 		default:
-			System.out.println("Your input was not understood");
+			mt.ps.println("Your input was not understood");
 		}
 	}
 

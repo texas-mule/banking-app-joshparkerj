@@ -5,7 +5,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.revature.bank.joshparkerj.UserSession;
@@ -33,10 +39,15 @@ public class MenuTreeTest {
 	private final String testBadDenialInput = "2\nJoe\n1\n2\n5\n88G\n5\n88GG\n0\n";
 	private final String testJointAccountInput = "\n1\n1\nSuperman\nKrypton01!\nKent\n1\nHeroism\nFortress of Solitude\n9\n1\n1\nJimmy Olsen\nPhotography01!\nDaily Planet Photographer\n8\n1\nFortress of Solitude\n9\n1\n1\nLex Luthor\nKryptonite01!\nEvil Genius\n8\n1\nFortress of Solitude\n9\n2\nSuperman\nKrypton01!\n1\n8\n2\n3\nDaily Planet Photographer\nFortress of Solitude\n2\n4\nFortress of Solitude\nEvil Genius\n2\n0\n";
 
+	@Before
+	public void initialize() {
+		FAKEOS.clearOutput();
+	}
+	
 	@Test
 	public void testMenu() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testMenuInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testMenuInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
 		assertTrue(db.customerExists("123Test"));
@@ -53,7 +64,7 @@ public class MenuTreeTest {
 	@Test
 	public void testBadCustomer() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadCustomerInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadCustomerInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
 		assertTrue(db.customerExists("6869R"));
@@ -62,7 +73,7 @@ public class MenuTreeTest {
 	@Test
 	public void testEmployeeMenu() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testEmployeeMenuInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testEmployeeMenuInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
 	}
@@ -70,15 +81,17 @@ public class MenuTreeTest {
 	@Test
 	public void testBadWithdrawal() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadWithdrawalInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadWithdrawalInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
+		assertTrue(FAKEOS.getOutput().contains("Not your account!"));
+		assertTrue(FAKEOS.getOutput().contains("You are not allowed to withdraw that much!"));
 	}
 
 	@Test
 	public void testSmallAmounts() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testSmallAmountsInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testSmallAmountsInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
 		assertEquals(db.getBalance("vladimir putin"), "$0.02");
@@ -89,7 +102,7 @@ public class MenuTreeTest {
 	@Test
 	public void testBadTransfer() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadTransferInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadTransferInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
 		assertEquals(db.getBalance("Forge"), "$1200.89");
@@ -99,7 +112,7 @@ public class MenuTreeTest {
 	@Test
 	public void testAccountNumberTaken() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testAccountNumberTakenInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testAccountNumberTakenInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
 	}
@@ -107,7 +120,7 @@ public class MenuTreeTest {
 	@Test
 	public void testNoSupervisor() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testNoSupervisorInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testNoSupervisorInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
 	}
@@ -115,7 +128,7 @@ public class MenuTreeTest {
 	@Test
 	public void testRefuseTransaction() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testRefuseTransactionInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testRefuseTransactionInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
 	}
@@ -123,7 +136,7 @@ public class MenuTreeTest {
 	@Test
 	public void testNonExistentCustomer() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testNonExistentCustomerInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testNonExistentCustomerInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
 	}
@@ -131,7 +144,7 @@ public class MenuTreeTest {
 	@Test
 	public void testBadMenuName() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadMenuNameInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadMenuNameInput.getBytes()), new PrintStream(new FAKEOS()));
 		mt.queueMenu("PerfectlyLegitimate");
 		mt.menu();
 	}
@@ -139,7 +152,7 @@ public class MenuTreeTest {
 	@Test
 	public void testBadLogin() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadLoginInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadLoginInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
 	}
@@ -147,7 +160,7 @@ public class MenuTreeTest {
 	@Test
 	public void testBadSplash() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadSplashInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadSplashInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
 	}
@@ -155,7 +168,7 @@ public class MenuTreeTest {
 	@Test
 	public void testBadApproval() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadApprovalInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadApprovalInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
 	}
@@ -163,7 +176,7 @@ public class MenuTreeTest {
 	@Test
 	public void testBadUserCreation() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadUserCreationInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadUserCreationInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
 	}
@@ -171,7 +184,7 @@ public class MenuTreeTest {
 	@Test
 	public void testBadDenial() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadDenialInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadDenialInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
 	}
@@ -179,9 +192,39 @@ public class MenuTreeTest {
 	@Test
 	public void testJointAccount() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testJointAccountInput.getBytes()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testJointAccountInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
 	}
+	
+	private static class FAKEOS extends OutputStream {
+		
+		public static void clearOutput() {
+			output.clear();
+		}
 
+		public static String getOutput() {
+			byte[] bytes = new byte[output.size()];
+			int i = 0;
+			for (Byte b : output) {
+				bytes[i++] = b.byteValue();
+			}
+			try {
+				return new String(bytes, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				return "";
+			}
+		}
+
+		private static List<Byte> output;
+		static {
+			output = new ArrayList<Byte>();
+		}
+
+		public void write(int b) {
+			output.add((byte) b);
+		}
+		
+	}
+	
 }

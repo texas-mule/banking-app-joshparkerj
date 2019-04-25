@@ -15,13 +15,13 @@ class LoginMenu extends ABCMenu {
 	}
 
 	public void Run() {
-		System.out.println("Enter your username:");
+		mt.ps.println("Enter your username:");
 		name = s.nextLine();
-		System.out.println("Enter your password:");
+		mt.ps.println("Enter your password:");
 		pass = s.nextLine();
-		System.out.println("Login as: ");
-		System.out.println("1. Customer");
-		System.out.println("2. Employee");
+		mt.ps.println("Login as: ");
+		mt.ps.println("1. Customer");
+		mt.ps.println("2. Employee");
 		switch (Integer.parseInt(s.nextLine().substring(0, 1))) {
 		case 1:
 			type = "Customer";
@@ -32,15 +32,15 @@ class LoginMenu extends ABCMenu {
 			id = mt.getDB().getEmployeeID(name, pass);
 			break;
 		default:
-			System.out.println("Your input was not understood.");
+			mt.ps.println("Your input was not understood.");
 			id = null;
 		}
 		if (id != null) {
 			UserSession.init(id);
-			System.out.println("Hello, " + name + "! Thank you for logging in!");
+			mt.ps.println("Hello, " + name + "! Thank you for logging in!");
 			mt.queueMenu(type);
 		} else {
-			System.out.println("Login failed");
+			mt.ps.println("Login failed");
 			mt.queueMenu("Splash");
 		}
 	}

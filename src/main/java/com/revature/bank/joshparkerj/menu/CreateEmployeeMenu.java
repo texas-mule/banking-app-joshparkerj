@@ -18,28 +18,28 @@ class CreateEmployeeMenu extends ABCMenu {
 	}
 
 	public void Run() {
-		System.out.println("Enter username: ");
+		mt.ps.println("Enter username: ");
 		name = s.nextLine();
-		System.out.println("Enter password: ");
+		mt.ps.println("Enter password: ");
 		pass = s.nextLine();
-		System.out.println("Enter employee\'s id number: ");
+		mt.ps.println("Enter employee\'s id number: ");
 		id = s.nextLine();
-		System.out.println("Enter supervisor\'s id number: ");
+		mt.ps.println("Enter supervisor\'s id number: ");
 		supid = s.nextLine();
 		if (mt.getDB().employeeExists(supid)) {
-			System.out.println("Enter salary: ");
+			mt.ps.println("Enter salary: ");
 			pay = s.nextLine();
-			System.out.println("Enter first name: ");
+			mt.ps.println("Enter first name: ");
 			first = s.nextLine();
-			System.out.println("Enter last name: ");
+			mt.ps.println("Enter last name: ");
 			last = s.nextLine();
-			System.out.println("Enter branch name: ");
+			mt.ps.println("Enter branch name: ");
 			loc = s.nextLine();
 			mt.getDB().addEmployee(name, pass, id, supid, pay, first, last, loc);
-			System.out.println("Employee added.");
+			mt.ps.println("Employee added.");
 
 		} else {
-			System.out.println("That supervisor is not in the system!");
+			mt.ps.println("That supervisor is not in the system!");
 		}
 		mt.queueMenu("Splash");
 	}

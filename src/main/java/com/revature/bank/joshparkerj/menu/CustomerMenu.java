@@ -10,21 +10,21 @@ class CustomerMenu extends ABCMenu {
 	}
 
 	public void Run() {
-		System.out.println("Please choose from the following options:");
-		System.out.println("1. Create Account");
-		System.out.println("2. See your accounts");
-		System.out.println("3. Make a deposit");
-		System.out.println("4. Make a withdrawal");
-		System.out.println("5. Make a transfer");
-		System.out.println("8. More options...");
-		System.out.println("9. Log out");
-		System.out.println("0. Quit.");
+		mt.ps.println("Please choose from the following options:");
+		mt.ps.println("1. Create Account");
+		mt.ps.println("2. See your accounts");
+		mt.ps.println("3. Make a deposit");
+		mt.ps.println("4. Make a withdrawal");
+		mt.ps.println("5. Make a transfer");
+		mt.ps.println("8. More options...");
+		mt.ps.println("9. Log out");
+		mt.ps.println("0. Quit.");
 		switch (Integer.parseInt(s.nextLine().substring(0, 1))) {
 		case 1:
 			mt.queueMenu("CreateAccount");
 			break;
 		case 2:
-			System.out.print(mt.getDB().getCustomerAccounts(UserSession.getID()));
+			mt.ps.print(mt.getDB().getCustomerAccounts(UserSession.getID()));
 			break;
 		case 3:
 			mt.queueMenu("Deposit");
@@ -46,7 +46,7 @@ class CustomerMenu extends ABCMenu {
 			mt.quit();
 			break;
 		default:
-			System.out.println("Your input was not understood");
+			mt.ps.println("Your input was not understood");
 		}
 	}
 

@@ -33,7 +33,7 @@ customer	Satan	HellIsCool01!	Lucifer
 customer	Leonardo	Katana01!	Lead Turtle
 customer	Donatello	Pizza01!	Machine Turtle
 customer	Shredder	Krang01	Foot Clan Bosss
-employee	supervisor	xxx	0	0	$100000000.00	Mahatma	Ghandi	Nirvana	t
+employee	supervisor	xxx	0	0	$100000000.00	Mahatma	Gandhi	Nirvana	t
 employee	Joe	1	101	0	14000	Joseph	Magneto	Dallas	f
 employee	Doug Jones	8088Test	8088Test	0	40000	Doug	Jones	Burlington Coat Factory	f
 ah	idk	8884	t
