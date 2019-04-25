@@ -85,8 +85,8 @@ public class BankDBTest {
 		assertNull(db.getEmployeeID("Douglas K Jones", "8088TheBest!"));
 		assertTrue(db.getCustomerAccounts("6869").equals("You have no accounts!\n"));
 		assertNull(db.deposit("8884NoSuchThing","$1,000,000.00"));
-		assertTrue(db.holdsAccount("8884", "idk"));
-		assertFalse(db.holdsAccount("8884", "6869"));
+		assertTrue(db.holdsAccount("idk", "8884"));
+		assertFalse(db.holdsAccount("6869", "8884"));
 		assertNull(db.withdraw("8884NoSuchAccount","$10.000.000,00"));
 		assertNull(db.transfer("8884NoSuchAccount", "88G", "$8.00"));
 		assertNull(db.transfer("88G", "ugly", "$3.85"));

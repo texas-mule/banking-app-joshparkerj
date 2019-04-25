@@ -1,7 +1,7 @@
 account	Checking	8884	$88.00	t
 account	Perforating	6969420	$0.00	t
 account	Checking	88G	$50.00	t
-account	Checking	99H	$50.00	f
+account	Checking	99H	$10050.00	f
 account	Hacking	BitCoin1337	$0.00	f
 customer	Wolverine	JeanGrey01!	idk
 customer	White Queen	EmmaFrost01*	88
@@ -11,9 +11,9 @@ customer	Abe	Lincoln01!	123
 employee	supervisor	xxx	0	0	$100000000.00	Mahatma	Ghandi	Nirvana	t
 employee	Joe	1	101	0	14000	Joseph	Magneto	Dallas	f
 employee	Doug Jones	8088Test	8088Test	0	40000	Doug	Jones	Burlington Coat Factory	f
-ah	idk	8884
-ah	idk	6969420
-ah	idk	88G
-ah	idk	99H
-ah	88	8884
-ah	idk	BitCoin1337
+ah	idk	8884	t
+ah	idk	6969420	t
+ah	idk	88G	t
+ah	idk	99H	t
+ah	88	8884	t
+ah	idk	BitCoin1337	t

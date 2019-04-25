@@ -37,6 +37,7 @@ class CustomerMenu extends ABCMenu {
 			break;
 		case 8:
 			mt.queueMenu("Customer2");
+			break;
 		case 9:
 			UserSession.end();
 			mt.queueMenu("Splash");

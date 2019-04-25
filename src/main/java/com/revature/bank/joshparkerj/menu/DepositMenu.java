@@ -12,7 +12,7 @@ class DepositMenu extends TransactionMenu {
 	public void Run() {
 		System.out.println("Enter the account number:");
 		num = s.nextLine();
-		if (mt.getDB().holdsAccount(num, UserSession.getID())) {
+		if (mt.getDB().holdsAccount(UserSession.getID(), num)) {
 			System.out.println("Enter the amount in dollars and cents:");
 			verifyAmount();
 		} else {

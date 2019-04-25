@@ -34,5 +34,9 @@ class AccountHolder {
 	public void approve() {
 		approved = true;
 	}
+	
+	public boolean isApproved() {
+		return approved;
+	}
 
 }

@@ -12,7 +12,7 @@ public class WithdrawalMenu extends TransactionMenu {
 	public void Run() {
 		System.out.println("Enter the account number:");
 		num = s.nextLine();
-		if (mt.getDB().holdsAccount(num, UserSession.getID())) {
+		if (mt.getDB().holdsAccount(UserSession.getID(), num)) {
 			System.out.println("How much do you wish to withdraw, in dollars and cents?");
 			verifyAmount();
 		} else {

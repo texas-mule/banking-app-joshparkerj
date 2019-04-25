@@ -12,7 +12,7 @@ public class BadFileTest {
 	@Test
 	public void testBadFileName() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		assertTrue(db.holdsAccount("88G", "idk"));
+		assertTrue(db.holdsAccount("idk", "88G"));
 		db = BankDB.getDB("~*~*~Bad#:#:#File%:%:%Name&*&*&");
 		assertTrue(db.accountExists("88G"));
 		db.close();

@@ -31,6 +31,7 @@ public class MenuTreeTest {
 	private final String testBadApprovalInput = "2\nJoe\n1\n2\n4\n88G\n4\n88GG\n0\n";
 	private final String testBadUserCreationInput = "1\n3\nX\n\n1\n\n3\n";
 	private final String testBadDenialInput = "2\nJoe\n1\n2\n5\n88G\n5\n88GG\n0\n";
+	private final String testJointAccountInput = "\n1\n1\nSuperman\nKrypton01!\nKent\n1\nHeroism\nFortress of Solitude\n9\n1\n1\nJimmy Olsen\nPhotography01!\nDaily Planet Photographer\n8\n1\nFortress of Solitude\n9\n1\n1\nLex Luthor\nKryptonite01!\nEvil Genius\n8\n1\nFortress of Solitude\n9\n2\nSuperman\nKrypton01!\n1\n8\n2\n3\nDaily Planet Photographer\nFortress of Solitude\n2\n4\nFortress of Solitude\nEvil Genius\n2\n0\n";
 
 	@Test
 	public void testMenu() {
@@ -171,6 +172,14 @@ public class MenuTreeTest {
 	public void testBadDenial() {
 		IDB db = BankDB.getDB("DefaultData.txt");
 		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadDenialInput.getBytes()));
+		while (!mt.isFinished())
+			mt.menu();
+	}
+	
+	@Test
+	public void testJointAccount() {
+		IDB db = BankDB.getDB("DefaultData.txt");
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testJointAccountInput.getBytes()));
 		while (!mt.isFinished())
 			mt.menu();
 	}

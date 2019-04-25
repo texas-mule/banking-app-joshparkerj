@@ -15,7 +15,7 @@ public class TransferMenu extends TransactionMenu {
 		mt.queueMenu("Customer");
 		System.out.println("Enter the source account number:");
 		num = s.nextLine();
-		if (!mt.getDB().holdsAccount(num, UserSession.getID())) {
+		if (!mt.getDB().holdsAccount(UserSession.getID(), num)) {
 			System.out.println("Not your account!");
 			return;
 		}

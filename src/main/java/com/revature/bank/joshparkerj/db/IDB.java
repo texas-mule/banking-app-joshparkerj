@@ -31,7 +31,7 @@ public interface IDB {
 
 	String deposit(String num, String sum);
 
-	boolean holdsAccount(String num, String id);
+	boolean holdsAccount(String id, String num);
 
 	String withdraw(String num, String sum);
 
@@ -69,6 +69,12 @@ public interface IDB {
 
 	String getJointApps(String id);
 
-	void addJointAccount(String num, String id);
+	void addJointAccount(String id, String num);
+	
+	void approveAccountHolder(String id, String num);
+
+	boolean jointAppExists(String id, String num);
+
+	void denyJointApp(String id, String num);
 
 }

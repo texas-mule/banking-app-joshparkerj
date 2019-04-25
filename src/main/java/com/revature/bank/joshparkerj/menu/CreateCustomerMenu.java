@@ -73,7 +73,6 @@ class CreateCustomerMenu extends ABCMenu {
 		}
 		System.out.println("Please enter your ssn:");
 		id = s.nextLine();
-		System.out.println("ID length: " + id.length()); //testing
 		if (!mt.getDB().uniqueSSN(id)) {
 			System.out.println("***** *****     ***** *****");
 			System.out.println("Unacceptable ssn: " + id);
