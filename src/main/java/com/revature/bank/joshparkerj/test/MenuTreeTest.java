@@ -38,7 +38,7 @@ public class MenuTreeTest {
 	private final String testBadUserCreationInput = "1\n3\nX\n\n1\n\n3\n";
 	private final String testBadDenialInput = "2\nJoe\n1\n2\n5\n88G\n5\n88GG\n0\n";
 	private final String testJointAccountInput = "\n1\n1\nSuperman\nKrypton01!\nKent\n1\nHeroism\nFortress of Solitude\n9\n1\n1\nJimmy Olsen\nPhotography01!\nDaily Planet Photographer\n8\n1\nFortress of Solitude\n9\n1\n1\nLex Luthor\nKryptonite01!\nEvil Genius\n8\n1\nFortress of Solitude\n9\n2\nSuperman\nKrypton01!\n1\n8\n2\n3\nDaily Planet Photographer\nFortress of Solitude\n2\n4\nFortress of Solitude\nEvil Genius\n2\n0\n";
-
+	
 	@Before
 	public void initialize() {
 		FAKEOS.clearOutput();
@@ -195,6 +195,11 @@ public class MenuTreeTest {
 		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testJointAccountInput.getBytes()), new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
+		FAKEOS.setEncoding("bad encoding string");
+		assertTrue(FAKEOS.getOutput().equals(""));
+		FAKEOS.setEncoding("UTF-8");
+		initialize();
+		assertTrue(FAKEOS.getOutput().equals(""));
 	}
 	
 	private static class FAKEOS extends OutputStream {
@@ -210,10 +215,15 @@ public class MenuTreeTest {
 				bytes[i++] = b.byteValue();
 			}
 			try {
-				return new String(bytes, "UTF-8");
+				return new String(bytes, encoding);
 			} catch (UnsupportedEncodingException e) {
 				return "";
 			}
+		}
+		
+		private static String encoding = "UTF-8";
+		public static void setEncoding(String e) {
+			encoding = e;
 		}
 
 		private static List<Byte> output;
