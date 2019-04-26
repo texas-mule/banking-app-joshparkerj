@@ -34,11 +34,13 @@ public class Customer2Menu extends ABCMenu {
 			break;
 		case 8:
 			mt.queueMenu("Customer");
+			break;
 		case 9:
 			UserSession.end();
 			mt.queueMenu("Splash");
 			break;
 		case 0:
+			UserSession.end();
 			mt.quit();
 			break;
 		default:

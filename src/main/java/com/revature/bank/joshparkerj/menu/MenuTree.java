@@ -19,7 +19,7 @@ public class MenuTree {
 		s = new Scanner(i_s);
 		ps = System.out;
 	}
-	
+
 	public MenuTree(IDB d, InputStream i_s, PrintStream p) {
 		db = d;
 		s = new Scanner(i_s);

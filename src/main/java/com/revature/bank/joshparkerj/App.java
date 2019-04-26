@@ -20,7 +20,8 @@ public class App {
 			}
 		}
 		IDB db = BankDB.getDB(filename);
-		if (db.uninitialized()) return;
+		if (db.uninitialized())
+			return;
 		MenuTree mt = new MenuTree(db, s);
 		while (!mt.isFinished())
 			mt.menu();

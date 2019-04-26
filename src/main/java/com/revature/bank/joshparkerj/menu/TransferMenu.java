@@ -27,7 +27,6 @@ public class TransferMenu extends TransactionMenu {
 		}
 		mt.ps.println("How much do you wish to transfer, in dollars and cents?");
 		verifyAmount();
-
 	}
 
 	void transact() {

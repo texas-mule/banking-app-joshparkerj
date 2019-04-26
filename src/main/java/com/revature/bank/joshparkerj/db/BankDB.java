@@ -144,6 +144,7 @@ public class BankDB implements IDB {
 			if (ah.getSSN().equals(id)) {
 				for (Account a : accounts) {
 					if (ah.getNum().equals(a.getID())) {
+						if (!ah.isApproved()) s.append("APPLICATION PENDING: \n");
 						s.append(a.prettyPrint());
 					}
 				}

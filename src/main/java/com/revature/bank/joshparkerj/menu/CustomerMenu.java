@@ -43,6 +43,7 @@ class CustomerMenu extends ABCMenu {
 			mt.queueMenu("Splash");
 			break;
 		case 0:
+			UserSession.end();
 			mt.quit();
 			break;
 		default:

@@ -31,6 +31,7 @@ public class AllTest {
 		mtt.testBadUserCreation();
 		mtt.testBadDenial();
 		mtt.testJointAccount();
+		mtt.testJointDeny();
 		BadFileTest bft = new BadFileTest();
 		bft.testBadFileName();
 		AppTest at = new AppTest();
