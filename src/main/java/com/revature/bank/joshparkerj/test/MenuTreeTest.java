@@ -54,6 +54,7 @@ public class MenuTreeTest {
 		assertFalse(db.accountApproved("808A"));
 		assertFalse(db.accountExists("707B"));
 		assertTrue(db.getPendingApps().contains("808A"));
+		assertTrue(FAKEOS.getOutput().contains("Hello, Abraham!"));
 	}
 
 	@Test
@@ -65,6 +66,13 @@ public class MenuTreeTest {
 		while (!mt.isFinished())
 			mt.menu();
 		assertTrue(db.customerExists("6869R"));
+		assertTrue(FAKEOS.getOutput().contains("That username is already in use!"));
+		assertTrue(FAKEOS.getOutput().contains("Special characters not allowed"));
+		assertTrue(FAKEOS.getOutput().contains("You can\'t leave this field blank!"));
+		assertTrue(FAKEOS.getOutput().contains("Please choose a shorter username!"));
+		assertTrue(FAKEOS.getOutput().contains("you have to include at least one lower case letter"));
+		assertTrue(FAKEOS.getOutput().contains("You have to include at least one upper case letter"));
+		assertTrue(FAKEOS.getOutput().contains("That ssn is already in our system!"));
 	}
 
 	@Test
@@ -75,6 +83,10 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
+		assertTrue(FAKEOS.getOutput().contains("Your input was not understood"));
+		assertTrue(FAKEOS.getOutput().contains("You have to enter a number!"));
+		assertTrue(FAKEOS.getOutput().contains("Account number: BitCoin1337\tType: Hacking"));
+		assertTrue(FAKEOS.getOutput().contains("Username:\tWolverine\tSSN:\tidk"));
 	}
 
 	@Test
@@ -100,6 +112,8 @@ public class MenuTreeTest {
 		assertEquals(db.getBalance("vladimir putin"), "$0.02");
 		assertEquals(db.getBalance("205D"), "$0.06");
 		assertEquals(db.getBalance("893HB"), "$75.27");
+		assertTrue(FAKEOS.getOutput().contains("The account balance is now: $79.99"));
+		assertTrue(FAKEOS.getOutput().contains("The account balance is now: $77.63"));
 	}
 
 	@Test
@@ -112,6 +126,9 @@ public class MenuTreeTest {
 			mt.menu();
 		assertEquals(db.getBalance("Forge"), "$1200.89");
 		assertEquals(db.getBalance("Shadow King"), "$0.00");
+		assertTrue(FAKEOS.getOutput().contains("You are not allowed to transfer that much!"));
+		assertTrue(FAKEOS.getOutput().contains("That account is not in the system!"));
+		assertTrue(FAKEOS.getOutput().contains("Not your account!"));
 	}
 
 	@Test
@@ -122,6 +139,7 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
+		assertTrue(FAKEOS.getOutput().contains("That account number is taken!"));
 	}
 
 	@Test
@@ -132,6 +150,7 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
+		assertTrue(FAKEOS.getOutput().contains("That supervisor is not in the system!"));
 	}
 
 	@Test
@@ -142,6 +161,7 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
+		assertTrue(FAKEOS.getOutput().contains("No transaction made"));
 	}
 
 	@Test
@@ -152,6 +172,7 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
+		assertTrue(FAKEOS.getOutput().contains("That customer is not in the system!"));
 	}
 
 	@Test
@@ -162,6 +183,7 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		mt.queueMenu("PerfectlyLegitimate");
 		mt.menu();
+		assertTrue(FAKEOS.getOutput().contains("Failed to open menu: PerfectlyLegitimate"));
 	}
 
 	@Test
@@ -172,6 +194,8 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
+		assertTrue(FAKEOS.getOutput().contains("Your input was not understood."));
+		assertTrue(FAKEOS.getOutput().contains("Login failed"));
 	}
 
 	@Test
@@ -182,6 +206,8 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
+		assertTrue(FAKEOS.getOutput().contains("Your input was not understood."));
+		assertTrue(FAKEOS.getOutput().contains("You have to enter a number!"));
 	}
 
 	@Test
@@ -192,6 +218,8 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
+		assertTrue(FAKEOS.getOutput().contains("That account is not in the system!"));
+		assertTrue(FAKEOS.getOutput().contains("That account has already been approved!"));
 	}
 
 	@Test
@@ -202,6 +230,8 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
+		assertTrue(FAKEOS.getOutput().contains("Your input was not understood"));
+		assertTrue(FAKEOS.getOutput().contains("You have to enter a number!"));
 	}
 
 	@Test
@@ -212,6 +242,8 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
+		assertTrue(FAKEOS.getOutput().contains("That account isn\'t in the system!"));
+		assertTrue(FAKEOS.getOutput().contains("You can\'t deny an application that was already approved!"));
 	}
 
 	@Test

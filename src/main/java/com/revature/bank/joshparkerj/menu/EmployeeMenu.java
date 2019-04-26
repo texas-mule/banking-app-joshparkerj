@@ -20,33 +20,33 @@ public class EmployeeMenu extends ABCMenu {
 		mt.ps.println("9. Log out");
 		mt.ps.println("0. Quit.");
 		try {
-		switch (Integer.parseInt(s.nextLine().substring(0, 1))) {
-		case 1:
-			viewCustomers();
-			break;
-		case 2:
-			mt.queueMenu("CustomerDetails");
-			break;
-		case 3:
-			viewApps();
-			break;
-		case 4:
-			mt.queueMenu("ApproveApp");
-			break;
-		case 5:
-			mt.queueMenu("DenyApp");
-			break;
-		case 9:
-			UserSession.end();
-			mt.queueMenu("Splash");
-			break;
-		case 0:
-			UserSession.end();
-			mt.quit();
-			break;
-		default:
-			mt.ps.println("Your input was not understood");
-		}
+			switch (Integer.parseInt(s.nextLine().substring(0, 1))) {
+			case 1:
+				viewCustomers();
+				break;
+			case 2:
+				mt.queueMenu("CustomerDetails");
+				break;
+			case 3:
+				viewApps();
+				break;
+			case 4:
+				mt.queueMenu("ApproveApp");
+				break;
+			case 5:
+				mt.queueMenu("DenyApp");
+				break;
+			case 9:
+				UserSession.end();
+				mt.queueMenu("Splash");
+				break;
+			case 0:
+				UserSession.end();
+				mt.quit();
+				break;
+			default:
+				mt.ps.println("Your input was not understood");
+			}
 		} catch (NumberFormatException e) {
 			mt.ps.println("You have to enter a number!");
 		}
