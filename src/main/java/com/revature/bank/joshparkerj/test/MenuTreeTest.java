@@ -37,6 +37,11 @@ public class MenuTreeTest {
 	private final String testBadDenialInput = "2\nJoe\n1\n2\n5\n88G\n5\n88GG\n0\n";
 	private final String testJointAccountInput = "\n1\n1\nSuperman\nKrypton01!\nKent\n1\nHeroism\nFortress of Solitude\n9\n1\n1\nJimmy Olsen\nPhotography01!\nDaily Planet Photographer\n8\n1\nFortress of Solitude\n9\n1\n1\nLex Luthor\nKryptonite01!\nEvil Genius\n8\n1\nFortress of Solitude\n9\n2\nSuperman\nKrypton01!\n1\n8\n2\n3\nDaily Planet Photographer\nFortress of Solitude\n2\n4\nFortress of Solitude\nEvil Genius\n2\n0\n";
 	private final String testJointDenyInput = "2\nObi Wan\nTatooine01!\n1\n8\n1\n88G\n9\n2\nWolverine\nJeanGrey01!\n1\n8\n2\n4\n88G\nKenobi\n2\n0\n";
+	private final String testBadJointDenyInput = "2\nWolverine\nJeanGrey01!\n1\n8\n4\nNegasonic Teenage Warhead\n4\n88G\nNintendoMascot\n4\n8884\n88\n0\n";
+	private final String testBadJointApplyInput = "2\nWolverine\nJeanGrey01!\n1\n8\n1\nJohnWayneGacy\n1\n88G\n0\n";
+	private final String testBadTransactionInput = "2\nWolverine\nJeanGrey01!\n1\n3\n88G\nFive dollars fifty three cents\n0\n";
+	private final String testBadJointApproveInput = "2\nWolverine\nJeanGrey01!\n1\n8\n3\nSlade\nNegasonic Teenage Warhead\n3\nSlade\n88G\n0\n";
+	private final String testCustomer2Input = "2\nWolverine\nJeanGrey01!\n1\n8\n7\n8\n0\n";
 
 	@Test
 	public void testMenu() {
@@ -260,17 +265,79 @@ public class MenuTreeTest {
 		FAKEOS.clearOutput();
 		assertTrue(FAKEOS.getOutput().equals(""));
 	}
-	
+
 	@Test
 	public void testJointDeny() {
 		FAKEOS.clearOutput();
 		IDB db = BankDB.getDB("DefaultData.txt");
-		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testJointDenyInput.getBytes()), new PrintStream(new FAKEOS()));
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testJointDenyInput.getBytes()),
+				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
 		assertFalse(db.jointAppExists("123", "88G"));
 		System.out.print(FAKEOS.getOutput());
 		assertTrue(FAKEOS.getOutput().contains("Application denied!"));
+	}
+
+	@Test
+	public void testBadJointDeny() {
+		FAKEOS.clearOutput();
+		IDB db = BankDB.getDB("DefaultData.txt");
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadJointDenyInput.getBytes()),
+				new PrintStream(new FAKEOS()));
+		while (!mt.isFinished())
+			mt.menu();
+		assertTrue(FAKEOS.getOutput().contains("Not your account!"));
+		assertTrue(FAKEOS.getOutput().contains("They haven\'t applied for this account!"));
+		assertTrue(FAKEOS.getOutput().contains("They are approved already! You can\'t deny this application!"));
+	}
+
+	@Test
+	public void testBadJointApply() {
+		FAKEOS.clearOutput();
+		IDB db = BankDB.getDB("DefaultData.txt");
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadJointApplyInput.getBytes()),
+				new PrintStream(new FAKEOS()));
+		while (!mt.isFinished())
+			mt.menu();
+		assertTrue(FAKEOS.getOutput().contains("That account is not in the system!"));
+		assertTrue(FAKEOS.getOutput().contains("You can\'t create duplicate applications for a joint account!"));
+	}
+	
+	@Test
+	public void testBadTransaction() {
+		FAKEOS.clearOutput();
+		IDB db = BankDB.getDB("DefaultData.txt");
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadTransactionInput.getBytes()),
+				new PrintStream(new FAKEOS()));
+		while (!mt.isFinished())
+			mt.menu();
+		assertTrue(FAKEOS.getOutput().contains("Please enter the amount using numerals!"));
+	}
+	
+	@Test
+	public void testBadJointApprove() {
+		FAKEOS.clearOutput();
+		IDB db = BankDB.getDB("DefaultData.txt");
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testBadJointApproveInput.getBytes()),
+				new PrintStream(new FAKEOS()));
+		while (!mt.isFinished())
+			mt.menu();
+		System.out.print(FAKEOS.getOutput());
+		assertTrue(FAKEOS.getOutput().contains("That information doesn\'t match any application!"));
+		assertTrue(FAKEOS.getOutput().contains("Not your account!"));
+	}
+	
+	@Test
+	public void testCustomer2() {
+		FAKEOS.clearOutput();
+		IDB db = BankDB.getDB("DefaultData.txt");
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testCustomer2Input.getBytes()),
+				new PrintStream(new FAKEOS()));
+		while (!mt.isFinished())
+			mt.menu();
+		System.out.print(FAKEOS.getOutput());
+		assertTrue(FAKEOS.getOutput().contains("Your input was not understood"));
 	}
 	
 	private static class FAKEOS extends OutputStream {

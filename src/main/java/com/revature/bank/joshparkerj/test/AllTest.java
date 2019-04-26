@@ -32,6 +32,11 @@ public class AllTest {
 		mtt.testBadDenial();
 		mtt.testJointAccount();
 		mtt.testJointDeny();
+		mtt.testBadJointDeny();
+		mtt.testBadJointApply();
+		mtt.testBadTransaction();
+		mtt.testBadJointApprove();
+		mtt.testCustomer2();
 		BadFileTest bft = new BadFileTest();
 		bft.testBadFileName();
 		AppTest at = new AppTest();
