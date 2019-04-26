@@ -28,11 +28,12 @@ class Customer extends ABCUser {
 	}
 
 	public String summary() {
-		return "Username:\t" + name + "\tSSN:\t" + id + "\n";
+		return String.format("%9s%22s%5s%22s\n", "Username:", name, "SSN:", id);
+		//System.out.format("%32s%10d%16s", string1, int1, string2);
 	}
 
 	public String details() {
-		return "Username:\t" + name + "\nSSN:\t" + id + "\nPassword:\t" + pass;
+		return String.format("%10s%22s%5s%22s%11s%22s\n", "Username:", name, "SSN:", id, "Password:", pass);
 	}
 
 }

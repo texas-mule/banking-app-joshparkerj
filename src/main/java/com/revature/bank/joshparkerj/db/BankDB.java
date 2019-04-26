@@ -311,4 +311,11 @@ public class BankDB implements IDB {
 		return (accounts.isEmpty() && customers.isEmpty() && accountholders.isEmpty() && employees.isEmpty());
 	}
 
+	public boolean isAdmin(String id) {
+		for (Employee e : employees) {
+			if (e.getID().equals(id)) return e.isAdmin();
+		}
+		return false;
+	}
+
 }

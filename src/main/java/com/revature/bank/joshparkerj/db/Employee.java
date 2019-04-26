@@ -43,4 +43,8 @@ class Employee extends ABCUser {
 		return id;
 	}
 
+	public boolean isAdmin() {
+		return admin.toLowerCase().startsWith("t");
+	}
+
 }

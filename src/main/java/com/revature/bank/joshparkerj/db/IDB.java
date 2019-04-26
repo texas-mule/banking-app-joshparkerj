@@ -77,4 +77,6 @@ public interface IDB {
 
 	void denyJointApp(String id, String num);
 
+	boolean isAdmin(String id);
+
 }
