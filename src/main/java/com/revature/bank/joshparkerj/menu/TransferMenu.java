@@ -19,10 +19,18 @@ public class TransferMenu extends TransactionMenu {
 			mt.ps.println("Not your account!");
 			return;
 		}
+		if (!mt.getDB().accountApproved(num)) {
+			mt.ps.println("That account hasn\'t been approved yet!");
+			return;
+		}
 		mt.ps.println("Enter the destination account number:");
 		dnum = s.nextLine();
 		if (!mt.getDB().accountExists(dnum)) {
 			mt.ps.println("That account is not in the system!");
+			return;
+		}
+		if (!mt.getDB().accountApproved(dnum)) {
+			mt.ps.println("That account hasn\'t been approved yet!");
 			return;
 		}
 		mt.ps.println("How much do you wish to transfer, in dollars and cents?");

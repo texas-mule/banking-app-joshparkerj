@@ -10,15 +10,19 @@ public class WithdrawalMenu extends TransactionMenu {
 	}
 
 	public void Run() {
+		mt.queueMenu("Customer");
 		mt.ps.println("Enter the account number:");
 		num = s.nextLine();
-		if (mt.getDB().holdsAccount(UserSession.getID(), num)) {
-			mt.ps.println("How much do you wish to withdraw, in dollars and cents?");
-			verifyAmount();
-		} else {
+		if (!mt.getDB().holdsAccount(UserSession.getID(), num)) {
 			mt.ps.println("Not your account!");
-			mt.queueMenu("Customer");
+			return;
 		}
+		if (!mt.getDB().accountApproved(num)) {
+			mt.ps.println("That account hasn\'t been approved yet!");
+			return;
+		}
+		mt.ps.println("How much do you wish to withdraw, in dollars and cents?");
+		verifyAmount();
 	}
 
 	void transact() {
