@@ -19,15 +19,15 @@ public class ApproveJointMenu extends ABCMenu {
 		ssn = s.nextLine();
 		mt.ps.println("Please enter the account number:");
 		num = s.nextLine();
-		if (!mt.getDB().holdsAccount(UserSession.getID(), num)) {
+		if (!mt.getDB().accountholder().holdsAccount(UserSession.getID(), num)) {
 			mt.ps.println("Not your account!");
 			return;
 		}
-		if (!mt.getDB().jointAppExists(ssn,num)) {
+		if (!mt.getDB().accountholder().jointAppExists(ssn,num)) {
 			mt.ps.println("That information doesn\'t match any application!");
 			return;
 		}
-		mt.getDB().approveAccountHolder(ssn, num);
+		mt.getDB().accountholder().approveAccountHolder(ssn, num);
 		mt.ps.println("The joint application has been approved!");
 	}
 

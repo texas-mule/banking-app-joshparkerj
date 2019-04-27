@@ -22,7 +22,7 @@ class CreateCustomerMenu extends ABCMenu {
 		mt.ps.println("Please enter your username:");
 		mt.queueMenu("Splash");
 		name = s.nextLine();
-		if (!mt.getDB().uniqueCustomerName(name)) {
+		if (!mt.getDB().customer().uniqueCustomerName(name)) {
 			mt.ps.println("***** *****     ***** *****");
 			mt.ps.println("Unacceptable username: " + name);
 			mt.ps.println("That username is already in use!");
@@ -73,7 +73,7 @@ class CreateCustomerMenu extends ABCMenu {
 		}
 		mt.ps.println("Please enter your ssn:");
 		id = s.nextLine();
-		if (!mt.getDB().uniqueSSN(id)) {
+		if (!mt.getDB().customer().uniqueSSN(id)) {
 			mt.ps.println("***** *****     ***** *****");
 			mt.ps.println("Unacceptable ssn: " + id);
 			mt.ps.println("That ssn is already in our system!");
@@ -87,7 +87,7 @@ class CreateCustomerMenu extends ABCMenu {
 			mt.ps.println("***** *****     ***** *****");
 			return;
 		}
-		mt.getDB().addCustomer(name, pass, id);
+		mt.getDB().customer().addCustomer(name, pass, id);
 		mt.ps.println("Customer added.");
 		UserSession.init(id);
 		mt.queueMenu("Customer");

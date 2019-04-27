@@ -18,9 +18,9 @@ class CreateAccountMenu extends ABCMenu {
 		type = s.nextLine();
 		mt.ps.println("Please enter the account number:");
 		num = s.nextLine();
-		if (mt.getDB().uniqueAccountNumber(num)) {
-			mt.getDB().addAccount(type, num);
-			mt.getDB().addAccountHolder(UserSession.getID(), num);
+		if (mt.getDB().account().uniqueAccountNumber(num)) {
+			mt.getDB().account().addAccount(type, num);
+			mt.getDB().accountholder().addAccountHolder(UserSession.getID(), num);
 			mt.ps.println("Account added");
 		} else {
 			mt.ps.println("That account number is taken!");

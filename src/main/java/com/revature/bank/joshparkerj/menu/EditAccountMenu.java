@@ -66,7 +66,7 @@ public class EditAccountMenu extends TransactionMenu {
 			}
 			mt.ps.println("What\'s the account number?");
 			num = s.nextLine();
-			if (mt.getDB().editAccount(num, newValue, fieldToEdit)) {
+			if (mt.getDB().account().editAccount(num, newValue, fieldToEdit)) {
 				mt.ps.println("account edited!");
 			} else mt.ps.println("The account number was incorrect");
 		} catch (NumberFormatException e) {
@@ -75,11 +75,11 @@ public class EditAccountMenu extends TransactionMenu {
 	}
 
 	private void viewAccounts() {
-		mt.ps.print(mt.getDB().getDetailedAccounts());
+		mt.ps.print(mt.getDB().account().getDetailedAccounts());
 	}
 
 	void transact() {
-		bal = mt.getDB().overwriteBalance(num, sum);
+		bal = mt.getDB().account().overwriteBalance(num, sum);
 		if (bal.length() > 0) mt.ps.println("The account balance is now: " + bal);
 		else mt.ps.println("The account number was incorrect");
 	}

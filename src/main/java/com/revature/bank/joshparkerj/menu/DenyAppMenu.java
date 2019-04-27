@@ -14,15 +14,15 @@ public class DenyAppMenu extends ABCMenu {
 		mt.queueMenu("Employee");
 		mt.ps.println("Please enter the account number:");
 		num = s.nextLine();
-		if (!mt.getDB().accountExists(num)) {
+		if (!mt.getDB().account().accountExists(num)) {
 			mt.ps.println("That account isn\'t in the system!");
 			return;
 		}
-		if (mt.getDB().accountApproved(num)) {
+		if (mt.getDB().account().accountApproved(num)) {
 			mt.ps.println("You can\'t deny an application that was already approved!");
 			return;
 		}
-		mt.getDB().denyAccount(num);
+		mt.getDB().deleteAccount(num);
 		mt.ps.println("Application denied!");
 	}
 

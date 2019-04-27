@@ -25,11 +25,11 @@ class LoginMenu extends ABCMenu {
 		switch (Integer.parseInt(s.nextLine().substring(0, 1))) {
 		case 1:
 			type = "Customer";
-			id = mt.getDB().getCustomerID(name, pass);
+			id = mt.getDB().customer().getCustomerID(name, pass);
 			break;
 		case 2:
 			type = "Employee";
-			id = mt.getDB().getEmployeeID(name, pass);
+			id = mt.getDB().employee().getEmployeeID(name, pass);
 			break;
 		default:
 			mt.ps.println("Your input was not understood.");

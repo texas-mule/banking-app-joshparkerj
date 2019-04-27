@@ -13,7 +13,7 @@ public class CancelAccountMenu extends ABCMenu {
 	}
 
 	public void Run() {
-		if (!mt.getDB().isAdmin(UserSession.getID())) {
+		if (!mt.getDB().employee().isAdmin(UserSession.getID())) {
 			mt.ps.println("Admins only!");
 			mt.queueMenu("Splash");
 			UserSession.end();
@@ -22,7 +22,7 @@ public class CancelAccountMenu extends ABCMenu {
 		mt.queueMenu("Admin");
 		mt.ps.println("Please enter the account number: ");
 		num = s.nextLine();
-		mt.getDB().denyAccount(num);
+		mt.getDB().deleteAccount(num);
 		mt.ps.println("Account cancelled!");
 	}
 

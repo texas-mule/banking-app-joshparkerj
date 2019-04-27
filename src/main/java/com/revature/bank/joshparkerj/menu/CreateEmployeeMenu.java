@@ -26,7 +26,7 @@ class CreateEmployeeMenu extends ABCMenu {
 		id = s.nextLine();
 		mt.ps.println("Enter supervisor\'s id number: ");
 		supid = s.nextLine();
-		if (mt.getDB().employeeExists(supid)) {
+		if (mt.getDB().employee().employeeExists(supid)) {
 			mt.ps.println("Enter salary: ");
 			pay = s.nextLine();
 			mt.ps.println("Enter first name: ");
@@ -35,7 +35,7 @@ class CreateEmployeeMenu extends ABCMenu {
 			last = s.nextLine();
 			mt.ps.println("Enter branch name: ");
 			loc = s.nextLine();
-			mt.getDB().addEmployee(name, pass, id, supid, pay, first, last, loc);
+			mt.getDB().employee().addEmployee(name, pass, id, supid, pay, first, last, loc);
 			mt.ps.println("Employee added.");
 
 		} else {

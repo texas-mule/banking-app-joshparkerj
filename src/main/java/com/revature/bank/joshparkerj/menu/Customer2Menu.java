@@ -24,7 +24,7 @@ public class Customer2Menu extends ABCMenu {
 			mt.queueMenu("ApplyJoint");
 			break;
 		case 2:
-			mt.ps.print(mt.getDB().getJointApps(UserSession.getID()));
+			mt.ps.print(mt.getDB().accountholder().getJointApps(UserSession.getID()));
 			break;
 		case 3:
 			mt.queueMenu("ApproveJoint");

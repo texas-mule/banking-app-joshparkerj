@@ -23,14 +23,14 @@ public class BankDBTest {
 	@Test
 	public void testWrite() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		db.addCustomer("Doug Woolford Jones", "IAmaGiantBaby01!", "1231235555123");
+		db.customer().addCustomer("Doug Woolford Jones", "IAmaGiantBaby01!", "1231235555123");
 		db.write();
 		db.close();
 		db = BankDB.getDB("DefaultData.txt");
-		assertEquals(db.getCustomerID("Doug Woolford Jones", "IAmaGiantBaby01!"), "1231235555123");
-		assertTrue(db.customerExists("1231235555123"));
+		assertEquals(db.customer().getCustomerID("Doug Woolford Jones", "IAmaGiantBaby01!"), "1231235555123");
+		assertTrue(db.customer().customerExists("1231235555123"));
 		db.deleteCustomer("1231235555123");
-		assertFalse(db.customerExists("1231235555123"));
+		assertFalse(db.customer().customerExists("1231235555123"));
 		db.write();
 		db.close();
 	}
@@ -38,71 +38,71 @@ public class BankDBTest {
 	@Test
 	public void testGetEmployeeID() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		db.addEmployee("a", "b", "c", "0", "e", "f", "g", "h");
-		assertEquals(db.getEmployeeID("a", "b"), "c");
-		assertTrue(db.employeeExists("c"));
-		db.deleteEmployee("c");
-		assertFalse(db.employeeExists("c"));
+		db.employee().addEmployee("a", "b", "c", "0", "e", "f", "g", "h");
+		assertEquals(db.employee().getEmployeeID("a", "b"), "c");
+		assertTrue(db.employee().employeeExists("c"));
+		db.employee().deleteEmployee("c");
+		assertFalse(db.employee().employeeExists("c"));
 	}
 	
 	@Test
 	public void testCustomerTransactions() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		db.addCustomer("a", "b", "coolguy");
-		assertTrue(db.customerExists("coolguy"));
-		db.addAccount("e", "failaccount");
-		assertTrue(db.accountExists("failaccount"));
-		db.addAccountHolder("coolguy", "failaccount");
+		db.customer().addCustomer("a", "b", "coolguy");
+		assertTrue(db.customer().customerExists("coolguy"));
+		db.account().addAccount("e", "failaccount");
+		assertTrue(db.account().accountExists("failaccount"));
+		db.accountholder().addAccountHolder("coolguy", "failaccount");
 		assertTrue(db.getCustomerAccounts("coolguy").contains("failaccount"));
 		assertFalse(db.getCustomerAccounts("coolguy").contains("hackaccount"));
-		db.approveAccount("failaccount");
-		assertTrue(db.accountApproved("failaccount"));
-		db.deposit("failaccount", "$1000.00");
-		assertTrue(db.sufficientFunds("failaccount","$1000.00"));
-		db.withdraw("failaccount", "$900.00");
-		assertFalse(db.sufficientFunds("failaccount", "$1000.00"));
-		assertTrue(db.getBalance("failaccount").equals("$100.00"));
-		assertTrue(db.sufficientFunds("failaccount","$100.00"));
-		db.addAccount("g", "hackaccount");
-		assertTrue(db.accountExists("hackaccount"));
-		db.addAccountHolder("coolguy", "hackaccount");
+		db.account().approveAccount("failaccount");
+		assertTrue(db.account().accountApproved("failaccount"));
+		db.account().deposit("failaccount", "$1000.00");
+		assertTrue(db.account().sufficientFunds("failaccount","$1000.00"));
+		db.account().withdraw("failaccount", "$900.00");
+		assertFalse(db.account().sufficientFunds("failaccount", "$1000.00"));
+		assertTrue(db.account().getBalance("failaccount").equals("$100.00"));
+		assertTrue(db.account().sufficientFunds("failaccount","$100.00"));
+		db.account().addAccount("g", "hackaccount");
+		assertTrue(db.account().accountExists("hackaccount"));
+		db.accountholder().addAccountHolder("coolguy", "hackaccount");
 		assertTrue(db.getCustomerAccounts("coolguy").contains("hackaccount"));
-		db.transfer("failaccount", "hackaccount", "$90.00");
-		assertTrue(db.sufficientFunds("hackaccount", "$90.00"));
+		db.account().transfer("failaccount", "hackaccount", "$90.00");
+		assertTrue(db.account().sufficientFunds("hackaccount", "$90.00"));
 		db.deleteAccount("hackaccount");
 		db.deleteAccount("failaccount");
 		db.deleteCustomer("coolguy");
-		assertFalse(db.accountExists("hackaccount"));
-		assertFalse(db.accountExists("failaccount"));
-		assertFalse(db.customerExists("coolguy"));
+		assertFalse(db.account().accountExists("hackaccount"));
+		assertFalse(db.account().accountExists("failaccount"));
+		assertFalse(db.customer().customerExists("coolguy"));
 	}
 	
 	
 	@Test
 	public void testMissingRecords() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		assertNull(db.getCustomerID("Goblin Queen", "PryorClone01!"));
-		assertNull(db.getEmployeeID("Douglas K Jones", "8088TheBest!"));
+		assertNull(db.customer().getCustomerID("Goblin Queen", "PryorClone01!"));
+		assertNull(db.employee().getEmployeeID("Douglas K Jones", "8088TheBest!"));
 		assertTrue(db.getCustomerAccounts("6869").equals("You have no accounts!\n"));
-		assertNull(db.deposit("8884NoSuchThing","$1,000,000.00"));
-		assertTrue(db.holdsAccount("idk", "8884"));
-		assertFalse(db.holdsAccount("6869", "8884"));
-		assertNull(db.withdraw("8884NoSuchAccount","$10.000.000,00"));
-		assertNull(db.transfer("8884NoSuchAccount", "88G", "$8.00"));
-		assertNull(db.transfer("88G", "ugly", "$3.85"));
-		assertNull(db.transfer("88G", "99H", "$51.00"));
-		assertNull(db.customerDetails("idk but it\'s wolverine"));
-		assertFalse(db.accountApproved("8884NoSuchAccount"));
-		db.approveAccount("8884NoSuchAccount");
-		assertFalse(db.sufficientFunds("8884NoSuchAccount", "$0.00"));
-		assertNull(db.getBalance("8884NoSuchAccount"));
+		assertNull(db.account().deposit("8884NoSuchThing","$1,000,000.00"));
+		assertTrue(db.accountholder().holdsAccount("idk", "8884"));
+		assertFalse(db.accountholder().holdsAccount("6869", "8884"));
+		assertNull(db.account().withdraw("8884NoSuchAccount","$10.000.000,00"));
+		assertNull(db.account().transfer("8884NoSuchAccount", "88G", "$8.00"));
+		assertNull(db.account().transfer("88G", "ugly", "$3.85"));
+		assertNull(db.account().transfer("88G", "99H", "$51.00"));
+		assertNull(db.customer().customerDetails("idk but it\'s wolverine"));
+		assertFalse(db.account().accountApproved("8884NoSuchAccount"));
+		db.account().approveAccount("8884NoSuchAccount");
+		assertFalse(db.account().sufficientFunds("8884NoSuchAccount", "$0.00"));
+		assertNull(db.account().getBalance("8884NoSuchAccount"));
 	}
 	
 	@Test
 	public void testUniqueAccountNumber() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		assertTrue(db.uniqueAccountNumber("8884Bub"));
-		assertFalse(db.uniqueAccountNumber("8884"));
+		assertTrue(db.account().uniqueAccountNumber("8884Bub"));
+		assertFalse(db.account().uniqueAccountNumber("8884"));
 	}
 	
 }

@@ -15,21 +15,21 @@ public class TransferMenu extends TransactionMenu {
 		mt.queueMenu("Customer");
 		mt.ps.println("Enter the source account number:");
 		num = s.nextLine();
-		if (!mt.getDB().holdsAccount(UserSession.getID(), num) && !mt.getDB().isAdmin(UserSession.getID())) {
+		if (!mt.getDB().accountholder().holdsAccount(UserSession.getID(), num) && !mt.getDB().employee().isAdmin(UserSession.getID())) {
 			mt.ps.println("Not your account!");
 			return;
 		}
-		if (!mt.getDB().accountApproved(num)) {
+		if (!mt.getDB().account().accountApproved(num)) {
 			mt.ps.println("That account hasn\'t been approved yet!");
 			return;
 		}
 		mt.ps.println("Enter the destination account number:");
 		dnum = s.nextLine();
-		if (!mt.getDB().accountExists(dnum)) {
+		if (!mt.getDB().account().accountExists(dnum)) {
 			mt.ps.println("That account is not in the system!");
 			return;
 		}
-		if (!mt.getDB().accountApproved(dnum)) {
+		if (!mt.getDB().account().accountApproved(dnum)) {
 			mt.ps.println("That account hasn\'t been approved yet!");
 			return;
 		}
@@ -38,7 +38,7 @@ public class TransferMenu extends TransactionMenu {
 	}
 
 	void transact() {
-		bal = mt.getDB().transfer(num, dnum, sum);
+		bal = mt.getDB().account().transfer(num, dnum, sum);
 		if (bal != null) {
 			mt.ps.println("Your account balance is now: " + bal);
 		} else {

@@ -16,17 +16,17 @@ public class ApplyJointMenu extends ABCMenu {
 		mt.queueMenu("Customer2");
 		mt.ps.println("Please enter the account number: ");
 		num = s.nextLine();
-		if (!mt.getDB().accountExists(num)) {
+		if (!mt.getDB().account().accountExists(num)) {
 			mt.ps.println("That account is not in the system!");
 			return;
 		}
 		System.out.println(UserSession.getID());
 		System.out.println(num);
-		if (mt.getDB().jointAppExists(UserSession.getID(), num)) {
+		if (mt.getDB().accountholder().jointAppExists(UserSession.getID(), num)) {
 			mt.ps.println("You can\'t create duplicate applications for a joint account!");
 			return;
 		}
-		mt.getDB().addJointAccount(UserSession.getID(), num);
+		mt.getDB().accountholder().addJointAccount(UserSession.getID(), num);
 		mt.ps.println("Application saved!");
 	}
 

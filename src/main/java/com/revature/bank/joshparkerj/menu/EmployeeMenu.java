@@ -17,7 +17,7 @@ public class EmployeeMenu extends ABCMenu {
 		mt.ps.println("3. View Account Applications");
 		mt.ps.println("4. Approve an Application");
 		mt.ps.println("5. Deny an application");
-		if (mt.getDB().isAdmin(UserSession.getID())) mt.ps.println("8. See admin options...");
+		if (mt.getDB().employee().isAdmin(UserSession.getID())) mt.ps.println("8. See admin options...");
 		mt.ps.println("9. Log out");
 		mt.ps.println("0. Quit.");
 		try {
@@ -38,7 +38,7 @@ public class EmployeeMenu extends ABCMenu {
 				mt.queueMenu("DenyApp");
 				break;
 			case 8:
-				if (mt.getDB().isAdmin(UserSession.getID())) mt.queueMenu("Admin");
+				if (mt.getDB().employee().isAdmin(UserSession.getID())) mt.queueMenu("Admin");
 				else mt.ps.println("Your input was not understood");
 				break;
 			case 9:
@@ -58,7 +58,7 @@ public class EmployeeMenu extends ABCMenu {
 	}
 
 	private void viewCustomers() {
-		mt.ps.print(mt.getDB().getCustomers());
+		mt.ps.print(mt.getDB().customer().getCustomers());
 	}
 
 	private void viewApps() {

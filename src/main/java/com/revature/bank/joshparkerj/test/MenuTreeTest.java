@@ -22,14 +22,12 @@ public class MenuTreeTest {
 	private final String testMenuInput = "1\n1\nAbraham\nLincoln01!\n123Test\n9\n1\n2\nBernie Sanders\n8088Test\n8099Test\n0\n40000\nBernie\nSanders\nBurlington Coat Factory\n2\nAbraham\nLincoln01!\n1\n1\nChecking\n909Z\n1\nChecking\n808A\n1\nChecking\n707B\n1\nChecking\n606C\n9\n2\nBernie Sanders\n8088Test\n2\n4\n808A\n4\n909Z\n9\n2\nAbraham\nLincoln01!\n1\n3\n808A\n$100.00\ny\n5\n808A\n909Z\n$45.00\ny\n4\n808A\n$35.00\ny\n9\n2\nBernie Sanders\n8088Test\n2\n2\n123Test\n5\n707B\n9\n2\nAbraham\nLincoln01!\n1\n0\n";
 	private final String testBadCustomerInput = "1\n1\n\n1\n1\nWolverine\n1\n1\nBernie!!!\n1\n1\nThe Fat and Happy Quick and Deadly Ninja Jumps Over the Lazy Herd of Thirsty Yaks\n1\n1\nJon\nRED01!\n1\n1\nJon\nred01!\n1\n1\nJon\nRed01!\n6869\n1\n1\nJon\nRed01!\n\n1\n1\nJon\nRed01!\n6869R\n0\n";
 	private final String testEmployeeMenuInput = "2\nJoe\n1\n2\n1\n3\nX\n6\n0\n";
-	private final String testBadWithdrawalInput = "2\nAbe\nLincoln01!\n1\n3\n8884\n4\n8884\n9\n2\nWolverine\nJeanGrey01!\n1\n4\n8884\n$888.00\ny\n0\n";	
-	private final String testSmallAmountsInput = "1\n1\nCyclops\nSlim01!\n456Test\n1\nChecking\nvladimir putin\n1\nSavings\n205D\n9\n2\nJoe\n1\n2\n4\nvladimir putin\n4\n205D\n9\n2\nCyclops\nSlim01!\n1\n3\n205D\n$0.09\ny\n4\n205D\n$0.01\ny\n5\n205D\nvladimir putin\n$0.02\ny\n1\nOptic Blast\n893HB\n9\n2\nJoe\n1\n2\n4\n893HB\n9\n2\nCyclops\nSlim01!\n1\n3\n893HB\n$79.99\ny\n4\n893HB\n$2.36\ny\n4\n893HB\n$2.36\ny\n0\n";	
+	private final String testBadWithdrawalInput = "2\nAbe\nLincoln01!\n1\n3\n8884\n4\n8884\n9\n2\nWolverine\nJeanGrey01!\n1\n4\n8884\n$888.00\ny\n0\n";
+	private final String testSmallAmountsInput = "1\n1\nCyclops\nSlim01!\n456Test\n1\nChecking\nvladimir putin\n1\nSavings\n205D\n9\n2\nJoe\n1\n2\n4\nvladimir putin\n4\n205D\n9\n2\nCyclops\nSlim01!\n1\n3\n205D\n$0.09\ny\n4\n205D\n$0.01\ny\n5\n205D\nvladimir putin\n$0.02\ny\n1\nOptic Blast\n893HB\n9\n2\nJoe\n1\n2\n4\n893HB\n9\n2\nCyclops\nSlim01!\n1\n3\n893HB\n$79.99\ny\n4\n893HB\n$2.36\ny\n4\n893HB\n$2.36\ny\n0\n";
 	private final String testBadTransferInput = "1\n1\nStorm\nOroro01@\n8882Testing\n1\nChecking\nShadow King\n1\nSavings\nForge\n9\n2\nJoe\n1\n2\n4\nShadow King\n4\nForge\n9\n2\nStorm\nOroro01@\n1\n3\nForge\n$1200.89\ny\n5\nForge\nShadow King\n$24,000.00\ny\n5\nZany\n5\nForge\nZany\n0\n";
 	private final String testAccountNumberTakenInput = "2\nWolverine\nJeanGrey01!\n1\n1\nChecking\n8884\n0\n";
 	private final String testNoSupervisorInput = "1\n2\nLinus Torvalds\n555Dudes01!\n12525\n99999\n3\n";
-	
 	private final String testRefuseTransactionInput = "2\nWolverine\nJeanGrey01!\n1\n2\n6\n3\n99H\n$38,000.00\nn\n0\n";
-
 	private final String testNonExistentCustomerInput = "2\nJoe\n1\n2\n2\nidk!\n0\n";
 	private final String testBadMenuNameInput = "";
 	private final String testBadLoginInput = "2\nWolverine\nJeanGrey01!!\n3\n2\nWolverine\nJeanGrey01!!\n1\n3\n";
@@ -53,13 +51,13 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
-		assertTrue(db.customerExists("123Test"));
-		assertTrue(db.employeeExists("8099Test"));
-		assertEquals("$45.00", db.getBalance("909Z"));
-		assertEquals("$20.00", db.getBalance("808A"));
-		assertTrue(db.accountApproved("909Z"));
-		assertTrue(db.accountApproved("808A"));
-		assertFalse(db.accountExists("707B"));
+		assertTrue(db.customer().customerExists("123Test"));
+		assertTrue(db.employee().employeeExists("8099Test"));
+		assertEquals("$45.00", db.account().getBalance("909Z"));
+		assertEquals("$20.00", db.account().getBalance("808A"));
+		assertTrue(db.account().accountApproved("909Z"));
+		assertTrue(db.account().accountApproved("808A"));
+		assertFalse(db.account().accountExists("707B"));
 		assertTrue(db.getPendingApps().contains("606C"));
 		assertTrue(FAKEOS.getOutput().contains("Hello, Abraham!"));
 	}
@@ -72,7 +70,7 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
-		assertTrue(db.customerExists("6869R"));
+		assertTrue(db.customer().customerExists("6869R"));
 		assertTrue(FAKEOS.getOutput().contains("That username is already in use!"));
 		assertTrue(FAKEOS.getOutput().contains("Special characters not allowed"));
 		assertTrue(FAKEOS.getOutput().contains("You can\'t leave this field blank!"));
@@ -116,9 +114,9 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
-		assertEquals(db.getBalance("vladimir putin"), "$0.02");
-		assertEquals(db.getBalance("205D"), "$0.06");
-		assertEquals(db.getBalance("893HB"), "$75.27");
+		assertEquals(db.account().getBalance("vladimir putin"), "$0.02");
+		assertEquals(db.account().getBalance("205D"), "$0.06");
+		assertEquals(db.account().getBalance("893HB"), "$75.27");
 		assertTrue(FAKEOS.getOutput().contains("The account balance is now: $79.99"));
 		assertTrue(FAKEOS.getOutput().contains("The account balance is now: $77.63"));
 	}
@@ -131,8 +129,8 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
-		assertEquals(db.getBalance("Forge"), "$1200.89");
-		assertEquals(db.getBalance("Shadow King"), "$0.00");
+		assertEquals(db.account().getBalance("Forge"), "$1200.89");
+		assertEquals(db.account().getBalance("Shadow King"), "$0.00");
 		assertTrue(FAKEOS.getOutput().contains("You are not allowed to transfer that much!"));
 		assertTrue(FAKEOS.getOutput().contains("That account is not in the system!"));
 		assertTrue(FAKEOS.getOutput().contains("Not your account!"));
@@ -276,7 +274,7 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
-		assertFalse(db.jointAppExists("123", "88G"));
+		assertFalse(db.accountholder().jointAppExists("123", "88G"));
 		System.out.print(FAKEOS.getOutput());
 		assertTrue(FAKEOS.getOutput().contains("Application denied!"));
 	}

@@ -14,15 +14,15 @@ public class ApproveAppMenu extends ABCMenu {
 		mt.queueMenu("Employee");
 		mt.ps.println("Please enter the account number:");
 		num = s.nextLine();
-		if (!mt.getDB().accountExists(num)) {
+		if (!mt.getDB().account().accountExists(num)) {
 			mt.ps.println("That account is not in the system!");
 			return;
 		}
-		if (mt.getDB().accountApproved(num)) {
+		if (mt.getDB().account().accountApproved(num)) {
 			mt.ps.println("That account has already been approved!");
 			return;
 		}
-		mt.getDB().approveAccount(num);
+		mt.getDB().account().approveAccount(num);
 		mt.ps.println("Account approved!");
 	}
 

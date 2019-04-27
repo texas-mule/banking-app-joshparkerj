@@ -61,7 +61,7 @@ public class AdminMenu extends ABCMenu {
 	}
 
 	private void viewAccounts() {
-		mt.ps.print(mt.getDB().getDetailedAccounts());
+		mt.ps.print(mt.getDB().account().getDetailedAccounts());
 	}
 	
 }

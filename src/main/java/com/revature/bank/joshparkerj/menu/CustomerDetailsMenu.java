@@ -14,13 +14,13 @@ public class CustomerDetailsMenu extends ABCMenu {
 		mt.queueMenu("Employee");
 		mt.ps.println("Please enter the customer id number:");
 		id = s.nextLine();
-		if (!mt.getDB().customerExists(id)) {
+		if (!mt.getDB().customer().customerExists(id)) {
 			mt.ps.println("That customer is not in the system!");
 			return;
 		}
 		mt.ps.println("**** **** **** **** ****");
 		mt.ps.println("Customer Details:");
-		mt.ps.println(mt.getDB().customerDetails(id));
+		mt.ps.println(mt.getDB().customer().customerDetails(id));
 		mt.ps.println("**** **** **** **** ****");
 		mt.ps.println("");
 		mt.ps.println("**** **** **** **** ****");

@@ -13,11 +13,11 @@ public class WithdrawalMenu extends TransactionMenu {
 		mt.queueMenu("Customer");
 		mt.ps.println("Enter the account number:");
 		num = s.nextLine();
-		if (!mt.getDB().holdsAccount(UserSession.getID(), num) && !mt.getDB().isAdmin(UserSession.getID())) {
+		if (!mt.getDB().accountholder().holdsAccount(UserSession.getID(), num) && !mt.getDB().employee().isAdmin(UserSession.getID())) {
 			mt.ps.println("Not your account!");
 			return;
 		}
-		if (!mt.getDB().accountApproved(num)) {
+		if (!mt.getDB().account().accountApproved(num)) {
 			mt.ps.println("That account hasn\'t been approved yet!");
 			return;
 		}
@@ -26,7 +26,7 @@ public class WithdrawalMenu extends TransactionMenu {
 	}
 
 	void transact() {
-		bal = mt.getDB().withdraw(num, sum);
+		bal = mt.getDB().account().withdraw(num, sum);
 		if (bal != null) {
 			mt.ps.println("The account balance is now: " + bal);
 		} else {
