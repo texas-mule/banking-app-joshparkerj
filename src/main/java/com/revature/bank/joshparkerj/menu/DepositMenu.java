@@ -13,7 +13,7 @@ class DepositMenu extends TransactionMenu {
 		mt.queueMenu("Customer");
 		mt.ps.println("Enter the account number:");
 		num = s.nextLine();
-		if (!mt.getDB().holdsAccount(UserSession.getID(), num)) {
+		if (!mt.getDB().holdsAccount(UserSession.getID(), num) && !mt.getDB().isAdmin(UserSession.getID())) {
 			mt.ps.println("Not your account!");
 			return;
 		}

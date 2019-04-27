@@ -79,4 +79,12 @@ public interface IDB {
 
 	boolean isAdmin(String id);
 
+	String getAccounts();
+
+	String overwriteBalance(String num, String newValue);
+
+	boolean editAccount(String num, String newValue, String fieldToEdit);
+
+	String getDetailedAccounts();
+
 }

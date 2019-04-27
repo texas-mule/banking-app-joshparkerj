@@ -144,7 +144,8 @@ public class BankDB implements IDB {
 			if (ah.getSSN().equals(id)) {
 				for (Account a : accounts) {
 					if (ah.getNum().equals(a.getID())) {
-						if (!ah.isApproved()) s.append("APPLICATION PENDING: \n");
+						if (!ah.isApproved())
+							s.append("APPLICATION PENDING: \n");
 						s.append(a.prettyPrint());
 					}
 				}
@@ -313,9 +314,53 @@ public class BankDB implements IDB {
 
 	public boolean isAdmin(String id) {
 		for (Employee e : employees) {
-			if (e.getID().equals(id)) return e.isAdmin();
+			if (e.getID().equals(id))
+				return e.isAdmin();
 		}
 		return false;
+	}
+
+	public String getAccounts() {
+		s = new StringBuilder();
+		accounts.forEach(account -> this.s.append(account.summary()));
+		return s.toString();
+	}
+
+	public String overwriteBalance(String num, String newValue) {
+		for (Account a : accounts) {
+			if (a.getID().equals(num)) {
+				a.setBalance(newValue);
+				return a.getBalance();
+			}
+		}
+		return "";
+	}
+
+	public boolean editAccount(String num, String newValue, String fieldToEdit) {
+		for (Account a : accounts) {
+			if (a.getID().equals(num)) {
+				switch (fieldToEdit) {
+				case "number":
+					a.setNumber(newValue);
+					return true;
+				case "type":
+					a.setType(newValue);
+					return true;
+				case "approval status":
+					a.setApprovalStatus(newValue);
+					return true;
+				default:
+					return false;
+				}
+			}
+		}
+		return false;
+	}
+
+	public String getDetailedAccounts() {
+		s = new StringBuilder();
+		accounts.forEach(account -> this.s.append(account.details()));
+		return s.toString();
 	}
 
 }

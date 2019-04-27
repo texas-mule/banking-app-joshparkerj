@@ -57,7 +57,11 @@ class Account {
 	}
 
 	public String summary() {
-		return "Account number: " + id + "\tType: " + type + "\n";
+		return String.format("%15s%26s%6s%22s\n", "Account number:", id, "Type:", type);
+	}
+	
+	public String details() {
+		return String.format("\n%15s%26s%6s%28s\n%9s%32s%9s%25s\n", "Account number:", id, "Type:", type, "Approved:", approved, "Balance:", bal);
 	}
 
 	public void approve() {
@@ -70,6 +74,22 @@ class Account {
 
 	public String getBalance() {
 		return bal;
+	}
+
+	public void setBalance(String newValue) {
+		bal = newValue;
+	}
+
+	public void setNumber(String newValue) {
+		id = newValue;
+	}
+
+	public void setType(String newValue) {
+		type = newValue;
+	}
+
+	public void setApprovalStatus(String newValue) {
+		approved = newValue.toLowerCase().startsWith("t");
 	}
 
 }

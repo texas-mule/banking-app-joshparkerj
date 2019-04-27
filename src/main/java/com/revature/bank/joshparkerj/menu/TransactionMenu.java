@@ -17,7 +17,6 @@ abstract class TransactionMenu extends ABCMenu {
 	}
 
 	protected void verifyAmount() {
-		mt.queueMenu("Customer");
 		sum = s.nextLine();
 		sum = sum.replaceAll("\\D", "");
 		if (sum.length() < 1) {
