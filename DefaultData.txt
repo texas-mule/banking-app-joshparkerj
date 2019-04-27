@@ -1,7 +1,7 @@
 account	Checking	8884	$88.00	t
 account	Perforating	6969420	$0.00	t
 account	Checking	88G	$50.00	t
-account	Hacking	BitCoin1337	$0.00	f
+account	Hacking	BitCoin1337	$0.00	t
 account	Cookies and Milk	Rudolph	$0.00	t
 account	Sleeping	Arbuckle	$0.00	f
 account	Spelunking	Alfred	$0.00	f
@@ -10,6 +10,7 @@ account	Killing	Negasonic Teenage Warhead	$0.00	f
 account	Performing Miracles	Wine from water	$0.00	t
 account	Crime Fighting	TMNT	$0.00	f
 account	Puzzling	SNES	$0.00	f
+account	Testing	99H	$0.00	t
 customer	Wolverine	JeanGrey01!	idk
 customer	White Queen	EmmaFrost01*	88
 customer	Lobo	1455.Coolguy	8884
@@ -60,3 +61,4 @@ ah	Lead Turtle	TMNT	t
 ah	Machine Turtle	TMNT	t
 ah	NintendoMascot	SNES	t
 ah	idk	SNES	n
+ah	idk	99H	t
