@@ -38,6 +38,7 @@ public class TransferMenu extends TransactionMenu {
 	}
 
 	void transact() {
+		LOGGER.info("\nTransaction type: TRANSFER");
 		bal = mt.getDB().account().transfer(num, dnum, sum);
 		if (bal != null) {
 			mt.ps.println("Your account balance is now: " + bal);

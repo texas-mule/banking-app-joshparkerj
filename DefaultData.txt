@@ -10,7 +10,7 @@ account	Killing	Negasonic Teenage Warhead	$0.00	f
 account	Performing Miracles	Wine from water	$0.00	t
 account	Crime Fighting	TMNT	$0.00	f
 account	Puzzling	SNES	$0.00	f
-account	Testing	99H	$0.00	t
+account	Testing	99H	$681.39	t
 customer	Wolverine	JeanGrey01!	idk
 customer	White Queen	EmmaFrost01*	88
 customer	Lobo	1455.Coolguy	8884

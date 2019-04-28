@@ -2,8 +2,12 @@ package com.revature.bank.joshparkerj.menu;
 
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 abstract class TransactionMenu extends ABCMenu {
 
+	protected static final Logger LOGGER = Logger.getLogger(TransactionMenu.class);
+	
 	protected String num;
 	protected String sum;
 	protected String bal;
@@ -30,6 +34,7 @@ abstract class TransactionMenu extends ABCMenu {
 		mt.ps.println("I got: " + sum + ". Is this the correct amount? Y/n");
 		choice = s.nextLine();
 		if (choice.toLowerCase().startsWith("y")) {
+			LOGGER.info("\n\nTransaction amount: " + sum);
 			transact();
 		} else
 			mt.ps.println("No transaction made");
