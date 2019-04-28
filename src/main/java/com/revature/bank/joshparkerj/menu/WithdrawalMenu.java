@@ -26,7 +26,7 @@ public class WithdrawalMenu extends TransactionMenu {
 	}
 
 	void transact() {
-		LOGGER.info("Transaction type: WITHDRAWAL");
+		LOGGER.info("Transaction type: WITHDRAWAL\n");
 		bal = mt.getDB().account().withdraw(num, sum);
 		if (bal != null) {
 			mt.ps.println("The account balance is now: " + bal);

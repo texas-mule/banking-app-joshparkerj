@@ -79,7 +79,7 @@ public class EditAccountMenu extends TransactionMenu {
 	}
 
 	void transact() {
-		LOGGER.info("Transaction type: EDIT BALANCE");
+		LOGGER.info("Transaction type: EDIT BALANCE\n");
 		bal = mt.getDB().account().overwriteBalance(num, sum);
 		if (bal.length() > 0) mt.ps.println("The account balance is now: " + bal);
 		else mt.ps.println("The account number was incorrect");
