@@ -34,7 +34,7 @@ abstract class TransactionMenu extends ABCMenu {
 		mt.ps.println("I got: " + sum + ". Is this the correct amount? Y/n");
 		choice = s.nextLine();
 		if (choice.toLowerCase().startsWith("y")) {
-			LOGGER.info("\n\nTransaction amount: " + sum);
+			LOGGER.info("Transaction amount: " + sum);
 			transact();
 		} else
 			mt.ps.println("No transaction made");

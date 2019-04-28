@@ -26,7 +26,7 @@ class DepositMenu extends TransactionMenu {
 	}
 
 	void transact() {
-		LOGGER.info("\nTransaction type: DEPOSIT");
+		LOGGER.info("Transaction type: DEPOSIT");
 		bal = mt.getDB().account().deposit(num, sum);
 		mt.ps.println("The account balance is now: " + bal);
 	}
