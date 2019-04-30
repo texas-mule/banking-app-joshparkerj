@@ -77,8 +77,8 @@ public class AccountDBHandler implements IDB.accounts {
 		try {
 			uniqueAccountNumber.setString(1, num);
 			ResultSet rs = uniqueAccountNumber.executeQuery();
-			rs.next();
-			return rs.getBoolean(1);
+			if (rs.next())
+				return rs.getBoolean(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -91,12 +91,16 @@ public class AccountDBHandler implements IDB.accounts {
 			deposit.setString(2, UserSession.getID());
 			deposit.setString(3, sum);
 			ResultSet rs = deposit.executeQuery();
-			rs.next();
-			return rs.getString(1);
+			if (rs.next()) {
+				if (rs.getString(1).equals("Not your account!"))
+					return null;
+				if (rs.getString(1).contains("Deposit made. "))
+				return rs.getString(1).substring(33);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return "";
+		return null;
 	}
 
 	public String withdraw(String num, String sum) {
@@ -104,13 +108,19 @@ public class AccountDBHandler implements IDB.accounts {
 			withdraw.setString(1, num);
 			withdraw.setString(2, UserSession.getID());
 			withdraw.setString(3, sum);
-			ResultSet rs = deposit.executeQuery();
-			rs.next();
-			return rs.getString(1);
+			ResultSet rs = withdraw.executeQuery();
+			if (rs.next()) {
+				if (rs.getString(1).equals("Not your account!"))
+					return null;
+				if (rs.getString(1).equals("Insufficient funds!"))
+					return null;
+				if (rs.getString(1).contains("Withdrawal made. "))
+					return rs.getString(1).substring(36);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return "";
+		return null;
 	}
 
 	public String transfer(String num, String dnum, String sum) {
@@ -119,21 +129,28 @@ public class AccountDBHandler implements IDB.accounts {
 			transfer.setString(2, dnum);
 			transfer.setString(3, UserSession.getID());
 			transfer.setString(4, sum);
-			ResultSet rs = deposit.executeQuery();
-			rs.next();
-			return rs.getString(1);
+			ResultSet rs = transfer.executeQuery();
+			if (rs.next()) {
+				if (rs.getString(1).equals("Not your account!"))
+					return null;
+				if (rs.getString(1).equals("That account is not in the system!"))
+					return null;
+				if (rs.getString(1).equals("Insufficient funds!"))
+					return null;
+				return rs.getString(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return "";
+		return null;
 	}
 
 	public boolean accountExists(String num) {
 		try {
 			accountExists.setString(1, num);
 			ResultSet rs = accountExists.executeQuery();
-			rs.next();
-			return rs.getBoolean(1);
+			if (rs.next())
+				return rs.getBoolean(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -144,8 +161,8 @@ public class AccountDBHandler implements IDB.accounts {
 		try {
 			accountApproved.setString(1, num);
 			ResultSet rs = accountApproved.executeQuery();
-			rs.next();
-			return rs.getBoolean(1);
+			if (rs.next())
+				return rs.getBoolean(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -166,8 +183,8 @@ public class AccountDBHandler implements IDB.accounts {
 			sufficientFunds.setString(1, sum);
 			sufficientFunds.setString(2, num);
 			ResultSet rs = sufficientFunds.executeQuery();
-			rs.next();
-			return rs.getBoolean(1);
+			if (rs.next())
+				return rs.getBoolean(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -178,12 +195,12 @@ public class AccountDBHandler implements IDB.accounts {
 		try {
 			getBalance.setString(1, num);
 			ResultSet rs = getBalance.executeQuery();
-			rs.next();
-			return rs.getString(1);
+			if (rs.next())
+				return rs.getString(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return "";
+		return null;
 	}
 
 	public String getAccounts() {
@@ -209,7 +226,7 @@ public class AccountDBHandler implements IDB.accounts {
 
 	public String overwriteBalance(String num, String newValue) {
 		try {
-			overwriteBalance.setString(1,newValue);
+			overwriteBalance.setString(1, newValue);
 			overwriteBalance.setString(2, num);
 			overwriteBalance.execute();
 			return newValue;
@@ -225,8 +242,8 @@ public class AccountDBHandler implements IDB.accounts {
 			editAccount.setString(2, newValue);
 			editAccount.setString(3, fieldToEdit);
 			ResultSet rs = editAccount.executeQuery();
-			rs.next();
-			return rs.getString(1).contains("edited account");
+			if (rs.next())
+				return rs.getString(1).contains("edited account");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -249,8 +266,8 @@ public class AccountDBHandler implements IDB.accounts {
 	public boolean isEmpty() {
 		try {
 			ResultSet rs = isEmpty.executeQuery();
-			rs.next();
-			return rs.getBoolean(1);
+			if (rs.next())
+				return rs.getBoolean(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

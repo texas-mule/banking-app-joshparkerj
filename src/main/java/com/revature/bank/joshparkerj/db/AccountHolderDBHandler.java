@@ -19,7 +19,7 @@ public class AccountHolderDBHandler implements IDB.accountholders {
 	private PreparedStatement jointAppExists;
 	private final String jointAppExistsString = "SELECT joint_app_exists(?, ?);";
 	private PreparedStatement getJointApps;
-	private final String getJointAppsString = "SELECT get_joint_apps(?);";
+	private final String getJointAppsString = "SELECT * FROM get_joint_apps(?);";
 	private PreparedStatement holdsAccount;
 	private final String holdsAccountString = "SELECT holds_account(?, ?);";
 	private PreparedStatement removeBySSN;
@@ -89,8 +89,8 @@ public class AccountHolderDBHandler implements IDB.accountholders {
 			jointAppExists.setString(1, id);
 			jointAppExists.setString(2, num);
 			ResultSet rs = jointAppExists.executeQuery();
-			rs.next();
-			return rs.getBoolean(1);
+			if (rs.next())
+				return rs.getBoolean(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -120,9 +120,9 @@ public class AccountHolderDBHandler implements IDB.accountholders {
 			holdsAccount.setString(1, id);
 			holdsAccount.setString(2, num);
 			ResultSet rs = holdsAccount.executeQuery();
-			rs.next();
-			return rs.getBoolean(1);
-		}catch (SQLException e) {
+			if (rs.next())
+				return rs.getBoolean(1);
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return false;
@@ -140,7 +140,7 @@ public class AccountHolderDBHandler implements IDB.accountholders {
 	public void removeBySSN(String id) {
 		try {
 			removeBySSN.setString(1, id);
-			removeByNum.execute();
+			removeBySSN.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -149,8 +149,8 @@ public class AccountHolderDBHandler implements IDB.accountholders {
 	public boolean isEmpty() {
 		try {
 			ResultSet rs = isEmpty.executeQuery();
-			rs.next();
-			return rs.getBoolean(1);
+			if (rs.next())
+				return rs.getBoolean(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

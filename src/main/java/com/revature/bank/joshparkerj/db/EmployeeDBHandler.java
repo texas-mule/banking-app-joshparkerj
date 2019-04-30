@@ -37,8 +37,8 @@ public class EmployeeDBHandler implements IDB.employees {
 			getEmployeeID.setString(1, name);
 			getEmployeeID.setString(2, pass);
 			ResultSet rs = getEmployeeID.executeQuery();
-			rs.next();
-			return rs.getString("id");
+			if (rs.next())
+				return rs.getString("id");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -67,8 +67,8 @@ public class EmployeeDBHandler implements IDB.employees {
 		try {
 			employeeExists.setString(1, id);
 			ResultSet rs = employeeExists.executeQuery();
-			rs.next();
-			return rs.getBoolean(1);
+			if (rs.next())
+				return rs.getBoolean(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -88,8 +88,8 @@ public class EmployeeDBHandler implements IDB.employees {
 		try {
 			isAdmin.setString(1, id);
 			ResultSet rs = isAdmin.executeQuery();
-			rs.next();
-			return rs.getBoolean(1);
+			if (rs.next())
+				return rs.getBoolean(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -99,8 +99,8 @@ public class EmployeeDBHandler implements IDB.employees {
 	public boolean isEmpty() {
 		try {
 			ResultSet rs = isEmpty.executeQuery();
-			rs.next();
-			rs.getBoolean(1);
+			if (rs.next())
+				return rs.getBoolean(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

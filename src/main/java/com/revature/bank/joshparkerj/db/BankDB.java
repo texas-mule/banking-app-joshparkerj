@@ -69,26 +69,27 @@ public class BankDB implements IDB {
 	}
 
 	public String getCustomerAccounts(String id) {
+		s = new StringBuilder();
 		try {
-			s = new StringBuilder();
-			s.append("account_type\taccount_number\taccount_balance\taccount_pending\n");
 			getCustomerAccounts.setString(1, id);
 			ResultSet rs = getCustomerAccounts.executeQuery();
-			while (rs.next()) {
-				s.append(rs.getString("account_type"));
-				s.append("\t");
-				s.append(rs.getString("account_number"));
-				s.append("\t");
-				s.append(rs.getString("account_balance"));
-				s.append("\t");
-				s.append(rs.getString("account_pending"));
-				s.append("\n");
-			}
-			return s.toString();
+			s.append("account_type\taccount_number\taccount_balance\taccount_pending\n");
+			if (rs.next()) {
+				do {
+					s.append(rs.getString("account_type"));
+					s.append("\t");
+					s.append(rs.getString("account_number"));
+					s.append("\t");
+					s.append(rs.getString("account_balance"));
+					s.append("\t");
+					s.append(rs.getString("account_pending"));
+					s.append("\n");
+				}while (rs.next()); 
+			}else return "You have no accounts!\n";
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return "";
+		return s.toString();
 	}
 
 	public String getPendingApps() {

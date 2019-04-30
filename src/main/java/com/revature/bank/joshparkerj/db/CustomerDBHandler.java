@@ -47,8 +47,8 @@ public class CustomerDBHandler implements IDB.customers {
 			getCustomerID.setString(1, name);
 			getCustomerID.setString(2, pass);
 			ResultSet rs = getCustomerID.executeQuery();
-			rs.next();
-			return rs.getString(1);
+			if (rs.next())
+				return rs.getString(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -70,8 +70,8 @@ public class CustomerDBHandler implements IDB.customers {
 		try {
 			uniqueCustomerName.setString(1, name);
 			ResultSet rs = uniqueCustomerName.executeQuery();
-			rs.next();
-			return rs.getBoolean(1);
+			if (rs.next())
+				return rs.getBoolean(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -82,8 +82,8 @@ public class CustomerDBHandler implements IDB.customers {
 		try {
 			uniqueSSN.setString(1, id);
 			ResultSet rs = uniqueSSN.executeQuery();
-			rs.next();
-			return rs.getBoolean(1);
+			if (rs.next())
+				return rs.getBoolean(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -94,14 +94,8 @@ public class CustomerDBHandler implements IDB.customers {
 		s = new StringBuilder();
 		try {
 			ResultSet rs = getCustomers.executeQuery();
-			s.append("ssn\tusername\tpassword\n");
-			while(rs.next()) {
-				s.append(rs.getString("ssn"));
-				s.append("\t");
-				s.append(rs.getString("username"));
-				s.append("\t");
-				s.append(rs.getString("password"));
-				s.append("\n");
+			while (rs.next()) {
+				s.append(String.format("%9s%22s%5s%22s\n", "Username:", rs.getString("username"), "SSN:", rs.getString("ssn")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -113,8 +107,8 @@ public class CustomerDBHandler implements IDB.customers {
 		try {
 			customerExists.setString(1, id);
 			ResultSet rs = customerExists.executeQuery();
-			rs.next();
-			return rs.getBoolean(1);
+			if (rs.next())
+				return rs.getBoolean(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -124,17 +118,15 @@ public class CustomerDBHandler implements IDB.customers {
 	public String customerDetails(String id) {
 		s = new StringBuilder();
 		try {
-			customerDetails.setString(1,id);
+			customerDetails.setString(1, id);
 			ResultSet rs = customerDetails.executeQuery();
-			s.append("ssn\tusername\tpassword\n");
-			while(rs.next()) {
-				s.append(rs.getString("ssn"));
-				s.append("\t");
-				s.append(rs.getString("username"));
-				s.append("\t");
-				s.append(rs.getString("password"));
-				s.append("\n");
-			}
+			if (rs.next()) {
+				do {
+					s.append(String.format("%10s%22s%5s%22s%11s%22s\n", "Username:", rs.getString("username"), "SSN:", rs.getString("ssn"), "Password:", rs.getString("password")));
+				} while (rs.next());
+			} else
+				return null;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -153,8 +145,8 @@ public class CustomerDBHandler implements IDB.customers {
 	public boolean isEmpty() {
 		try {
 			ResultSet rs = isEmpty.executeQuery();
-			rs.next();
-			return rs.getBoolean(1);
+			if (rs.next())
+				return rs.getBoolean(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

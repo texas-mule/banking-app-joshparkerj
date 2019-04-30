@@ -60,6 +60,17 @@ public class MenuTreeTest {
 		assertFalse(db.account().accountExists("707B"));
 		assertTrue(db.getPendingApps().contains("606C"));
 		assertTrue(FAKEOS.getOutput().contains("Hello, Abraham!"));
+		db.accountholder().removeByNum("909Z");
+		db.accountholder().removeByNum("808A");
+		db.accountholder().removeByNum("606C");
+		db.accountholder().removeBySSN("123Test");
+		db.accountholder().removeBySSN("8088Test");
+		db.employee().deleteEmployee("8099Test");
+		db.customer().removeBySSN("123Test");
+		db.customer().removeBySSN("8088Test");
+		db.account().removeByNum("909Z");
+		db.account().removeByNum("808A");
+		db.account().removeByNum("606C");
 	}
 
 	@Test
@@ -119,6 +130,12 @@ public class MenuTreeTest {
 		assertEquals(db.account().getBalance("893HB"), "$75.27");
 		assertTrue(FAKEOS.getOutput().contains("The account balance is now: $79.99"));
 		assertTrue(FAKEOS.getOutput().contains("The account balance is now: $77.63"));
+		db.accountholder().removeBySSN("456Test");
+		db.account().removeByNum("205D");
+		db.account().removeByNum("vladimir putin");
+		db.account().removeByNum("893HB");
+		db.customer().removeBySSN("6869R");
+		db.customer().removeBySSN("456Test");
 	}
 
 	@Test
@@ -129,11 +146,17 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
-		assertEquals(db.account().getBalance("Forge"), "$1200.89");
+		assertEquals(db.account().getBalance("Forge"), "$1,200.89");
 		assertEquals(db.account().getBalance("Shadow King"), "$0.00");
 		assertTrue(FAKEOS.getOutput().contains("You are not allowed to transfer that much!"));
 		assertTrue(FAKEOS.getOutput().contains("That account is not in the system!"));
 		assertTrue(FAKEOS.getOutput().contains("Not your account!"));
+		db.accountholder().removeBySSN("8882Testing");
+		db.accountholder().removeBySSN("9");
+		db.account().removeByNum("Forge");
+		db.account().removeByNum("Shadow King");
+		db.customer().removeBySSN("8882Testing");
+		db.customer().removeBySSN("9");
 	}
 
 	@Test
@@ -264,6 +287,12 @@ public class MenuTreeTest {
 		FAKEOS.setEncoding("UTF-8");
 		FAKEOS.clearOutput();
 		assertTrue(FAKEOS.getOutput().equals(""));
+		db.accountholder().removeByNum("Fortress of Solitude");
+		db.account().removeByNum("Fortress of Solitude");
+		db.customer().removeBySSN("Kent");
+		db.customer().removeBySSN("Daily Planet Photographer");
+		db.customer().removeBySSN("Evil Genius");
+		db.customer().removeBySSN("Photography01!");
 	}
 
 	@Test
@@ -275,7 +304,6 @@ public class MenuTreeTest {
 		while (!mt.isFinished())
 			mt.menu();
 		assertFalse(db.accountholder().jointAppExists("123", "88G"));
-		System.out.print(FAKEOS.getOutput());
 		assertTrue(FAKEOS.getOutput().contains("Application denied!"));
 	}
 
@@ -323,7 +351,6 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
-		System.out.print(FAKEOS.getOutput());
 		assertTrue(FAKEOS.getOutput().contains("That information doesn\'t match any application!"));
 		assertTrue(FAKEOS.getOutput().contains("Not your account!"));
 	}
@@ -336,7 +363,6 @@ public class MenuTreeTest {
 				new PrintStream(new FAKEOS()));
 		while (!mt.isFinished())
 			mt.menu();
-		System.out.print(FAKEOS.getOutput());
 		assertTrue(FAKEOS.getOutput().contains("Your input was not understood"));
 	}
 

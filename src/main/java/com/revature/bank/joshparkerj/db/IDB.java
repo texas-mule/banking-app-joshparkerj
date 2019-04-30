@@ -24,6 +24,7 @@ public interface IDB {
 		boolean customerExists(String id);
 		String getCustomers();
 		boolean uniqueSSN(String id);
+		void removeBySSN(String ssn);
 
 	}
 
@@ -53,6 +54,7 @@ public interface IDB {
 		boolean editAccount(String num, String newValue, String fieldToEdit);
 		String getDetailedAccounts();
 		String getBalance(String num);
+		void removeByNum(String num);
 
 	}
 
@@ -65,6 +67,8 @@ public interface IDB {
 		String getJointApps(String id);
 		boolean holdsAccount(String id, String num);
 		boolean jointAppExists(String id, String num);
+		void removeBySSN(String ssn);
+		void removeByNum(String num);
 
 	}
 

@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import com.revature.bank.joshparkerj.UserSession;
 import com.revature.bank.joshparkerj.db.BankDB;
 import com.revature.bank.joshparkerj.db.IDB;
 
@@ -38,7 +39,7 @@ public class BankDBTest {
 	@Test
 	public void testGetEmployeeID() {
 		IDB db = BankDB.getDB("DefaultData.txt");
-		db.employee().addEmployee("a", "b", "c", "0", "e", "f", "g", "h");
+		db.employee().addEmployee("a", "b", "c", "0", "$1.00", "f", "g", "h");
 		assertEquals(db.employee().getEmployeeID("a", "b"), "c");
 		assertTrue(db.employee().employeeExists("c"));
 		db.employee().deleteEmployee("c");
@@ -57,6 +58,7 @@ public class BankDBTest {
 		assertFalse(db.getCustomerAccounts("coolguy").contains("hackaccount"));
 		db.account().approveAccount("failaccount");
 		assertTrue(db.account().accountApproved("failaccount"));
+		UserSession.init("coolguy");
 		db.account().deposit("failaccount", "$1000.00");
 		assertTrue(db.account().sufficientFunds("failaccount","$1000.00"));
 		db.account().withdraw("failaccount", "$900.00");
@@ -84,6 +86,7 @@ public class BankDBTest {
 		assertNull(db.customer().getCustomerID("Goblin Queen", "PryorClone01!"));
 		assertNull(db.employee().getEmployeeID("Douglas K Jones", "8088TheBest!"));
 		assertTrue(db.getCustomerAccounts("6869").equals("You have no accounts!\n"));
+		UserSession.init("idk");
 		assertNull(db.account().deposit("8884NoSuchThing","$1,000,000.00"));
 		assertTrue(db.accountholder().holdsAccount("idk", "8884"));
 		assertFalse(db.accountholder().holdsAccount("6869", "8884"));

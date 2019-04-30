@@ -20,8 +20,6 @@ public class ApplyJointMenu extends ABCMenu {
 			mt.ps.println("That account is not in the system!");
 			return;
 		}
-		System.out.println(UserSession.getID());
-		System.out.println(num);
 		if (mt.getDB().accountholder().jointAppExists(UserSession.getID(), num)) {
 			mt.ps.println("You can\'t create duplicate applications for a joint account!");
 			return;
