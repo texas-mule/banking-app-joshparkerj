@@ -6,11 +6,6 @@ import java.util.List;
 public class AccountHolderDBHandler implements IDB.accountholders {
 
 	private StringBuilder s;
-	private List<AccountHolder> accountholders;
-
-	public AccountHolderDBHandler(List<AccountHolder> ah) {
-		accountholders = ah;
-	}
 
 	public String serialize() {
 		s = new StringBuilder();

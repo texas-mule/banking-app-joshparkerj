@@ -5,11 +5,6 @@ import java.util.List;
 public class EmployeeDBHandler implements IDB.employees {
 
 	private StringBuilder s;
-	private List<Employee> employees;
-
-	EmployeeDBHandler(List<Employee> e) {
-		employees = e;
-	}
 
 	public String serialize() {
 		s = new StringBuilder();

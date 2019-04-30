@@ -6,11 +6,6 @@ import java.util.List;
 public class CustomerDBHandler implements IDB.customers {
 
 	private StringBuilder s;
-	private List<Customer> customers;
-
-	CustomerDBHandler(List<Customer> c) {
-		customers = c;
-	}
 
 	public String serialize() {
 		s = new StringBuilder();

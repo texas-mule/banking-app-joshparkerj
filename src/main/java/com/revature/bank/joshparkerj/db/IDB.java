@@ -1,5 +1,7 @@
 package com.revature.bank.joshparkerj.db;
 
+import java.sql.SQLException;
+
 public interface IDB {
 
 	void write();
@@ -8,7 +10,7 @@ public interface IDB {
 	String getPendingApps();
 	void close();
 	void deleteCustomer(String id);
-	void deleteAccount(String num);
+	void deleteAccount(String num) throws SQLException;
 	boolean uninitialized();
 	accounts account();
 	customers customer();

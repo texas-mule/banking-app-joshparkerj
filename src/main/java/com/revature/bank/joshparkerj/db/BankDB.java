@@ -1,82 +1,111 @@
 package com.revature.bank.joshparkerj.db;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class BankDB implements IDB {
 
 	private static BankDB uniqueInstance = null;
 
+	Connection con;
 	private StringBuilder s;
-	private TextFile t;
 	private AccountDBHandler accounts;
 	private CustomerDBHandler customers;
 	private EmployeeDBHandler employees;
 	private AccountHolderDBHandler accountholders;
+	private final String url = "jdbc:postgresql://127.0.0.1:5432/banking_app";
 
-	public static BankDB getDB(String filename) {
+	private PreparedStatement deleteAccount;
+	private final String deleteAccountString = "SELECT delete_account(?);";
+	private PreparedStatement deleteCustomer;
+	private final String deleteCustomerString = "SELECT delete_customer(?);";
+	private PreparedStatement getPendingApps;
+	private final String getPendingAppsString = "SELECT * FROM pending_apps;";
+	private PreparedStatement getCustomerAccounts;
+	private final String getCustomerAccountsString = "SELECT * FROM get_customer_accounts(?);";
+
+	public static BankDB getDB(String filename) throws SQLException {
 		if (uniqueInstance == null)
 			uniqueInstance = new BankDB(filename);
 		return uniqueInstance;
 	}
 
-	private BankDB(String f) {
-		t = new TextFile(f);
-		accounts = new AccountDBHandler(t.getAccounts());
-		customers = new CustomerDBHandler(t.getCustomers());
-		employees = new EmployeeDBHandler(t.getEmployees());
-		accountholders = new AccountHolderDBHandler(t.getAccountHolders());
+	private BankDB(String f) throws SQLException {
+		con = DriverManager.getConnection(url);
+		deleteAccount = con.prepareStatement(deleteAccountString);
+		deleteCustomer = con.prepareStatement(deleteCustomerString);
+		getPendingApps = con.prepareStatement(getPendingAppsString);
+		getCustomerAccounts = con.prepareStatement(getCustomerAccountsString);
+		accounts = new AccountDBHandler(con);
+		customers = new CustomerDBHandler(con);
+		employees = new EmployeeDBHandler(con);
+		accountholders = new AccountHolderDBHandler(con);
 	}
-	
+
 	public accounts account() {
 		return accounts;
 	}
-	
+
 	public employees employee() {
 		return employees;
 	}
-	
+
 	public accountholders accountholder() {
 		return accountholders;
 	}
-	
+
 	public customers customer() {
 		return customers;
 	}
 
-	public String serialize() {
-		s = new StringBuilder();
-		s.append(accounts.serialize());
-		s.append(customers.serialize());
-		s.append(employees.serialize());
-		s.append(accountholders.serialize());
-		return s.toString();
-	}
-
-	public void write() {
-		t.writeToDisc(this);
-	}
-
 	public String getCustomerAccounts(String id) {
-		s = new StringBuilder();
-		for (AccountHolder ah : accountholders.getBySSN(id)) {
-			for (Account a : accounts.getByNum(ah.getNum())){
-				if (!ah.isApproved()) s.append("APPLICATION PENDING: \n");
-				s.append(a.prettyPrint());
+		try {
+			s = new StringBuilder();
+			s.append("account_type\taccount_number\taccount_balance\taccount_pending\n");
+			getCustomerAccounts.setString(1, id);
+			ResultSet rs = getCustomerAccounts.executeQuery();
+			while (rs.next()) {
+				s.append(rs.getString("account_type"));
+				s.append("\t");
+				s.append(rs.getString("account_number"));
+				s.append("\t");
+				s.append(rs.getString("account_balance"));
+				s.append("\t");
+				s.append(rs.getString("account_pending"));
+				s.append("\n");
 			}
+			return s.toString();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		if (s.length() == 0)
-			s.append("You have no accounts!\n");
-		return s.toString();
+		return "";
 	}
 
 	public String getPendingApps() {
-		s = new StringBuilder();
-		for (Account a : accounts.getUnapproved()) {
-			for (AccountHolder ah : accountholders.getByNum(a.getID())) {
-				for (Customer c : customers.getByID(ah.getSSN())) {
-					s.append(c.summary() + a.summary());
-				}
+		try {
+			s = new StringBuilder();
+			s.append("customer_name\tcustomer_ssn\taccount_type\taccount_number\taccount_balance\n");
+			ResultSet rs = getPendingApps.executeQuery();
+			while (rs.next()) {
+				s.append(rs.getString("customer_name"));
+				s.append("\t");
+				s.append(rs.getString("customer_ssn"));
+				s.append("\t");
+				s.append(rs.getString("account_type"));
+				s.append("\t");
+				s.append(rs.getString("account_number"));
+				s.append("\t");
+				s.append(rs.getString("account_balance"));
+				s.append("\n");
 			}
+			return s.toString();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return s.toString();
+		return "";
 	}
 
 	public void close() {
@@ -84,17 +113,34 @@ public class BankDB implements IDB {
 	}
 
 	public void deleteCustomer(String id) {
-		customers.removeBySSN(id);
-		accountholders.removeBySSN(id);
+		try {
+			deleteCustomer.setString(1, id);
+			deleteCustomer.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public void deleteAccount(String id) {
-		accounts.removeByNum(id);
-		accountholders.removeByNum(id);
+		try {
+			deleteAccount.setString(1, id);
+			deleteAccount.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void write() {
+
+	}
+
+	public String serialize() {
+		return null;
 	}
 
 	public boolean uninitialized() {
-		return (accounts.isEmpty() && customers.isEmpty() && accountholders.isEmpty() && employees.isEmpty());
+		return false;
 	}
 
 }
