@@ -1,16 +1,23 @@
 package com.revature.bank.joshparkerj.db;
 
+import java.sql.Connection;
 import java.util.LinkedList;
 import java.util.List;
 
 public class AccountHolderDBHandler implements IDB.accountholders {
 
 	private StringBuilder s;
+	private Connection con;
+	
+	private PreparedStatement addAccountHolder;
+	private final String addAccountHolderString = "";
+	
+	AccountHolderDBHandler(Connection c){
+		con = c;
+	}
 
 	public String serialize() {
-		s = new StringBuilder();
-		accountholders.forEach(ah -> this.s.append(ah.serialize()));
-		return s.toString();
+		return null;
 	}
 
 	public void addAccountHolder(String id, String num) {
@@ -75,22 +82,6 @@ public class AccountHolderDBHandler implements IDB.accountholders {
 
 	public boolean isEmpty() {
 		return accountholders.isEmpty();
-	}
-
-	public List<AccountHolder> getBySSN(String id) {
-		List<AccountHolder> lah = new LinkedList<AccountHolder>();
-		for (AccountHolder ah : accountholders) {
-			if (ah.getSSN().equals(id)) lah.add(ah);
-		}
-		return lah;
-	}
-
-	public List<AccountHolder> getByNum(String id) {
-		List<AccountHolder> lah = new LinkedList<AccountHolder>();
-		for (AccountHolder ah : accountholders) {
-			if (ah.getNum().equals(id)) lah.add(ah);
-		}
-		return lah;
 	}
 
 }

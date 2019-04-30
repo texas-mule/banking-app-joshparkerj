@@ -2,9 +2,12 @@ package com.revature.bank.joshparkerj.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.revature.bank.joshparkerj.UserSession;
 
 public class AccountDBHandler implements IDB.accounts {
 
@@ -15,11 +18,50 @@ public class AccountDBHandler implements IDB.accounts {
 	private final String addAccountString = "SELECT add_account(?, ?, ?);";
 	private PreparedStatement uniqueAccountNumber;
 	private final String uniqueAccountNumberString = "SELECT ? NOT IN (SELECT number FROM account);";
+	private PreparedStatement deposit;
+	private final String depositString = "SELECT deposit_funds(?, ?, ?);";
+	private PreparedStatement withdraw;
+	private final String withdrawString = "SELECT withdraw_funds(?, ?, ?);";
+	private PreparedStatement transfer;
+	private final String transferString = "SELECT transfer_funds(?, ?, ?, ?);";
+	private PreparedStatement accountExists;
+	private final String accountExistsString = "SELECT ? IN (SELECT number FROM account);";
+	private PreparedStatement accountApproved;
+	private final String accountApprovedString = "SELECT approved FROM account WHERE number = ?;";
+	private PreparedStatement approveAccount;
+	private final String approveAccountString = "UPDATE account SET approved = TRUE WHERE number = ?;";
+	private PreparedStatement sufficientFunds;
+	private final String sufficientFundsString = "SELECT balance >= ?::MONEY FROM account WHERE number = ?;";
+	private PreparedStatement getBalance;
+	private final String getBalanceString = "SELECT balance::TEXT FROM account WHERE number = ?;";
+	private PreparedStatement getAccounts;
+	private final String getAccountsString = "SELECT * FROM account;";
+	private PreparedStatement overwriteBalance;
+	private final String overwriteBalanceString = "UPDATE account SET balance = ?::MONEY WHERE number = ?;";
+	private PreparedStatement editAccount;
+	private final String editAccountString = "SELECT edit_account(?, ?, ?);";
+	private PreparedStatement removeByNum;
+	private final String removeByNumString = "SELECT delete_account(?);";
+	private PreparedStatement isEmpty;
+	private final String isEmptyString = "SELECT COUNT(*) = 0 FROM account;";
 
 	AccountDBHandler(Connection c) throws SQLException {
 		con = c;
 		addAccount = con.prepareStatement(addAccountString);
 		uniqueAccountNumber = con.prepareStatement(uniqueAccountNumberString);
+		deposit = con.prepareStatement(depositString);
+		withdraw = con.prepareStatement(withdrawString);
+		transfer = con.prepareStatement(transferString);
+		accountExists = con.prepareStatement(accountExistsString);
+		accountApproved = con.prepareStatement(accountApprovedString);
+		approveAccount = con.prepareStatement(approveAccountString);
+		sufficientFunds = con.prepareStatement(sufficientFundsString);
+		getBalance = con.prepareStatement(getBalanceString);
+		getAccounts = con.prepareStatement(getAccountsString);
+		overwriteBalance = con.prepareStatement(overwriteBalanceString);
+		editAccount = con.prepareStatement(editAccountString);
+		removeByNum = con.prepareStatement(removeByNumString);
+		isEmpty = con.prepareStatement(isEmptyString);
 	}
 
 	public String serialize() {
@@ -40,156 +82,185 @@ public class AccountDBHandler implements IDB.accounts {
 	public boolean uniqueAccountNumber(String num) {
 		try {
 			uniqueAccountNumber.setString(1, num);
-			ResultSet rs = 
+			ResultSet rs = uniqueAccountNumber.executeQuery();
+			rs.next();
+			return rs.getBoolean(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		for (Account a : accounts) {
-			if (a.getID().equals(num))
-				return false;
-		}
-		return true;
+		return false;
 	}
 
 	public String deposit(String num, String sum) {
-		for (Account a : accounts) {
-			if (a.getID().equals(num))
-				return a.deposit(sum);
+		try {
+			deposit.setString(1, num);
+			deposit.setString(2, UserSession.getID());
+			deposit.setString(3, sum);
+			ResultSet rs = deposit.executeQuery();
+			rs.next();
+			return rs.getString(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return null;
+		return "";
 	}
 
 	public String withdraw(String num, String sum) {
-		for (Account a : accounts) {
-			if (a.getID().equals(num))
-				return a.withdraw(sum);
+		try {
+			withdraw.setString(1, num);
+			withdraw.setString(2, UserSession.getID());
+			withdraw.setString(3, sum);
+			ResultSet rs = deposit.executeQuery();
+			rs.next();
+			return rs.getString(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return null;
+		return "";
 	}
 
 	public String transfer(String num, String dnum, String sum) {
-		String finalSum = null;
-		for (Account a : accounts) {
-			for (Account b : accounts) {
-				if (a.getID().equals(num) && b.getID().equals(dnum)) {
-					finalSum = a.withdraw(sum);
-					if (finalSum != null)
-						b.deposit(sum);
-					return finalSum;
-				}
-			}
+		try {
+			transfer.setString(1, num);
+			transfer.setString(2, dnum);
+			transfer.setString(3, UserSession.getID());
+			transfer.setString(4, sum);
+			ResultSet rs = deposit.executeQuery();
+			rs.next();
+			return rs.getString(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return finalSum;
+		return "";
 	}
 
 	public boolean accountExists(String num) {
-		for (Account a : accounts) {
-			if (a.getID().equals(num))
-				return true;
+		try {
+			accountExists.setString(1, num);
+			ResultSet rs = accountExists.executeQuery();
+			rs.next();
+			return rs.getBoolean(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return false;
 	}
 
 	public boolean accountApproved(String num) {
-		for (Account a : accounts) {
-			if (a.getID().equals(num))
-				return !a.unapproved();
+		try {
+			accountApproved.setString(1, num);
+			ResultSet rs = accountApproved.executeQuery();
+			rs.next();
+			return rs.getBoolean(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return false;
 	}
 
 	public void approveAccount(String num) {
-		for (Account a : accounts) {
-			if (a.getID().equals(num)) {
-				a.approve();
-				return;
-			}
+		try {
+			approveAccount.setString(1, num);
+			approveAccount.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public boolean sufficientFunds(String num, String sum) {
-		for (Account a : accounts) {
-			if (a.getID().equals(num))
-				return a.sufficientFunds(sum);
+		try {
+			sufficientFunds.setString(1, sum);
+			sufficientFunds.setString(2, num);
+			ResultSet rs = sufficientFunds.executeQuery();
+			rs.next();
+			return rs.getBoolean(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return false;
 	}
 
 	public String getBalance(String num) {
-		for (Account a : accounts) {
-			if (a.getID().equals(num))
-				return a.getBalance();
+		try {
+			getBalance.setString(1, num);
+			ResultSet rs = getBalance.executeQuery();
+			rs.next();
+			return rs.getString(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return null;
+		return "";
 	}
 
 	public String getAccounts() {
 		s = new StringBuilder();
-		accounts.forEach(account -> this.s.append(account.summary()));
+		try {
+			ResultSet rs = getAccounts.executeQuery();
+			s.append("type\tnumber\tbalance\tapproved\n");
+			while (rs.next()) {
+				s.append(rs.getString("type"));
+				s.append("\t");
+				s.append(rs.getString("number"));
+				s.append("\t");
+				s.append(rs.getString("balance"));
+				s.append("\t");
+				s.append(rs.getString("approved"));
+				s.append("\n");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return s.toString();
 	}
 
 	public String overwriteBalance(String num, String newValue) {
-		for (Account a : accounts) {
-			if (a.getID().equals(num)) {
-				a.setBalance(newValue);
-				return a.getBalance();
-			}
+		try {
+			overwriteBalance.setString(1,newValue);
+			overwriteBalance.setString(2, num);
+			overwriteBalance.execute();
+			return newValue;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return "";
 	}
 
 	public boolean editAccount(String num, String newValue, String fieldToEdit) {
-		for (Account a : accounts) {
-			if (a.getID().equals(num)) {
-				switch (fieldToEdit) {
-				case "number":
-					a.setNumber(newValue);
-					return true;
-				case "type":
-					a.setType(newValue);
-					return true;
-				case "approval status":
-					a.setApprovalStatus(newValue);
-					return true;
-				default:
-					return false;
-				}
-			}
+		try {
+			editAccount.setString(1, num);
+			editAccount.setString(2, newValue);
+			editAccount.setString(3, fieldToEdit);
+			ResultSet rs = editAccount.executeQuery();
+			rs.next();
+			return rs.getString(1).contains("edited account");
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return false;
 	}
 
 	public String getDetailedAccounts() {
-		s = new StringBuilder();
-		accounts.forEach(account -> this.s.append(account.details()));
-		return s.toString();
+		return getAccounts();
 	}
 
 	public void removeByNum(String num) {
-		accounts.removeIf(a -> a.getID().equals(num));
+		try {
+			removeByNum.setString(1, num);
+			removeByNum.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public boolean isEmpty() {
-		return accounts.isEmpty();
-	}
-
-	public List<Account> getByNum(String num) {
-		List<Account> la = new LinkedList<Account>();
-		for (Account a : accounts) {
-			if (a.getID().equals(num))
-				la.add(a);
+		try {
+			ResultSet rs = isEmpty.executeQuery();
+			rs.next();
+			return rs.getBoolean(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return la;
-	}
-
-	public List<Account> getUnapproved() {
-		List<Account> la = new LinkedList<Account>();
-		for (Account a : accounts) {
-			if (a.unapproved())
-				la.add(a);
-		}
-		return la;
+		return false;
 	}
 
 }
