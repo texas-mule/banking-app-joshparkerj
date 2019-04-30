@@ -9,6 +9,7 @@ import java.sql.SQLException;
 public class BankDB implements IDB {
 
 	private static BankDB uniqueInstance = null;
+	private static boolean uninitialized = true;
 
 	Connection con;
 	private StringBuilder s;
@@ -27,13 +28,14 @@ public class BankDB implements IDB {
 	private PreparedStatement getCustomerAccounts;
 	private final String getCustomerAccountsString = "SELECT * FROM get_customer_accounts(?);";
 
-	public static BankDB getDB(String filename) throws SQLException {
+	public static BankDB getDB(String filename) {
 		if (uniqueInstance == null)
 			uniqueInstance = new BankDB(filename);
 		return uniqueInstance;
 	}
 
-	private BankDB(String f) throws SQLException {
+	private BankDB(String f) {
+		try {
 		con = DriverManager.getConnection(url);
 		deleteAccount = con.prepareStatement(deleteAccountString);
 		deleteCustomer = con.prepareStatement(deleteCustomerString);
@@ -43,6 +45,11 @@ public class BankDB implements IDB {
 		customers = new CustomerDBHandler(con);
 		employees = new EmployeeDBHandler(con);
 		accountholders = new AccountHolderDBHandler(con);
+		uninitialized = false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			uninitialized = true;
+		}
 	}
 
 	public accounts account() {
@@ -140,7 +147,7 @@ public class BankDB implements IDB {
 	}
 
 	public boolean uninitialized() {
-		return false;
+		return uninitialized;
 	}
 
 }

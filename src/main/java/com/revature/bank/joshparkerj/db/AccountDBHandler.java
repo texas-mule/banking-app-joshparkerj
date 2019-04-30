@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
 
 import com.revature.bank.joshparkerj.UserSession;
 
@@ -62,10 +60,6 @@ public class AccountDBHandler implements IDB.accounts {
 		editAccount = con.prepareStatement(editAccountString);
 		removeByNum = con.prepareStatement(removeByNumString);
 		isEmpty = con.prepareStatement(isEmptyString);
-	}
-
-	public String serialize() {
-		return null;
 	}
 
 	public void addAccount(String type, String number) {

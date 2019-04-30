@@ -1,6 +1,7 @@
 package com.revature.bank.joshparkerj.db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,10 +15,6 @@ public class AccountHolderDBHandler implements IDB.accountholders {
 	
 	AccountHolderDBHandler(Connection c){
 		con = c;
-	}
-
-	public String serialize() {
-		return null;
 	}
 
 	public void addAccountHolder(String id, String num) {

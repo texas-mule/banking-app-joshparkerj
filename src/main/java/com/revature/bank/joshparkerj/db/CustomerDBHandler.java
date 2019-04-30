@@ -1,11 +1,17 @@
 package com.revature.bank.joshparkerj.db;
 
+import java.sql.Connection;
 import java.util.LinkedList;
 import java.util.List;
 
 public class CustomerDBHandler implements IDB.customers {
 
 	private StringBuilder s;
+	private Connection con;
+	
+	CustomerDBHandler (Connection c){
+		con = c;
+	}
 
 	public String serialize() {
 		s = new StringBuilder();

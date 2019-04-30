@@ -1,15 +1,15 @@
 package com.revature.bank.joshparkerj.db;
 
+import java.sql.Connection;
 import java.util.List;
 
 public class EmployeeDBHandler implements IDB.employees {
 
 	private StringBuilder s;
-
-	public String serialize() {
-		s = new StringBuilder();
-		employees.forEach(employee -> this.s.append(employee.serialize()));
-		return s.toString();
+	private Connection con;
+	
+	EmployeeDBHandler(Connection c){
+		con = c;
 	}
 
 	public String getEmployeeID(String name, String pass) {
