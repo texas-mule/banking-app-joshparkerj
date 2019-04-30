@@ -42,6 +42,7 @@ public class MenuTreeTest {
 	private final String testBadTransactionInput = "2\nWolverine\nJeanGrey01!\n1\n3\n88G\nFive dollars fifty three cents\n0\n";
 	private final String testBadJointApproveInput = "2\nWolverine\nJeanGrey01!\n1\n8\n3\nSlade\nNegasonic Teenage Warhead\n3\nSlade\n88G\n0\n";
 	private final String testCustomer2Input = "2\nWolverine\nJeanGrey01!\n1\n8\n7\n8\n0\n";
+	private final String testEditAccountInput = "2\nsupervisor\nxxx\n2\n8\n6\n1\n2\nTESTING\n99H\n2\nTesting\n99H\n3\nA test\n99H\n3\n99H\nA test\n1\n4\n99H\n$4,808,222.88\ny\n5\nf\n99H\n5\nt\n99H\n4\n99H\n$681.39\ny\n4\nsome random account\n$50.00\ny\n0\n";
 
 	@Test
 	public void testMenu() {
@@ -364,6 +365,17 @@ public class MenuTreeTest {
 		while (!mt.isFinished())
 			mt.menu();
 		assertTrue(FAKEOS.getOutput().contains("Your input was not understood"));
+	}
+
+	@Test
+	public void testEditAccount() {
+		FAKEOS.clearOutput();
+		IDB db = BankDB.getDB("DefaultData.txt");
+		MenuTree mt = new MenuTree(db, new ByteArrayInputStream(testEditAccountInput.getBytes()),
+				new PrintStream(new FAKEOS()));
+		while (!mt.isFinished())
+			mt.menu();
+		assertTrue(FAKEOS.getOutput().contains("The account number was incorrect"));
 	}
 
 	private static class FAKEOS extends OutputStream {

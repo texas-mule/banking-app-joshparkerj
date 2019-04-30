@@ -228,8 +228,8 @@ public class AccountDBHandler implements IDB.accounts {
 		try {
 			overwriteBalance.setString(1, newValue);
 			overwriteBalance.setString(2, num);
-			overwriteBalance.execute();
-			return newValue;
+			int rs = overwriteBalance.executeUpdate();
+			return (rs > 0) ? newValue : "";
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
